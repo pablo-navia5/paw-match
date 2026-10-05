@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShelterDao extends JpaRepository<ShelterModel,Long> {
 
+    boolean existsByEmail(String email);
 }

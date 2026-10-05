@@ -1,6 +1,5 @@
 package com.pawmatch.backend.converters;
 
-import com.pawmatch.backend.dtos.UserDto;
 import com.pawmatch.backend.dtos.UserRegisterDto;
 import com.pawmatch.backend.models.UserModel;
 import lombok.NonNull;
