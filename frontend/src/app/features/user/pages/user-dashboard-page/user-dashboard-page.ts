@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   imports: [],
@@ -11,6 +12,7 @@ import { PetResponse } from '../../../../shared/models/pet.model';
 })
 export class UserDashboardPageComponent implements OnInit {
   private petService = inject(PetService);
+  private authService = inject(AuthService);
 
   pets = signal<PetResponse[]>([]);
   isLoading = signal<boolean>(true);
@@ -34,7 +36,27 @@ export class UserDashboardPageComponent implements OnInit {
   }
 
   nextPet(action: 'like' | 'pass') {
-    console.log(`Acción: ${action} a la mascota ID: ${this.currentPet.id}`);
-    this.currentIndex++;
+    const userSession = this.authService.currentUser();
+
+    if (!userSession || !userSession.databaseId) return;
+
+    const interactionPayload = {
+      userId: userSession.databaseId,
+      petId: this.currentPet.id,
+      interactionType: action
+    };
+
+    this.petService.registerInteraction(interactionPayload).subscribe({
+      next: () => {
+        this.currentIndex++;
+      },
+      error: (err) => {
+        console.error('Error al registrar la acción:', err);
+        if (err.status === 400) {
+          alert('Ya habías interactuado con esta mascota.');
+          this.currentIndex++;
+        }
+      }
+    });
   }
 }

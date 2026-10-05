@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { PetResponse } from '../models/pet.model';
+import { InteractionRequest } from '../models/interaction.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,9 @@ export class PetService {
 
   getAllPets(): Observable<PetResponse[]> {
     return this.http.get<PetResponse[]>(`${this.apiUrl}/pet`);
+  }
+
+  registerInteraction(interaction: InteractionRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/interaction`, interaction, { responseType: 'text' });
   }
 }
