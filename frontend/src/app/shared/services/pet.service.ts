@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { PetResponse } from '../models/pet.model';
 
@@ -18,5 +18,13 @@ export class PetService {
   createPet(shelterId: number, petData: any): Observable<PetResponse> {
     const payload = { ...petData, shelterId };
     return this.http.post<PetResponse>(`${this.apiUrl}/pet/create`, payload);
+  }
+
+  deletePet(petId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/pet/${petId}`);
+  }
+
+  getAllPets(): Observable<PetResponse[]> {
+    return this.http.get<PetResponse[]>(`${this.apiUrl}/pet`);
   }
 }

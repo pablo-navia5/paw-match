@@ -34,4 +34,17 @@ public class PetFacadeImpl implements PetFacade {
                          .map(toDtoConverter::convert)
                          .toList();
     }
+
+    @Override
+    public List<PetDto> findAll() {
+        return petService.findAll()
+                         .stream()
+                         .map(toDtoConverter::convert)
+                         .toList();
+    }
+
+    @Override
+    public void delete(Long id) {
+        petService.delete(id);
+    }
 }

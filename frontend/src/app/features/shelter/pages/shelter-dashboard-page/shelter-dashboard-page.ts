@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
-import { PetService } from '../../service/pet.service';
-import { PetResponse } from '../../models/pet.model';
+import { PetService } from '../../../../shared/services/pet.service';
+import { PetResponse } from '../../../../shared/models/pet.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -49,7 +49,19 @@ export class ShelterDashboardPageComponent implements OnInit {
   }
 
   deletePet(id: number) {
-    console.log('Eliminar mascota con ID:', id);
-    alert('Próximamente: Llamada al backend para borrar mascota.');
+    const confirmacion = confirm('¿Estás seguro de que quieres retirar a esta mascota?');
+
+    if (confirmacion) {
+      this.petService.deletePet(id).subscribe({
+        next: () => {
+          this.pets.update(mascotasActuales => mascotasActuales.filter(pet => pet.id !== id));
+          alert('Mascota eliminada correctamente.');
+        },
+        error: (err) => {
+          console.error('Error al borrar la mascota:', err);
+          alert('Hubo un error al intentar borrar.');
+        }
+      });
+    }
   }
 }

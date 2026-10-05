@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PetService } from '../../service/pet.service';
+import { PetService } from '../../../../shared/services/pet.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -31,7 +31,6 @@ export class CreatePetPageComponent {
       if (session?.databaseId) {
         this.petService.createPet(session.databaseId, this.petForm.getRawValue()).subscribe({
           next: () => {
-            alert('¡Mascota añadida correctamente!');
             this.router.navigate(['/shelter-panel']);
           },
           error: (err) => console.error('Error al guardar:', err),

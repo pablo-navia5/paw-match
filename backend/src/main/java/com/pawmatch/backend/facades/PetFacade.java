@@ -10,4 +10,8 @@ public interface PetFacade {
     PetDto create(final PetCreateDto petCreateDto);
 
     List<PetDto> findByShelterId(final Long shelterId);
+
+    List<PetDto> findAll();
+
+    void delete(final Long id);
 }

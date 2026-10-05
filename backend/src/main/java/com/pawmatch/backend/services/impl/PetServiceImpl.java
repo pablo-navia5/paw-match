@@ -35,7 +35,12 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Optional<PetModel> findById(Long id) {
-        return petDao.findById(id);
+    public List<PetModel> findAll() {
+        return petDao.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        petDao.deleteById(id);
     }
 }

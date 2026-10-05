@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { PetService } from '../../../../shared/services/pet.service';
+import { PetResponse } from '../../../../shared/models/pet.model';
 
 @Component({
   imports: [],
@@ -7,17 +9,28 @@ import { Component } from '@angular/core';
   styleUrl: './user-dashboard-page.scss',
   templateUrl: './user-dashboard-page.html',
 })
-export class UserDashboardPageComponent {
-  pets = [
-    { id: 1, name: 'Luna', species: 'Perro', age: 2, image: 'https://placehold.co/400x400/ff9800/white?text=Luna' },
-    { id: 2, name: 'Milo', species: 'Gato', age: 1, image: 'https://placehold.co/400x400/4caf50/white?text=Milo' },
-    { id: 3, name: 'Kira', species: 'Perro', age: 4, image: 'https://placehold.co/400x400/2196f3/white?text=Kira' }
-  ];
+export class UserDashboardPageComponent implements OnInit {
+  private petService = inject(PetService);
 
+  pets = signal<PetResponse[]>([]);
+  isLoading = signal<boolean>(true);
   currentIndex = 0;
 
   get currentPet() {
-    return this.pets[this.currentIndex];
+    return this.pets()[this.currentIndex];
+  }
+
+  ngOnInit() {
+    this.petService.getAllPets().subscribe({
+      next: (data) => {
+        this.pets.set(data);
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Error al descargar las mascotas:', err);
+        this.isLoading.set(false);
+      }
+    });
   }
 
   nextPet(action: 'like' | 'pass') {

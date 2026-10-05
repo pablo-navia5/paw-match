@@ -1,10 +1,8 @@
 package com.pawmatch.backend.services;
 
 import com.pawmatch.backend.models.PetModel;
-import com.pawmatch.backend.models.ShelterModel;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PetService {
 
@@ -12,5 +10,7 @@ public interface PetService {
 
     List<PetModel> findByShelterId(final Long id);
 
-    Optional<PetModel> findById(final Long id);
+    List<PetModel> findAll();
+
+    void delete(final Long id);
 }
