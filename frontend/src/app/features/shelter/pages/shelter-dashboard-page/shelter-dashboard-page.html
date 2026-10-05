@@ -1,1 +1,66 @@
-<p>shelter-dashboard-page works!</p>
+<header
+  style="padding: 1rem 2rem; background: #007bff; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <h1 style="margin: 0; font-size: 1.5rem;">🏠 Panel de Protectora</h1>
+  <span style="font-weight: bold;">{{ shelterName }}</span>
+</header>
+
+<main style="padding: 2rem; max-width: 900px; margin: 0 auto; font-family: sans-serif;">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h2 style="margin: 0; color: #333;">Mis Mascotas Publicadas</h2>
+    <button (click)="addNewPet()"
+            style="background: #28a745; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.2s;">
+      + Añadir Mascota
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div style="text-align: center; padding: 3rem; color: #666;">
+      <h3> Cargando mascotas...</h3>
+    </div>
+  } @else {
+    <table
+      style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+      <thead style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+      <tr>
+        <th style="padding: 1rem; text-align: left; color: #495057;">Nombre</th>
+        <th style="padding: 1rem; text-align: left; color: #495057;">Especie</th>
+        <th style="padding: 1rem; text-align: center; color: #495057;">Edad</th>
+        <th style="padding: 1rem; text-align: center; color: #495057;">Estado</th>
+        <th style="padding: 1rem; text-align: center; color: #495057;">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (pet of pets(); track pet.id) {
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 1rem; font-weight: bold;">{{ pet.name }}</td>
+            <td style="padding: 1rem;">{{ pet.species }}</td>
+            <td style="padding: 1rem; text-align: center;">{{ pet.age }} años</td>
+            <td style="padding: 1rem; text-align: center;">
+            <span
+              style="background: #e1f5fe; color: #0288d1; padding: 0.3rem 0.6rem; border-radius: 12px; font-size: 0.85rem; font-weight: bold;">
+              {{ pet.status }}
+            </span>
+            </td>
+            <td style="padding: 1rem; text-align: center;">
+              <button
+                style="background: #ffc107; border: none; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; margin-right: 0.5rem; font-weight: bold;">
+                Editar
+              </button>
+              <button (click)="deletePet(pet.id)"
+                      style="background: #dc3545; color: white; border: none; border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; font-weight: bold;">
+                Borrar
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" style="padding: 2rem; text-align: center; color: #777;">
+              Aún no has publicado ninguna mascota. ¡Empieza añadiendo una!
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</main>

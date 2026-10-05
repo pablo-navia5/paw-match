@@ -1,1 +1,39 @@
-<p>user-dashboard-page works!</p>
+<header style="padding: 1rem 2rem; background: #ff5e62; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <h1 style="margin: 0; font-size: 1.5rem;">🐾 PawMatch</h1>
+  <button style="background: transparent; border: 1px solid white; border-radius: 4px; padding: 0.5rem 1rem; color: white; font-weight: bold; cursor: pointer;">
+    Mi Perfil
+  </button>
+</header>
+
+<main style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 70px); background: #f4f4f9;">
+
+  @if (currentPet) {
+    <div style="background: white; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; width: 350px; text-align: center;">
+
+      <img [src]="currentPet.image" alt="Foto de mascota" style="width: 100%; height: 350px; object-fit: cover;">
+
+      <div style="padding: 1.5rem;">
+        <h2 style="margin: 0 0 0.5rem 0; font-size: 1.8rem; color: #333;">{{ currentPet.name }}, {{ currentPet.age }}</h2>
+        <p style="margin: 0; color: #777; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">{{ currentPet.species }}</p>
+      </div>
+
+      <div style="display: flex; justify-content: space-evenly; padding: 1rem 0 1.5rem 0; border-top: 1px solid #eee;">
+
+        <button (click)="nextPet('pass')" style="background: white; border: 2px solid #fd5068; color: #fd5068; border-radius: 50%; width: 60px; height: 60px; font-size: 1.8rem; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;">
+          ✖
+        </button>
+
+        <button (click)="nextPet('like')" style="background: white; border: 2px solid #1be4a1; color: #1be4a1; border-radius: 50%; width: 60px; height: 60px; font-size: 1.8rem; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;">
+          ♥
+        </button>
+
+      </div>
+    </div>
+  } @else {
+    <div style="text-align: center; color: #888;">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">😴</div>
+      <h2>¡No hay más mascotas por ahora!</h2>
+      <p>Vuelve más tarde para ver nuevos peludos en adopción.</p>
+    </div>
+  }
+</main>
