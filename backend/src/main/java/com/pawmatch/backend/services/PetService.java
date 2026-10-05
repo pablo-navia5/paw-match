@@ -12,5 +12,7 @@ public interface PetService {
 
     List<PetModel> findAll();
 
+    List<PetModel> findUnseenPetsForUser(Long userId);
+
     void delete(final Long id);
 }

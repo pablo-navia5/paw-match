@@ -23,16 +23,20 @@ export class UserDashboardPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.petService.getAllPets().subscribe({
-      next: (data) => {
-        this.pets.set(data);
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        console.error('Error al descargar las mascotas:', err);
-        this.isLoading.set(false);
-      }
-    });
+    const userSession = this.authService.currentUser();
+
+    if (userSession && userSession.databaseId) {
+      this.petService.getUserFeed(userSession.databaseId).subscribe({
+        next: (data) => {
+          this.pets.set(data);
+          this.isLoading.set(false);
+        },
+        error: (err) => {
+          console.error('Error al descargar el feed:', err);
+          this.isLoading.set(false);
+        },
+      });
+    }
   }
 
   nextPet(action: 'like' | 'pass') {
@@ -43,7 +47,7 @@ export class UserDashboardPageComponent implements OnInit {
     const interactionPayload = {
       userId: userSession.databaseId,
       petId: this.currentPet.id,
-      interactionType: action
+      interactionType: action,
     };
 
     this.petService.registerInteraction(interactionPayload).subscribe({
@@ -56,7 +60,7 @@ export class UserDashboardPageComponent implements OnInit {
           alert('Ya habías interactuado con esta mascota.');
           this.currentIndex++;
         }
-      }
+      },
     });
   }
 }

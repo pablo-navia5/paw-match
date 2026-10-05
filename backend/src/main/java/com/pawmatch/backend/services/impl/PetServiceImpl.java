@@ -38,6 +38,11 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
+    public List<PetModel> findUnseenPetsForUser(Long userId) {
+        return petDao.findUnseenPetsForUser(userId);
+    }
+
+    @Override
     public void delete(Long id) {
         petDao.deleteById(id);
     }

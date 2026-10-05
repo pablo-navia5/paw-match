@@ -44,6 +44,15 @@ public class PetFacadeImpl implements PetFacade {
     }
 
     @Override
+    public List<PetDto> getUnseenPetsForUser(Long userId) {
+        List<PetModel> unseenPets = petService.findUnseenPetsForUser(userId);
+
+        return unseenPets.stream()
+                .map(toDtoConverter::convert)
+                .toList();
+    }
+
+    @Override
     public void delete(Long id) {
         petService.delete(id);
     }

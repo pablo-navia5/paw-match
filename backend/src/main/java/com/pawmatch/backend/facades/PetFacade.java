@@ -13,5 +13,7 @@ public interface PetFacade {
 
     List<PetDto> findAll();
 
+    List<PetDto> getUnseenPetsForUser(Long userId);
+
     void delete(final Long id);
 }

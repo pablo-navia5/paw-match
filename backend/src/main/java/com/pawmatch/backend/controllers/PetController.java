@@ -37,6 +37,16 @@ public class PetController {
         return ResponseEntity.ok(petFacade.findAll());
     }
 
+    @GetMapping("/feed/{userId}")
+    public ResponseEntity<List<PetDto>> getUserFeed(@PathVariable Long userId) {
+        try {
+            List<PetDto> feed = petFacade.getUnseenPetsForUser(userId);
+            return ResponseEntity.ok(feed);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @GetMapping("/shelter/{shelterId}")
     public ResponseEntity<List<PetDto>> findByShelterId(@PathVariable final Long shelterId) {
         return ResponseEntity.ok(petFacade.findByShelterId(shelterId));

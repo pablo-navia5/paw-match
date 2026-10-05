@@ -29,6 +29,10 @@ export class PetService {
     return this.http.get<PetResponse[]>(`${this.apiUrl}/pet`);
   }
 
+  getUserFeed(userId: number): Observable<PetResponse[]> {
+    return this.http.get<PetResponse[]>(`${this.apiUrl}/pet/feed/${userId}`);
+  }
+
   registerInteraction(interaction: InteractionRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}/interaction`, interaction, { responseType: 'text' });
   }
