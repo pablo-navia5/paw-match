@@ -6,6 +6,8 @@ import com.pawmatch.backend.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,5 +21,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return userDao.save(user);
+    }
+
+    @Override
+    public Optional<UserModel> findByFirebaseUid(String firebaseUid) {
+        return userDao.findByFirebaseUid(firebaseUid);
     }
 }

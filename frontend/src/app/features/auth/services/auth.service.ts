@@ -3,7 +3,7 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { from, switchMap, Observable } from 'rxjs';
-import { UserRegisterRequest, ShelterRegisterRequest } from '../models/auth.model';
+import { UserRegisterRequest, ShelterRegisterRequest, AuthProfile } from '../models/auth.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -41,7 +41,14 @@ export class AuthService {
     );
   }
 
-  login(email: string, password: string): Observable<any> {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
+  login(email: string, password: string): Observable<AuthProfile> {
+    const firebaseLogin$ = from(signInWithEmailAndPassword(this.auth, email, password));
+
+    return firebaseLogin$.pipe(
+      switchMap(userCredential => {
+        const uid = userCredential.user.uid;
+        return this.http.get<AuthProfile>(`${this.apiUrl}/auth/profile/${uid}`);
+      })
+    );
   }
 }

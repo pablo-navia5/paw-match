@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @AllArgsConstructor
 public class ShelterFacadeImpl implements ShelterFacade {
@@ -23,5 +25,10 @@ public class ShelterFacadeImpl implements ShelterFacade {
         final ShelterModel shelterModel = shelterService.save(toModelConverter.convert(shelterRegisterDto));
 
         return toDtoConverter.convert(shelterModel);
+    }
+
+    @Override
+    public Optional<ShelterModel> findByFirebaseUid(String firebaseUid) {
+        return shelterService.findByFirebaseUid(firebaseUid);
     }
 }

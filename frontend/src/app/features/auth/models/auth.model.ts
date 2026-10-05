@@ -15,3 +15,8 @@ export interface ShelterRegisterRequest {
   contactPhone: string;
   address: string;
 }
+
+export interface AuthProfile {
+  databaseId: number;
+  role: string;
+}

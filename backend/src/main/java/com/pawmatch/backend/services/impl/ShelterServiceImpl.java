@@ -6,6 +6,8 @@ import com.pawmatch.backend.services.ShelterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @AllArgsConstructor
 @Service
 public class ShelterServiceImpl implements ShelterService {
@@ -19,5 +21,10 @@ public class ShelterServiceImpl implements ShelterService {
         }
 
         return shelterDao.save(shelter);
+    }
+
+    @Override
+    public Optional<ShelterModel> findByFirebaseUid(String firebaseUid) {
+        return shelterDao.findByFirebaseUid(firebaseUid);
     }
 }

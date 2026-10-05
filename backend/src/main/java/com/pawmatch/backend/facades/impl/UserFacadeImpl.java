@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @AllArgsConstructor
 public class UserFacadeImpl implements UserFacade {
@@ -23,5 +25,10 @@ public class UserFacadeImpl implements UserFacade {
         final UserModel userModel = userService.save(toModelConverter.convert(userRegisterDto));
 
         return toDtoConverter.convert(userModel);
+    }
+
+    @Override
+    public Optional<UserModel> findByFirebaseUid(String firebaseUid) {
+        return userService.findByFirebaseUid(firebaseUid);
     }
 }
