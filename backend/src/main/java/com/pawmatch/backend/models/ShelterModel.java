@@ -1,6 +1,7 @@
 package com.pawmatch.backend.models;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +25,11 @@ public class ShelterModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private String firebaseUid;
+
     private String name;
     private String email;
-    private String password;
     private String contactPhone;
     private String address;
 }

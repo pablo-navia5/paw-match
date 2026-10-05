@@ -1,5 +1,6 @@
 package com.pawmatch.backend.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,9 +24,11 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private String firebaseUid;
+
     private String name;
     private String email;
-    private String password;
 
     private String preferredSpecies;
     private Integer minAgePreference;
