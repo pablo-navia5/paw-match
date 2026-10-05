@@ -1,0 +1,23 @@
+package com.pawmatch.backend.dtos;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PetCreateDto {
+
+    private String name;
+    private String species;
+    private Integer age;
+
+    private String requiredHouseSize;
+    private Boolean needsYard;
+    private Integer requiredHoursPerDay;
+
+    private Long shelterId;
+}

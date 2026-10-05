@@ -1,0 +1,41 @@
+package com.pawmatch.backend.services.impl;
+
+import com.pawmatch.backend.daos.PetDao;
+import com.pawmatch.backend.daos.ShelterDao;
+import com.pawmatch.backend.models.PetModel;
+import com.pawmatch.backend.models.ShelterModel;
+import com.pawmatch.backend.services.PetService;
+import com.pawmatch.backend.services.ShelterService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@AllArgsConstructor
+@Service
+public class PetServiceImpl implements PetService {
+
+    private final PetDao petDao;
+    private final ShelterDao shelterDao;
+
+    @Override
+    public PetModel save(final PetModel pet, final Long shelterId) {
+        final ShelterModel shelter = shelterDao.findById(shelterId)
+                                               .orElseThrow(() -> new IllegalArgumentException("No se encontró la protectora con ID: " + shelterId));
+
+        pet.setShelter(shelter);
+
+        return petDao.save(pet);
+    }
+
+    @Override
+    public List<PetModel> findByShelterId(Long id) {
+        return petDao.findByShelterId(id);
+    }
+
+    @Override
+    public Optional<PetModel> findById(Long id) {
+        return petDao.findById(id);
+    }
+}

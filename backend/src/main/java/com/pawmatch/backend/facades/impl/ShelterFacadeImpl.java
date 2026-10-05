@@ -2,10 +2,8 @@ package com.pawmatch.backend.facades.impl;
 
 import com.pawmatch.backend.dtos.ShelterDto;
 import com.pawmatch.backend.dtos.ShelterRegisterDto;
-import com.pawmatch.backend.dtos.UserDto;
 import com.pawmatch.backend.facades.ShelterFacade;
 import com.pawmatch.backend.models.ShelterModel;
-import com.pawmatch.backend.models.UserModel;
 import com.pawmatch.backend.services.ShelterService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
