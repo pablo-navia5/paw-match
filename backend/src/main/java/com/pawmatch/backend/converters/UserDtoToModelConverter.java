@@ -19,6 +19,12 @@ public class UserDtoToModelConverter implements Converter<UserRegisterDto, UserM
         user.setName(source.getName());
         user.setEmail(source.getEmail());
         user.setFirebaseUid(source.getFirebaseUid());
+        user.setPreferredSpecies(source.getPreferredSpecies());
+        user.setMinAgePreference(source.getMinAgePreference());
+        user.setMaxAgePreference(source.getMaxAgePreference());
+        user.setHouseSize(source.getHouseSize());
+        user.setHasYard(source.getHasYard());
+        user.setHoursAvailablePerDay(source.getHoursAvailablePerDay());
         return user;
     }
 }
