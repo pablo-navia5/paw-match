@@ -5,12 +5,10 @@ import com.pawmatch.backend.daos.ShelterDao;
 import com.pawmatch.backend.models.PetModel;
 import com.pawmatch.backend.models.ShelterModel;
 import com.pawmatch.backend.services.PetService;
-import com.pawmatch.backend.services.ShelterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
