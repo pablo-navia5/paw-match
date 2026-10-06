@@ -11,6 +11,7 @@ public class MatchDtoToModelConverter implements Converter<MatchDto, MatchModel>
     @Override
     public MatchModel convert(final MatchDto source) {
         MatchModel match = new MatchModel();
+        match.setId(source.getId());
         match.setUserId(source.getUserId());
         match.setPetId(source.getPetId());
         match.setMatchPercentage(source.getMatchPercentage());

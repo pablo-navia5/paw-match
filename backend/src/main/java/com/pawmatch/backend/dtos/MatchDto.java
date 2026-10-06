@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchDto {
+    private Long id;
     private Long userId;
     private Long petId;
     private Double matchPercentage;

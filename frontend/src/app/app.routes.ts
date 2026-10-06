@@ -6,6 +6,7 @@ import { LoginPageComponent } from './features/auth/pages/login-page/login-page'
 import { ShelterDashboardPageComponent } from './features/shelter/pages/shelter-dashboard-page/shelter-dashboard-page';
 import { UserDashboardPageComponent } from './features/user/pages/user-dashboard-page/user-dashboard-page';
 import { CreatePetPageComponent } from './features/shelter/pages/create-pet-page/create-pet-page';
+import { ShelterMatchesPageComponent } from './features/shelter/pages/shelter-matches-page/shelter-matches-page';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -30,6 +31,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: { role: 'SHELTER' }
   },
-
+  {
+    path: 'shelter-panel/matches',
+    component: ShelterMatchesPageComponent,
+    canActivate: [authGuard],
+    data: { role: 'SHELTER' }
+  },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
