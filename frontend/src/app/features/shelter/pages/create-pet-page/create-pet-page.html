@@ -1,65 +1,89 @@
-<div style="max-width: 400px; margin: 3rem auto; padding: 2rem; border: 1px solid #ccc; border-radius: 8px; font-family: sans-serif;">
-  <h2>Añadir Nueva Mascota</h2>
-
-  <form [formGroup]="petForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; gap: 1rem;">
-    <div>
-      <label>Nombre:</label>
-      <input type="text" formControlName="name" style="width: 100%; padding: 0.5rem;">
+<div class="form-wrapper">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Añadir Nueva Mascota</h2>
+      <p class="text-muted">Completa el perfil para que el sistema encuentre al adoptante ideal.</p>
     </div>
 
-    <div>
-      <label>Especie:</label>
-      <select formControlName="species" style="width: 100%; padding: 0.5rem;">
-        <option value="Perro">Perro</option>
-        <option value="Gato">Gato</option>
-      </select>
-    </div>
+    <form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="modern-form">
+      <h3 class="section-title">Datos Básicos</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" formControlName="name" placeholder="Ej. Max" class="form-control">
+        </div>
 
-    <div>
-      <label>Edad:</label>
-      <input type="number" formControlName="age" style="width: 100%; padding: 0.5rem;">
-    </div>
+        <div class="form-group">
+          <label for="species">Especie</label>
+          <select id="species" formControlName="species" class="form-control">
+            <option value="" disabled selected>Selecciona una especie...</option>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+          </select>
+        </div>
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="requiredHoursPerDay">
-        ¿Requiere horas al dia?
-      </label>
-    </div>
+        <div class="form-group">
+          <label for="age">Edad (años)</label>
+          <input type="number" id="age" formControlName="age" placeholder="Ej. 3" class="form-control">
+        </div>
+      </div>
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="requiresExperiencedOwner">
-        ¿Requiere dueño experimentado?
-      </label>
-    </div>
+      <hr class="divider">
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="goodWithChildren">
-        ¿Es bueno con niños pequeños?
-      </label>
-    </div>
+      <h3 class="section-title">Requisitos de Adopción</h3>
+      <div class="form-grid">
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="goodWithOtherPets">
-        ¿Es bueno con otras mascotas?
-      </label>
-    </div>
+        <div class="form-group">
+          <label for="requiredHoursPerDay">Horas de atención diarias requeridas</label>
+          <input type="number" id="requiredHoursPerDay" formControlName="requiredHoursPerDay" placeholder="Ej. 2" class="form-control">
+        </div>
 
-    <div>
-      <label>Edad:</label>
-      <input type="number" formControlName="energyLevel" style="width: 100%; padding: 0.5rem;">
-    </div>
+        <div class="form-group">
+          <label for="energyLevel">Nivel de energía (1-Bajo, 2-Medio, 3-Alto)</label>
+          <input type="number" id="energyLevel" formControlName="energyLevel" min="1" max="3" class="form-control">
+        </div>
 
-    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-      <button type="button" routerLink="/shelter-panel" style="flex: 1; padding: 0.8rem; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">
-        Cancelar
-      </button>
-      <button type="submit" [disabled]="petForm.invalid" style="flex: 1; padding: 0.8rem; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
-        Guardar
-      </button>
-    </div>
-  </form>
+        <div class="form-group">
+          <label for="requiredHouseSize">Tamaño de vivienda mínimo</label>
+          <select id="requiredHouseSize" formControlName="requiredHouseSize" class="form-control">
+            <option value="Pequeña">Pequeña (Piso)</option>
+            <option value="Mediana">Mediana (Adosado)</option>
+            <option value="Grande">Grande (Finca/Chalet)</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="checkbox-grid">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="needsYard" class="custom-checkbox">
+          <span>Requiere jardín obligatorio</span>
+        </label>
+
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="requiresExperiencedOwner" class="custom-checkbox">
+          <span>Requiere dueño experimentado</span>
+        </label>
+
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="goodWithChildren" class="custom-checkbox">
+          <span>Compatible con niños pequeños</span>
+        </label>
+
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="goodWithOtherPets" class="custom-checkbox">
+          <span>Compatible con otras mascotas</span>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" routerLink="/shelter-panel" class="btn-secondary">
+          Cancelar
+        </button>
+        <button type="submit" [disabled]="petForm.invalid" class="btn-primary">
+          Guardar Mascota
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

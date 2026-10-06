@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   imports: [],
@@ -40,12 +40,16 @@ export class ShelterDashboardPageComponent implements OnInit {
       error: (err) => {
         console.error('Error al descargar las mascotas de Spring Boot:', err);
         this.isLoading.set(true);
-      }
+      },
     });
   }
 
   addNewPet() {
     this.router.navigate(['/shelter-panel/create-pet']);
+  }
+
+  goToMatches() {
+    this.router.navigate(['/shelter-panel/matches'])
   }
 
   deletePet(id: number) {
@@ -54,13 +58,13 @@ export class ShelterDashboardPageComponent implements OnInit {
     if (confirmacion) {
       this.petService.deletePet(id).subscribe({
         next: () => {
-          this.pets.update(mascotasActuales => mascotasActuales.filter(pet => pet.id !== id));
+          this.pets.update((mascotasActuales) => mascotasActuales.filter((pet) => pet.id !== id));
           alert('Mascota eliminada correctamente.');
         },
         error: (err) => {
           console.error('Error al borrar la mascota:', err);
           alert('Hubo un error al intentar borrar.');
-        }
+        },
       });
     }
   }

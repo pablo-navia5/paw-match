@@ -1,92 +1,106 @@
-<div style="max-width: 400px; margin: 3rem auto; font-family: sans-serif; padding: 2rem; border: 1px solid #ccc; border-radius: 8px;">
-  <h2>Registro de Adoptante</h2>
-
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; gap: 1rem;">
-
-    <div>
-      <label>Nombre Completo:</label>
-      <input type="text" formControlName="name" style="width: 100%; padding: 0.5rem;">
+<div class="form-wrapper">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Registro de Adoptante</h2>
+      <p class="text-muted">Crea tu perfil y encuentra a tu compañero ideal</p>
     </div>
 
-    <div>
-      <label>Email:</label>
-      <input type="email" formControlName="email" style="width: 100%; padding: 0.5rem;">
-    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="modern-form">
 
-    <div>
-      <label>Contraseña (mín 6 carácteres):</label>
-      <input type="password" formControlName="password" style="width: 100%; padding: 0.5rem;">
-    </div>
+      <h3 class="section-title">Datos Básicos</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Nombre Completo</label>
+          <input type="text" id="name" formControlName="name" placeholder="Ej. Ana García" class="form-control">
+        </div>
 
-    <div>
-      <label>Especie Preferida:</label>
-      <select formControlName="preferredSpecies" style="width: 100%; padding: 0.5rem;">
-        <option value="Perro">Perro</option>
-        <option value="Gato">Gato</option>
-      </select>
-    </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="ana@ejemplo.com" class="form-control">
+        </div>
 
-    <div style="display: flex; gap: 1rem;">
-      <div style="flex: 1;">
-        <label>Edad Mínima:</label>
-        <input type="number" formControlName="minAgePreference" style="width: 100%; padding: 0.5rem;">
+        <div class="form-group">
+          <label for="password">Contraseña (mín 6 carácteres)</label>
+          <input type="password" id="password" formControlName="password" placeholder="••••••••" class="form-control">
+        </div>
       </div>
-      <div style="flex: 1;">
-        <label>Edad Máxima:</label>
-        <input type="number" formControlName="maxAgePreference" style="width: 100%; padding: 0.5rem;">
+
+      <hr class="divider">
+
+      <h3 class="section-title">Preferencias de Adopción</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="preferredSpecies">Especie Preferida</label>
+          <select id="preferredSpecies" formControlName="preferredSpecies" class="form-control">
+            <option value="" disabled selected>Selecciona una especie...</option>
+            <option value="Perro">Perro</option>
+            <option value="Gato">Gato</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="minAgePreference">Edad Mínima (años)</label>
+          <input type="number" id="minAgePreference" formControlName="minAgePreference" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="maxAgePreference">Edad Máxima (años)</label>
+          <input type="number" id="maxAgePreference" formControlName="maxAgePreference" class="form-control">
+        </div>
       </div>
-    </div>
 
-    <div>
-      <label>Tamaño de Casa:</label>
-      <select formControlName="houseSize" style="width: 100%; padding: 0.5rem;">
-        <option value="Pequeña">Pequeña</option>
-        <option value="Mediana">Mediana</option>
-        <option value="Grande">Grande</option>
-      </select>
-    </div>
+      <hr class="divider">
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="hasYard">
-        ¿Tienes patio o jardín exterior?
-      </label>
-    </div>
+      <h3 class="section-title">Tu Estilo de Vida y Hogar</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="houseSize">Tamaño de Casa</label>
+          <select id="houseSize" formControlName="houseSize" class="form-control">
+            <option value="Pequeña">Pequeña (Piso)</option>
+            <option value="Mediana">Mediana (Adosado)</option>
+            <option value="Grande">Grande (Finca/Chalet)</option>
+          </select>
+        </div>
 
-    <div>
-      <label>Horas disponibles al día:</label>
-      <input type="number" formControlName="hoursAvailablePerDay" style="width: 100%; padding: 0.5rem;">
-    </div>
+        <div class="form-group">
+          <label for="hoursAvailablePerDay">Horas disponibles al día</label>
+          <input type="number" id="hoursAvailablePerDay" formControlName="hoursAvailablePerDay" class="form-control">
+        </div>
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="hasPreviousExperience">
-        ¿Tienes experiencia previa?
-      </label>
-    </div>
+        <div class="form-group">
+          <label for="activityLevel">Tu nivel de actividad (1-Bajo, 2-Medio, 3-Alto)</label>
+          <input type="number" id="activityLevel" formControlName="activityLevel" min="1" max="3" class="form-control">
+        </div>
+      </div>
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="hasSmallChildren">
-        ¿Tienes niños pequeños?
-      </label>
-    </div>
+      <div class="checkbox-grid">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="hasYard" class="custom-checkbox">
+          <span>Tengo patio o jardín exterior</span>
+        </label>
 
-    <div>
-      <label>
-        <input type="checkbox" formControlName="hasOtherPets">
-        ¿Tienes otras mascotas?
-      </label>
-    </div>
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="hasPreviousExperience" class="custom-checkbox">
+          <span>Tengo experiencia previa con mascotas</span>
+        </label>
 
-    <div>
-      <label>Nivel de actividad:</label>
-      <input type="number" formControlName="activityLevel" style="width: 100%; padding: 0.5rem;">
-    </div>
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="hasSmallChildren" class="custom-checkbox">
+          <span>Tengo niños pequeños en casa</span>
+        </label>
 
-    <button type="submit" [disabled]="registerForm.invalid" style="padding: 0.8rem; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
-      Crear Cuenta
-    </button>
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="hasOtherPets" class="custom-checkbox">
+          <span>Tengo otras mascotas actualmente</span>
+        </label>
+      </div>
 
-  </form>
+      <div class="form-actions">
+        <button type="submit" [disabled]="registerForm.invalid" class="btn-primary btn-block">
+          Crear Cuenta
+        </button>
+      </div>
+
+    </form>
+  </div>
 </div>

@@ -1,8 +1,12 @@
-<div class="matches-container">
-  <h2>Solicitudes de Adopción</h2>
+<div class="matches-wrapper">
+  <div class="matches-header">
+    <button class="btn-back" routerLink="/shelter-panel">
+      ← Volver al Panel
+    </button>
+    <h2>Solicitudes de Adopción</h2>
+  </div>
 
-  <!-- Pestañas de Filtro -->
-  <div class="tabs">
+  <div class="tabs-container">
     <button
       [class.active]="currentFilter() === 'PENDING'"
       (click)="setFilter('PENDING')">
@@ -20,38 +24,41 @@
     </button>
   </div>
 
-  <!-- Estado de Carga -->
   @if (isLoading()) {
-    <div class="loading">
-      Cargando solicitudes...
+    <div class="state-container">
+      <p>Cargando solicitudes...</p>
     </div>
   }
 
-  <!-- Lista de Matches Vacía -->
   @if (!isLoading() && filteredMatches().length === 0) {
-    <div class="empty-state">
-      No hay solicitudes en este estado.
+    <div class="state-container empty">
+      <p>No hay solicitudes en este estado.</p>
     </div>
   }
 
-  <!-- Cuadrícula de Tarjetas -->
   <div class="matches-grid">
     @for (match of filteredMatches(); track match.id) {
       <div class="match-card">
         <div class="card-header">
           <span class="match-badge">{{ match.matchPercentage | number:'1.0-0' }}% Afinidad</span>
-          <span class="date">{{ match.createdAt | date:'dd/MM/yyyy' }}</span>
+          <span class="match-date">{{ match.createdAt | date:'dd/MM/yyyy' }}</span>
         </div>
 
         <div class="card-body">
-          <h3>Mascota ID: {{ match.petId }}</h3>
-          <p>Solicitante ID: {{ match.userId }}</p>
+          <div class="info-row">
+            <span class="info-label">Mascota ID</span>
+            <span class="info-value">{{ match.petId }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Solicitante ID</span>
+            <span class="info-value">{{ match.userId }}</span>
+          </div>
         </div>
 
         @if (match.status === 'PENDING') {
           <div class="card-actions">
-            <button class="btn-approve">Aceptar</button>
             <button class="btn-reject">Rechazar</button>
+            <button class="btn-approve">Aceptar</button>
           </div>
         }
       </div>

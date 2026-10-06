@@ -3,9 +3,10 @@ import { MatchResponse, MatchStatus } from '../../../../shared/models/match.mode
 import { MatchService } from '../../../../shared/services/match.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [DecimalPipe, DatePipe],
+  imports: [DecimalPipe, DatePipe, RouterLink],
   standalone: true,
   selector: 'app-shelter-matches-page',
   styleUrl: './shelter-matches-page.scss',

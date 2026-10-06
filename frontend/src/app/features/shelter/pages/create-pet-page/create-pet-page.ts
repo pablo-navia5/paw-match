@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PetService } from '../../../../shared/services/pet.service';
 import { AuthService } from '../../../auth/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   standalone: true,
   selector: 'app-create-pet-page',
   styleUrl: './create-pet-page.scss',
@@ -26,7 +26,7 @@ export class CreatePetPageComponent {
     requiresExperiencedOwner: [false],
     goodWithChildren: [false],
     goodWithOtherPets: [false],
-    energyLevel: [1, Validators.required]
+    energyLevel: [1, Validators.required],
   });
 
   onSubmit() {
