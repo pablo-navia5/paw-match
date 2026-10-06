@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-user-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register-user-page.html',
-  styleUrl: './register-user-page.scss'
+  styleUrl: './register-user-page.scss',
 })
 export class RegisterUserPageComponent {
   private fb = inject(FormBuilder);
@@ -26,7 +27,7 @@ export class RegisterUserPageComponent {
     hasPreviousExperience: [false],
     hasSmallChildren: [false],
     hasOtherPets: [false],
-    activityLevel: [1, Validators.required]
+    activityLevel: [1, Validators.required],
   });
 
   onSubmit() {
@@ -42,7 +43,7 @@ export class RegisterUserPageComponent {
         error: (err) => {
           alert('Error al registrar: ' + err.message);
           console.error(err);
-        }
+        },
       });
     }
   }

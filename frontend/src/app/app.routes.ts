@@ -7,11 +7,13 @@ import { ShelterDashboardPageComponent } from './features/shelter/pages/shelter-
 import { UserDashboardPageComponent } from './features/user/pages/user-dashboard-page/user-dashboard-page';
 import { CreatePetPageComponent } from './features/shelter/pages/create-pet-page/create-pet-page';
 import { ShelterMatchesPageComponent } from './features/shelter/pages/shelter-matches-page/shelter-matches-page';
+import { HomePageComponent } from './features/home/pages/home-page/home-page';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register-user', component: RegisterUserPageComponent },
   { path: 'register-shelter', component: RegisterShelterPageComponent },
+  { path: '', component: HomePageComponent },
 
   {
     path: 'user-panel',
@@ -37,5 +39,4 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: { role: 'SHELTER' }
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-shelter-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register-shelter-page.html',
-  styleUrl: './register-shelter-page.scss'
+  styleUrl: './register-shelter-page.scss',
 })
 export class RegisterShelterPageComponent {
   private fb = inject(FormBuilder);
@@ -18,7 +19,7 @@ export class RegisterShelterPageComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     contactPhone: ['', Validators.required],
-    address: ['', Validators.required]
+    address: ['', Validators.required],
   });
 
   onSubmit() {
@@ -34,7 +35,7 @@ export class RegisterShelterPageComponent {
         error: (err) => {
           alert('Error al registrar: ' + err.message);
           console.error(err);
-        }
+        },
       });
     }
   }
