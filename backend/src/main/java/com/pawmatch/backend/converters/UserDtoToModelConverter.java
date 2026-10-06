@@ -24,6 +24,10 @@ public class UserDtoToModelConverter implements Converter<UserRegisterDto, UserM
         user.setHouseSize(source.getHouseSize());
         user.setHasYard(source.getHasYard());
         user.setHoursAvailablePerDay(source.getHoursAvailablePerDay());
+        user.setHasPreviousExperience(source.getHasPreviousExperience());
+        user.setHasSmallChildren(source.getHasSmallChildren());
+        user.setHasOtherPets(source.getHasOtherPets());
+        user.setActivityLevel(source.getActivityLevel());
         return user;
     }
 }

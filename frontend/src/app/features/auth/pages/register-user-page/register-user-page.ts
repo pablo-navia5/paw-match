@@ -22,7 +22,11 @@ export class RegisterUserPageComponent {
     maxAgePreference: [10, Validators.required],
     houseSize: ['Mediana', Validators.required],
     hasYard: [false],
-    hoursAvailablePerDay: [2, Validators.required]
+    hoursAvailablePerDay: [2, Validators.required],
+    hasPreviousExperience: [false],
+    hasSmallChildren: [false],
+    hasOtherPets: [false],
+    activityLevel: [1, Validators.required]
   });
 
   onSubmit() {

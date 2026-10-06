@@ -7,6 +7,10 @@ export interface UserRegisterRequest {
   houseSize: string;
   hasYard: boolean;
   hoursAvailablePerDay: number;
+  hasPreviousExperience: boolean;
+  hasSmallChildren: boolean;
+  hasOtherPets: boolean;
+  activityLevel: number;
 }
 
 export interface ShelterRegisterRequest {

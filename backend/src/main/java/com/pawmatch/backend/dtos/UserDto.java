@@ -14,4 +14,8 @@ public class UserDto {
     private Long id;
     private String name;
     private String email;
+    private Boolean hasPreviousExperience;
+    private Boolean hasSmallChildren;
+    private Boolean hasOtherPets;
+    private Integer activityLevel;
 }

@@ -17,6 +17,10 @@ public class PetDtoToModelConverter implements Converter<PetCreateDto, PetModel>
         pet.setRequiredHouseSize(source.getRequiredHouseSize());
         pet.setNeedsYard(source.getNeedsYard());
         pet.setRequiredHoursPerDay(source.getRequiredHoursPerDay());
+        pet.setRequiresExperiencedOwner(source.getRequiresExperiencedOwner());
+        pet.setGoodWithChildren(source.getGoodWithChildren());
+        pet.setGoodWithOtherPets(source.getGoodWithOtherPets());
+        pet.setEnergyLevel(source.getEnergyLevel());
         return pet;
     }
 }

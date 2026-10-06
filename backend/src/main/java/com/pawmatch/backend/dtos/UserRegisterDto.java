@@ -22,4 +22,8 @@ public class UserRegisterDto {
     private String houseSize;
     private Boolean hasYard;
     private Integer hoursAvailablePerDay;
+    private Boolean hasPreviousExperience;
+    private Boolean hasSmallChildren;
+    private Boolean hasOtherPets;
+    private Integer activityLevel;
 }

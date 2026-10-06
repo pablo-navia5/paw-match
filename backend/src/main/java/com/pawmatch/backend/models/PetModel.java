@@ -33,6 +33,10 @@ public class PetModel {
     private String requiredHouseSize;
     private Boolean needsYard;
     private Integer requiredHoursPerDay;
+    private Boolean requiresExperiencedOwner;
+    private Boolean goodWithChildren;
+    private Boolean goodWithOtherPets;
+    private Integer energyLevel;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shelter_id", nullable = false)

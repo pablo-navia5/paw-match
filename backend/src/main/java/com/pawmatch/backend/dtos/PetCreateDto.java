@@ -18,6 +18,10 @@ public class PetCreateDto {
     private String requiredHouseSize;
     private Boolean needsYard;
     private Integer requiredHoursPerDay;
+    private Boolean requiresExperiencedOwner;
+    private Boolean goodWithChildren;
+    private Boolean goodWithOtherPets;
+    private Integer energyLevel;
 
     private Long shelterId;
 }

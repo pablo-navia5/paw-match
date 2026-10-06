@@ -18,6 +18,10 @@ public class UserModelToDtoConverter implements Converter<UserModel, UserDto> {
         dto.setId(source.getId());
         dto.setName(source.getName());
         dto.setEmail(source.getEmail());
+        dto.setHasPreviousExperience(source.getHasPreviousExperience());
+        dto.setHasSmallChildren(source.getHasSmallChildren());
+        dto.setHasOtherPets(source.getHasOtherPets());
+        dto.setActivityLevel(source.getActivityLevel());
         return dto;
     }
 }

@@ -18,6 +18,10 @@ public class PetModelToDtoConverter implements Converter<PetModel,PetDto> {
         dto.setRequiredHouseSize(source.getRequiredHouseSize());
         dto.setNeedsYard(source.getNeedsYard());
         dto.setRequiredHoursPerDay(source.getRequiredHoursPerDay());
+        dto.setRequiresExperiencedOwner(source.getRequiresExperiencedOwner());
+        dto.setGoodWithChildren(source.getGoodWithChildren());
+        dto.setGoodWithOtherPets(source.getGoodWithOtherPets());
+        dto.setEnergyLevel(source.getEnergyLevel());
 
         if (source.getShelter() != null) {
             dto.setShelterId(source.getShelter().getId());
