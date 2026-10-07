@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatchResponse } from '../models/match.model';
 import { environment } from '../../../environments/environment';
@@ -13,7 +13,8 @@ export class MatchService {
     return this.http.get<MatchResponse[]>(`${this.apiUrl}/match/shelter/${shelterId}`);
   }
 
-  updateMatchStatus(matchId: number, status: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/matches/${matchId}/status?status=${status}`, {}, { responseType: 'text' });
+  updateMatchStatus(matchId: number, status: string) {
+    const params = new HttpParams().set('status', status);
+    return this.http.patch<void>(`${this.apiUrl}/match/${matchId}/status`, {}, { params });
   }
 }

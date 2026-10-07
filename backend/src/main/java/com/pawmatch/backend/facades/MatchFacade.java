@@ -7,4 +7,6 @@ import java.util.List;
 public interface MatchFacade {
 
     List<MatchDto> getAllMatchesByShelterId(Long shelterId);
+
+    void updateMatchStatus(Long matchId, String newStatus);
 }

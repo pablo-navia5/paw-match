@@ -54,4 +54,9 @@ public class MatchFacadeImpl implements MatchFacade {
                     .build();
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void updateMatchStatus(Long matchId, String newStatus) {
+        matchService.updateMatchStatus(matchId, newStatus);
+    }
 }

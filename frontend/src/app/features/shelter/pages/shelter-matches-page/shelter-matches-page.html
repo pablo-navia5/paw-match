@@ -56,10 +56,6 @@
         </div>
 
         <div class="card-actions">
-          @if (match.status === 'PENDING') {
-            <button class="btn-reject">Rechazar</button>
-            <button class="btn-approve">Aceptar</button>
-          }
           <button class="btn-details" (click)="openDetails(match)">Ver Detalles</button>
         </div>
       </div>
@@ -185,8 +181,12 @@
 
       @if (selectedMatch()?.status === 'PENDING') {
         <div class="modal-actions">
-          <button class="btn-reject-large">Rechazar Adopción</button>
-          <button class="btn-approve-large">Aprobar Adopción</button>
+          <button class="btn-reject-large" (click)="changeMatchStatus(selectedMatch()!.id, 'REJECTED')">
+            Rechazar Adopción
+          </button>
+          <button class="btn-approve-large" (click)="changeMatchStatus(selectedMatch()!.id, 'APPROVED')">
+            Aprobar Adopción
+          </button>
         </div>
       }
     </div>

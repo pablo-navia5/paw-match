@@ -59,6 +59,23 @@ export class ShelterMatchesPageComponent implements OnInit {
     this.currentFilter.set(status);
   }
 
+  changeMatchStatus(matchId: number, newStatus: string) {
+    this.matchService.updateMatchStatus(matchId, newStatus).subscribe({
+      next: () => {
+        this.allMatches.update(currentMatches =>
+          currentMatches.map(m =>
+            m.id === matchId ? { ...m, status: newStatus as any } : m
+          )
+        );
+
+        this.closeDetails();
+      },
+      error: (err) => {
+        console.error('Error al actualizar el estado:', err);
+      }
+    });
+  }
+
   checkRequirement(type: string): boolean {
     const match = this.selectedMatch();
     if (!match || !match.pet || !match.applicant) return false;
