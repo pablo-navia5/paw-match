@@ -22,9 +22,14 @@ export class UserDashboardPageComponent implements OnInit {
 
   showMatchAnimation = signal<boolean>(false);
   matchedPetName = signal<string>('');
+  isProfileMenuOpen = signal<boolean>(false);
 
   get currentPet() {
     return this.pets()[this.currentIndex];
+  }
+
+  toggleProfileMenu() {
+    this.isProfileMenuOpen.update(val => !val);
   }
 
   ngOnInit() {
@@ -71,5 +76,9 @@ export class UserDashboardPageComponent implements OnInit {
   closeMatchPopup() {
     this.showMatchAnimation.set(false);
     this.currentIndex++;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

@@ -18,10 +18,11 @@ export class ShelterDashboardPageComponent implements OnInit {
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
-  shelterName = 'Refugio Esperanza';
+  shelterName = 'Protectora prueba';
   pets = signal<PetResponse[]>([]);
   isLoading = signal<boolean>(true);
   isEditModalOpen = signal<boolean>(false);
+  isProfileMenuOpen = signal<boolean>(false);
 
   editPetForm = this.fb.nonNullable.group({
     id: [0, Validators.required],
@@ -106,9 +107,17 @@ export class ShelterDashboardPageComponent implements OnInit {
     this.isEditModalOpen.set(true);
   }
 
+  toggleProfileMenu() {
+    this.isProfileMenuOpen.update(val => !val);
+  }
+
   closeEditModal() {
     this.isEditModalOpen.set(false);
     this.editPetForm.reset();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   onSubmitEdit() {

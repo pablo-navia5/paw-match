@@ -63,7 +63,7 @@ export class AuthService {
     this.auth.signOut().then(() => {
       this.currentUser.set(null);
       localStorage.removeItem('pawmatch_session');
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     });
   }
 

@@ -6,6 +6,27 @@
   <button class="btn-profile">
     Mi Perfil
   </button>
+  <div class="top-nav-right">
+    <div class="profile-dropdown-container">
+      <button class="profile-trigger-btn" (click)="toggleProfileMenu()">
+        <div class="avatar-circle">P</div>
+        <span class="profile-name">Mi Cuenta</span>
+        <span class="chevron" [class.rotated]="isProfileMenuOpen()">▼</span>
+      </button>
+
+      @if (isProfileMenuOpen()) {
+        <div class="dropdown-menu">
+          <a routerLink="/perfil" class="dropdown-item">
+            <i>👤</i> Perfil
+          </a>
+          <div class="dropdown-divider"></div>
+          <button (click)="logout()" class="dropdown-item text-danger">
+            <i>🚪</i> Cerrar sesión
+          </button>
+        </div>
+      }
+    </div>
+  </div>
 </header>
 
 <main class="discover-container">
