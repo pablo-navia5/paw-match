@@ -1,6 +1,7 @@
 package com.pawmatch.backend.controllers;
 
 import com.pawmatch.backend.dtos.InteractionRequestDto;
+import com.pawmatch.backend.dtos.InteractionResponseDto;
 import com.pawmatch.backend.facades.InteractionFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,20 @@ public class InteractionController {
     private final InteractionFacade interactionFacade;
 
     @PostMapping
-    public ResponseEntity<String> createInteraction(@RequestBody InteractionRequestDto requestDto) {
+    public ResponseEntity<InteractionResponseDto> createInteraction(@RequestBody InteractionRequestDto requestDto) {
         try {
-            interactionFacade.RegisterInteraction(requestDto);
-            return ResponseEntity.ok("Interacción registrada correctamente");
+            boolean isMatch = interactionFacade.RegisterInteraction(requestDto);
+
+            InteractionResponseDto response = InteractionResponseDto.builder()
+                    .message("Interacción registrada correctamente")
+                    .hasMatch(isMatch)
+                    .build();
+
+            return ResponseEntity.ok(response);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(new InteractionResponseDto(e.getMessage(), false));
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Error interno del servidor");
+            return ResponseEntity.internalServerError().body(new InteractionResponseDto("Error interno del servidor", false));
         }
     }
 }

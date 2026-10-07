@@ -44,3 +44,16 @@
     }
   }
 </main>
+
+@if (showMatchAnimation()) {
+  <div class="match-overlay">
+    <div class="match-content">
+      <h2 class="match-title">¡Es un Match!</h2>
+      <p class="match-subtitle">Nuestra IA dice que <strong>{{ matchedPetName() }}</strong> y tú sois tal para cual.</p>
+      <div class="match-icon">💖</div>
+      <p class="match-info">La protectora acaba de recibir tu solicitud.</p>
+
+      <button class="btn-continue-match" (click)="closeMatchPopup()">Seguir buscando</button>
+    </div>
+  </div>
+}

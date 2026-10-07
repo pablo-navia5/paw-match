@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
 import { AuthService } from '../../../auth/services/auth.service';
+import { InteractionService } from '../../../../shared/services/interaction.service';
 
 @Component({
   imports: [],
@@ -13,10 +14,14 @@ import { AuthService } from '../../../auth/services/auth.service';
 export class UserDashboardPageComponent implements OnInit {
   private petService = inject(PetService);
   private authService = inject(AuthService);
+  private interactionService = inject(InteractionService);
 
   pets = signal<PetResponse[]>([]);
   isLoading = signal<boolean>(true);
   currentIndex = 0;
+
+  showMatchAnimation = signal<boolean>(false);
+  matchedPetName = signal<string>('');
 
   get currentPet() {
     return this.pets()[this.currentIndex];
@@ -44,15 +49,14 @@ export class UserDashboardPageComponent implements OnInit {
 
     if (!userSession || !userSession.databaseId) return;
 
-    const interactionPayload = {
-      userId: userSession.databaseId,
-      petId: this.currentPet.id,
-      interactionType: action,
-    };
-
-    this.petService.registerInteraction(interactionPayload).subscribe({
-      next: () => {
-        this.currentIndex++;
+    this.interactionService.createInteraction(userSession.databaseId, this.currentPet.id, action).subscribe({
+      next: (response) => {
+        if (response.hasMatch) {
+          this.matchedPetName.set(this.currentPet.name)
+          this.showMatchAnimation.set(true)
+        } else {
+          this.currentIndex++;
+        }
       },
       error: (err) => {
         console.error('Error al registrar la acción:', err);
@@ -62,5 +66,10 @@ export class UserDashboardPageComponent implements OnInit {
         }
       },
     });
+  }
+
+  closeMatchPopup() {
+    this.showMatchAnimation.set(false);
+    this.currentIndex++;
   }
 }

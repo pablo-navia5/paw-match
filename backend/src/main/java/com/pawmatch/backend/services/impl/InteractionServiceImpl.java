@@ -24,7 +24,7 @@ public class InteractionServiceImpl implements InteractionService {
     private final MatchDao matchDao;
 
     @Override
-    public void registerInteraction(InteractionModel model) {
+    public boolean registerInteraction(InteractionModel model) {
         if (interactionDao.existsByUserIdAndPetId(model.getUserId(), model.getPetId())) {
             throw new IllegalArgumentException("El usuario ya ha interactuado con esta mascota.");
         }
@@ -32,12 +32,14 @@ public class InteractionServiceImpl implements InteractionService {
         interactionDao.save(model);
 
         if (model.getInteractionType() == InteractionType.LIKE) {
-            calculateAndSaveMatch(model.getUserId(), model.getPetId());
+            return calculateAndSaveMatch(model.getUserId(), model.getPetId());
         }
+
+        return false;
     }
 
     @Override
-    public void calculateAndSaveMatch(Long userId, Long petId) {
+    public boolean calculateAndSaveMatch(Long userId, Long petId) {
         UserModel user = userDao.findById(userId).orElseThrow();
         PetModel pet = petDao.findById(petId).orElseThrow();
 
@@ -70,6 +72,9 @@ public class InteractionServiceImpl implements InteractionService {
             match.setMatchPercentage(matchPercentage);
             match.setStatus(MatchStatus.PENDING);
             matchDao.save(match);
+            return true;
         }
+
+        return false;
     }
 }

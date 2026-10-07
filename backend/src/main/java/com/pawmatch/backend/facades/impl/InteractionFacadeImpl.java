@@ -17,7 +17,7 @@ public class InteractionFacadeImpl implements InteractionFacade {
     private final Converter<InteractionRequestDto, InteractionModel> toModelConverter;
 
     @Override
-    public void RegisterInteraction(InteractionRequestDto requestDto) {
-        interactionService.registerInteraction(toModelConverter.convert(requestDto));
+    public boolean RegisterInteraction(InteractionRequestDto requestDto) {
+        return interactionService.registerInteraction(toModelConverter.convert(requestDto));
     }
 }
