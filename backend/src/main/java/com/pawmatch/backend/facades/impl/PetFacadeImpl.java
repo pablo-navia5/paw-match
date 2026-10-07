@@ -6,6 +6,7 @@ import com.pawmatch.backend.facades.PetFacade;
 import com.pawmatch.backend.models.PetModel;
 import com.pawmatch.backend.services.PetService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -63,16 +64,7 @@ public class PetFacadeImpl implements PetFacade {
         PetModel existingPet = petService.findById(petDto.getId())
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
 
-        existingPet.setName(petDto.getName());
-        existingPet.setSpecies(petDto.getSpecies());
-        existingPet.setAge(petDto.getAge());
-        existingPet.setRequiredHouseSize(petDto.getRequiredHouseSize());
-        existingPet.setNeedsYard(petDto.getNeedsYard());
-        existingPet.setRequiredHoursPerDay(petDto.getRequiredHoursPerDay());
-        existingPet.setRequiresExperiencedOwner(petDto.getRequiresExperiencedOwner());
-        existingPet.setGoodWithChildren(petDto.getGoodWithChildren());
-        existingPet.setGoodWithOtherPets(petDto.getGoodWithOtherPets());
-        existingPet.setEnergyLevel(petDto.getEnergyLevel());
+        BeanUtils.copyProperties(petDto, existingPet, "id", "shelterId");
 
         petService.update(existingPet);
     }

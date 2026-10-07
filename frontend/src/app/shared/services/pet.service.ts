@@ -27,4 +27,8 @@ export class PetService {
   getUserFeed(userId: number): Observable<PetResponse[]> {
     return this.http.get<PetResponse[]>(`${this.apiUrl}/pet/feed/${userId}`);
   }
+
+  updatePet(petData: any) {
+    return this.http.put(`${this.apiUrl}/pet/update`, petData, { responseType: 'text' });
+  }
 }
