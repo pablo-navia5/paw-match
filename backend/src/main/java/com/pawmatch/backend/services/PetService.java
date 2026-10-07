@@ -3,6 +3,7 @@ package com.pawmatch.backend.services;
 import com.pawmatch.backend.models.PetModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PetService {
 
@@ -13,6 +14,8 @@ public interface PetService {
     List<PetModel> findAll();
 
     List<PetModel> findUnseenPetsForUser(Long userId);
+
+    Optional<PetModel> findById(Long id);
 
     void delete(final Long id);
 }

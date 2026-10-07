@@ -18,6 +18,9 @@ public class UserModelToDtoConverter implements Converter<UserModel, UserDto> {
         dto.setId(source.getId());
         dto.setName(source.getName());
         dto.setEmail(source.getEmail());
+        dto.setHouseSize(source.getHouseSize());
+        dto.setHasYard(source.getHasYard());
+        dto.setHoursAvailablePerDay(source.getHoursAvailablePerDay());
         dto.setHasPreviousExperience(source.getHasPreviousExperience());
         dto.setHasSmallChildren(source.getHasSmallChildren());
         dto.setHasOtherPets(source.getHasOtherPets());

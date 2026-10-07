@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
     public Optional<UserModel> findByFirebaseUid(String firebaseUid) {
         return userDao.findByFirebaseUid(firebaseUid);
     }
+
+    @Override
+    public Optional<UserModel> findById(Long Id) {
+        return userDao.findById(Id);
+    }
 }

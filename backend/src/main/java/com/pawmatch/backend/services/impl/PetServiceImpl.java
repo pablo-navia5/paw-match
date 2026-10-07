@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -40,6 +41,11 @@ public class PetServiceImpl implements PetService {
     @Override
     public List<PetModel> findUnseenPetsForUser(Long userId) {
         return petDao.findUnseenPetsForUser(userId);
+    }
+
+    @Override
+    public Optional<PetModel> findById(Long id) {
+        return petDao.findById(id);
     }
 
     @Override

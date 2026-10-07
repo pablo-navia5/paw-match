@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MatchDto {
     private Long id;
     private Long userId;
@@ -19,4 +21,6 @@ public class MatchDto {
     private Double matchPercentage;
     private MatchStatus status;
     private LocalDateTime createdAt;
+    private UserDto applicant;
+    private PetDto pet;
 }

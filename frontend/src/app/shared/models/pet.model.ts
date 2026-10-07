@@ -4,7 +4,9 @@ export interface PetResponse {
   species: string;
   age: number;
   status: string;
-  requiredHoursPerDay: boolean;
+  needsYard: boolean;
+  requiredHouseSize: string;
+  requiredHoursPerDay: number;
   requiresExperiencedOwner: boolean;
   goodWithChildren: boolean;
   goodWithOtherPets: boolean;

@@ -55,13 +55,140 @@
           </div>
         </div>
 
-        @if (match.status === 'PENDING') {
-          <div class="card-actions">
+        <div class="card-actions">
+          @if (match.status === 'PENDING') {
             <button class="btn-reject">Rechazar</button>
             <button class="btn-approve">Aceptar</button>
-          </div>
-        }
+          }
+          <button class="btn-details" (click)="openDetails(match)">Ver Detalles</button>
+        </div>
       </div>
     }
   </div>
 </div>
+
+@if (selectedMatch()) {
+  <div class="modal-backdrop" (click)="closeDetails()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeDetails()">✖</button>
+
+      <div class="modal-header">
+        <div class="header-titles">
+          <h3>Análisis de Compatibilidad</h3>
+          <p class="subtitle">{{ selectedMatch()?.pet?.name }} & {{ selectedMatch()?.applicant?.name }}</p>
+        </div>
+        <span class="match-badge">{{ selectedMatch()?.matchPercentage | number:'1.0-0' }}% Afinidad</span>
+      </div>
+
+      <div class="comparison-table">
+        <div class="table-header">
+          <div class="th-pet"><span class="icon">🐾</span> Requisitos de la mascota</div>
+          <div class="th-user"><span class="icon">👤</span> Perfil del adoptante</div>
+        </div>
+
+        <div class="table-row">
+          <div class="td-pet">
+            <span class="label">Vivienda:</span>
+            <span class="value">{{ selectedMatch()?.pet?.requiredHouseSize || 'Cualquiera' }}</span>
+          </div>
+          <div class="td-user">
+            <span class="label">Vivienda:</span>
+            <span class="value" [class.highlight-match]="checkRequirement('houseSize')">
+              {{ selectedMatch()?.applicant?.houseSize || 'No especificado' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="td-pet">
+            <span class="label">Jardín obligatorio:</span>
+            <span class="value">{{ selectedMatch()?.pet?.needsYard ? 'Sí' : 'No' }}</span>
+          </div>
+          <div class="td-user">
+            <span class="label">Tiene jardín:</span>
+            <span class="value" [class.highlight-match]="checkRequirement('yard')">
+              {{ selectedMatch()?.applicant?.hasYard ? 'Sí' : 'No' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="td-pet">
+            <span class="label">Horas al día:</span>
+            <span class="value">{{ selectedMatch()?.pet?.requiredHoursPerDay }}h mínimas</span>
+          </div>
+          <div class="td-user">
+            <span class="label">Horas disponibles:</span>
+            <span class="value" [class.highlight-match]="checkRequirement('hours')">
+              {{ selectedMatch()?.applicant?.hoursAvailablePerDay }}h declaradas
+            </span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="td-pet">
+            <span class="label">Dueño experto:</span>
+            <span class="value">{{ selectedMatch()?.pet?.requiresExperiencedOwner ? 'Obligatorio' : 'No necesario' }}</span>
+          </div>
+          <div class="td-user">
+            <span class="label">Experiencia previa:</span>
+            <span class="value" [class.highlight-match]="checkRequirement('experience')">
+              {{ selectedMatch()?.applicant?.hasPreviousExperience ? 'Sí' : 'No' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="td-pet">
+            <span class="label">Compatible con niños:</span>
+            <span class="value">{{ selectedMatch()?.pet?.goodWithChildren ? 'Sí' : 'Preferible sin niños' }}</span>
+          </div>
+          <div class="td-user">
+            <span class="label">Niños en casa:</span>
+            <span class="value" [class.highlight-match]="checkRequirement('children')">
+              {{ selectedMatch()?.applicant?.hasSmallChildren ? 'Sí' : 'No' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="td-pet">
+            <span class="label">Otras mascotas:</span>
+            <span class="value">{{ selectedMatch()?.pet?.goodWithOtherPets ? 'Sí' : 'Hijo único' }}</span>
+          </div>
+          <div class="td-user">
+            <span class="label">Otras mascotas:</span>
+            <span class="value" [class.highlight-match]="checkRequirement('otherPets')">
+              {{ selectedMatch()?.applicant?.hasOtherPets ? 'Sí' : 'No' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="td-pet">
+            <span class="label">Nivel de energía:</span>
+            <span class="value">{{ selectedMatch()?.pet?.energyLevel }}/3</span>
+          </div>
+          <div class="td-user">
+            <span class="label">Nivel de actividad:</span>
+            <span class="value" [class.highlight-match]="checkRequirement('energy')">
+              {{ selectedMatch()?.applicant?.activityLevel }}/3
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-info">
+        <span class="icon">📧</span>
+        <span><strong>Email de contacto:</strong> {{ selectedMatch()?.applicant?.email }}</span>
+      </div>
+
+      @if (selectedMatch()?.status === 'PENDING') {
+        <div class="modal-actions">
+          <button class="btn-reject-large">Rechazar Adopción</button>
+          <button class="btn-approve-large">Aprobar Adopción</button>
+        </div>
+      }
+    </div>
+  </div>
+}
