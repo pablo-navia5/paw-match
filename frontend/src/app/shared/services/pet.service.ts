@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { PetResponse } from '../models/pet.model';
-import { InteractionRequest } from '../models/interaction.model';
 
 @Injectable({
   providedIn: 'root',
