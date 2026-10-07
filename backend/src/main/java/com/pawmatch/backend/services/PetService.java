@@ -18,4 +18,6 @@ public interface PetService {
     Optional<PetModel> findById(Long id);
 
     void delete(final Long id);
+
+    void update(final PetModel pet);
 }

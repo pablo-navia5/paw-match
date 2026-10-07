@@ -17,12 +17,13 @@ public class PetFacadeImpl implements PetFacade {
 
     private final PetService petService;
 
-    private final Converter<PetCreateDto, PetModel> toModelConverter;
+    private final Converter<PetCreateDto, PetModel> CreatetoModelConverter;
     private final Converter<PetModel, PetDto> toDtoConverter;
+    private final Converter<PetDto, PetModel> toModelConverter;
 
     @Override
     public PetDto create(final PetCreateDto petCreateDto) {
-        final PetModel petModel = petService.save(toModelConverter.convert(petCreateDto), petCreateDto.getShelterId());
+        final PetModel petModel = petService.save(CreatetoModelConverter.convert(petCreateDto), petCreateDto.getShelterId());
 
         return toDtoConverter.convert(petModel);
     }
@@ -55,5 +56,24 @@ public class PetFacadeImpl implements PetFacade {
     @Override
     public void delete(Long id) {
         petService.delete(id);
+    }
+
+    @Override
+    public void update(PetDto petDto) {
+        PetModel existingPet = petService.findById(petDto.getId())
+                .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
+
+        existingPet.setName(petDto.getName());
+        existingPet.setSpecies(petDto.getSpecies());
+        existingPet.setAge(petDto.getAge());
+        existingPet.setRequiredHouseSize(petDto.getRequiredHouseSize());
+        existingPet.setNeedsYard(petDto.getNeedsYard());
+        existingPet.setRequiredHoursPerDay(petDto.getRequiredHoursPerDay());
+        existingPet.setRequiresExperiencedOwner(petDto.getRequiresExperiencedOwner());
+        existingPet.setGoodWithChildren(petDto.getGoodWithChildren());
+        existingPet.setGoodWithOtherPets(petDto.getGoodWithOtherPets());
+        existingPet.setEnergyLevel(petDto.getEnergyLevel());
+
+        petService.update(existingPet);
     }
 }

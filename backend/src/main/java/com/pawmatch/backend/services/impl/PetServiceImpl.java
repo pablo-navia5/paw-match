@@ -52,4 +52,9 @@ public class PetServiceImpl implements PetService {
     public void delete(Long id) {
         petDao.deleteById(id);
     }
+
+    @Override
+    public void update(PetModel pet) {
+        petDao.save(pet);
+    }
 }
