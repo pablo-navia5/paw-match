@@ -8,6 +8,7 @@ import { UserDashboardPageComponent } from './features/user/pages/user-dashboard
 import { CreatePetPageComponent } from './features/shelter/pages/create-pet-page/create-pet-page';
 import { ShelterMatchesPageComponent } from './features/shelter/pages/shelter-matches-page/shelter-matches-page';
 import { HomePageComponent } from './features/home/pages/home-page/home-page';
+import { ShelterProfilePageComponent } from './features/shelter/pages/shelter-profile-page/shelter-profile-page';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -36,6 +37,12 @@ export const routes: Routes = [
   {
     path: 'shelter-panel/matches',
     component: ShelterMatchesPageComponent,
+    canActivate: [authGuard],
+    data: { role: 'SHELTER' }
+  },
+  {
+    path: 'shelter-panel/profile',
+    component: ShelterProfilePageComponent,
     canActivate: [authGuard],
     data: { role: 'SHELTER' }
   },

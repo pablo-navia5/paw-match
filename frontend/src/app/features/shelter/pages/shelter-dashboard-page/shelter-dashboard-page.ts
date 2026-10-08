@@ -6,7 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   standalone: true,
   selector: 'app-shelter-dashboard-page',
   styleUrl: './shelter-dashboard-page.scss',
@@ -71,6 +71,10 @@ export class ShelterDashboardPageComponent implements OnInit {
     this.router.navigate(['/shelter-panel/matches']);
   }
 
+  goToProfile() {
+    this.router.navigate(['/shelter-panel/profile']);
+  }
+
   deletePet(id: number) {
     const confirmacion = confirm('¿Estás seguro de que quieres retirar a esta mascota?');
 
@@ -108,7 +112,7 @@ export class ShelterDashboardPageComponent implements OnInit {
   }
 
   toggleProfileMenu() {
-    this.isProfileMenuOpen.update(val => !val);
+    this.isProfileMenuOpen.update((val) => !val);
   }
 
   closeEditModal() {

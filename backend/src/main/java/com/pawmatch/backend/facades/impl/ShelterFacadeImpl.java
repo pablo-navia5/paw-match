@@ -31,4 +31,10 @@ public class ShelterFacadeImpl implements ShelterFacade {
     public Optional<ShelterModel> findByFirebaseUid(String firebaseUid) {
         return shelterService.findByFirebaseUid(firebaseUid);
     }
+
+    @Override
+    public Optional<ShelterDto> getShelterById(Long shelterId) {
+        return shelterService.getShelterById(shelterId)
+                             .map(toDtoConverter::convert);
+    }
 }

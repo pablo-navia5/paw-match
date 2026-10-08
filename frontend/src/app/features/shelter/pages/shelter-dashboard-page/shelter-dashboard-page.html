@@ -15,9 +15,9 @@
 
       @if (isProfileMenuOpen()) {
         <div class="dropdown-menu">
-          <a routerLink="/perfil" class="dropdown-item">
+          <button (click)="goToProfile()" class="dropdown-item">
             <i>👤</i> Perfil
-          </a>
+          </button>
           <div class="dropdown-divider"></div>
           <button (click)="logout()" class="dropdown-item text-danger">
             <i>🚪</i> Cerrar sesión

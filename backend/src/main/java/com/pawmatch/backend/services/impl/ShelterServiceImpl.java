@@ -27,4 +27,9 @@ public class ShelterServiceImpl implements ShelterService {
     public Optional<ShelterModel> findByFirebaseUid(String firebaseUid) {
         return shelterDao.findByFirebaseUid(firebaseUid);
     }
+
+    @Override
+    public Optional<ShelterModel> getShelterById(Long shelterId) {
+        return shelterDao.findById(shelterId);
+    }
 }

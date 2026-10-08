@@ -5,10 +5,7 @@ import com.pawmatch.backend.dtos.ShelterRegisterDto;
 import com.pawmatch.backend.facades.ShelterFacade;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -20,5 +17,10 @@ public class ShelterController {
     @PostMapping("/register")
     public ResponseEntity<ShelterDto> registerUser(@RequestBody final ShelterRegisterDto shelterRegisterDto) {
         return ResponseEntity.ok(shelterFacade.registerShelter(shelterRegisterDto));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ShelterDto> getShelterById(@PathVariable final Long id) {
+        return ResponseEntity.ok(shelterFacade.getShelterById(id).orElse(null));
     }
 }
