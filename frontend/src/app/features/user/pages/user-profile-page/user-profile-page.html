@@ -35,7 +35,34 @@
           </div>
         </div>
 
-        <h3 class="section-title">Hogar y Estilo de Vida</h3>
+        <h3 class="section-title">Preferencias de Adopción</h3>
+        <div class="info-grid three-cols">
+          <div class="info-box">
+            <div class="info-icon">🐾</div>
+            <div class="info-content">
+              <label>Especie preferida</label>
+              <p>{{ profile()?.preferredSpecies || 'Cualquiera' }}</p>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-icon">🍼</div>
+            <div class="info-content">
+              <label>Edad mínima</label>
+              <p>{{ profile()?.minAgePreference }} años</p>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-icon">🦴</div>
+            <div class="info-content">
+              <label>Edad máxima</label>
+              <p>{{ profile()?.maxAgePreference }} años</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title">Hogar, Estilo de Vida y Entorno</h3>
         <div class="info-grid three-cols">
           <div class="info-box">
             <div class="info-icon">🏠</div>
@@ -62,7 +89,6 @@
           </div>
         </div>
 
-        <h3 class="section-title">Entorno y Experiencia</h3>
         <div class="features-grid">
           <div class="feature-item" [class.active]="profile()?.hasYard">
             <span class="status-dot"></span>
@@ -96,7 +122,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   } @else {

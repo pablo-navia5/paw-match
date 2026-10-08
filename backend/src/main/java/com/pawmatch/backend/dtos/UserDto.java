@@ -16,6 +16,11 @@ public class UserDto {
     private Long id;
     private String name;
     private String email;
+
+    private String preferredSpecies;
+    private Integer minAgePreference;
+    private Integer maxAgePreference;
+
     private String houseSize;
     private Boolean hasYard;
     private Integer hoursAvailablePerDay;
