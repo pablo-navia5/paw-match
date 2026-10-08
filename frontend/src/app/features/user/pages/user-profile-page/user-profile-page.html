@@ -1,0 +1,108 @@
+<div class="profile-page-wrapper">
+  <div class="page-header">
+    <a routerLink="/user-panel" class="btn-back">← Volver al Panel</a>
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Cargando información del perfil...</p>
+    </div>
+  } @else if (profile()) {
+    <div class="profile-card">
+      <div class="card-banner"></div>
+
+      <div class="card-header">
+        <div class="header-main">
+          <div class="avatar-large">{{ profile()?.name?.[0] }}</div>
+          <div class="header-titles">
+            <h2>{{ profile()?.name }}</h2>
+            <span class="badge">🏡 Cuenta de Adoptante</span>
+          </div>
+        </div>
+        <button class="btn-edit-profile">✏️ Editar Perfil</button>
+      </div>
+
+      <div class="card-body">
+        <h3 class="section-title">Información de Contacto</h3>
+        <div class="info-grid single-col">
+          <div class="info-box">
+            <div class="info-icon">✉️</div>
+            <div class="info-content">
+              <label>Email</label>
+              <p>{{ profile()?.email }}</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title">Hogar y Estilo de Vida</h3>
+        <div class="info-grid three-cols">
+          <div class="info-box">
+            <div class="info-icon">🏠</div>
+            <div class="info-content">
+              <label>Tamaño de vivienda</label>
+              <p>{{ profile()?.houseSize || 'No especificado' }}</p>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-icon">⏳</div>
+            <div class="info-content">
+              <label>Tiempo disponible</label>
+              <p>{{ profile()?.hoursAvailablePerDay }} horas / día</p>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-icon">⚡</div>
+            <div class="info-content">
+              <label>Nivel de actividad</label>
+              <p>Nivel {{ profile()?.activityLevel }} / 3</p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title">Entorno y Experiencia</h3>
+        <div class="features-grid">
+          <div class="feature-item" [class.active]="profile()?.hasYard">
+            <span class="status-dot"></span>
+            <div class="feature-text">
+              <span class="feature-label">Jardín o terraza</span>
+              <span class="feature-value">{{ profile()?.hasYard ? 'Sí tiene' : 'No tiene' }}</span>
+            </div>
+          </div>
+
+          <div class="feature-item" [class.active]="profile()?.hasPreviousExperience">
+            <span class="status-dot"></span>
+            <div class="feature-text">
+              <span class="feature-label">Experiencia previa</span>
+              <span class="feature-value">{{ profile()?.hasPreviousExperience ? 'Con experiencia' : 'Sin experiencia' }}</span>
+            </div>
+          </div>
+
+          <div class="feature-item" [class.active]="profile()?.hasSmallChildren">
+            <span class="status-dot"></span>
+            <div class="feature-text">
+              <span class="feature-label">Niños pequeños en casa</span>
+              <span class="feature-value">{{ profile()?.hasSmallChildren ? 'Sí hay' : 'No hay' }}</span>
+            </div>
+          </div>
+
+          <div class="feature-item" [class.active]="profile()?.hasOtherPets">
+            <span class="status-dot"></span>
+            <div class="feature-text">
+              <span class="feature-label">Otras mascotas</span>
+              <span class="feature-value">{{ profile()?.hasOtherPets ? 'Sí convive' : 'No tiene' }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  } @else {
+    <div class="error-state">
+      <h3>Vaya, algo ha salido mal</h3>
+      <p>No hemos podido cargar los datos de tu perfil.</p>
+    </div>
+  }
+</div>

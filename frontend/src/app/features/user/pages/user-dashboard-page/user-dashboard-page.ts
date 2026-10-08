@@ -3,6 +3,7 @@ import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
 import { AuthService } from '../../../auth/services/auth.service';
 import { InteractionService } from '../../../../shared/services/interaction.service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [],
@@ -14,6 +15,7 @@ import { InteractionService } from '../../../../shared/services/interaction.serv
 export class UserDashboardPageComponent implements OnInit {
   private petService = inject(PetService);
   private authService = inject(AuthService);
+  private router = inject(Router);
   private interactionService = inject(InteractionService);
 
   pets = signal<PetResponse[]>([]);
@@ -80,5 +82,9 @@ export class UserDashboardPageComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  goToProfile() {
+    this.router.navigate(['/user-panel/profile']);
   }
 }

@@ -11,4 +11,6 @@ public interface UserFacade {
     UserDto registerUser(final UserRegisterDto userRegisterDto);
 
     Optional<UserModel> findByFirebaseUid(final String firebaseUid);
+
+    Optional<UserDto> getUserById(final Long id);
 }

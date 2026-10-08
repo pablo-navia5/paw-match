@@ -31,4 +31,10 @@ public class UserFacadeImpl implements UserFacade {
     public Optional<UserModel> findByFirebaseUid(String firebaseUid) {
         return userService.findByFirebaseUid(firebaseUid);
     }
+
+    @Override
+    public Optional<UserDto> getUserById(Long id) {
+        return userService.findById(id)
+                          .map(toDtoConverter::convert);
+    }
 }
