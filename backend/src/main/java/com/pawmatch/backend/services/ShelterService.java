@@ -10,5 +10,7 @@ public interface ShelterService {
 
     Optional<ShelterModel> findByFirebaseUid(final String firebaseUid);
 
-    Optional<ShelterModel> getShelterById(final Long shelterId);
+    Optional<ShelterModel> findById(final Long Id);
+
+    void update(final ShelterModel shelter);
 }

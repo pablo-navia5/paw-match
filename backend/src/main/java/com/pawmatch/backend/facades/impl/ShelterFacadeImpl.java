@@ -34,7 +34,22 @@ public class ShelterFacadeImpl implements ShelterFacade {
 
     @Override
     public Optional<ShelterDto> getShelterById(Long shelterId) {
-        return shelterService.getShelterById(shelterId)
+        return shelterService.findById(shelterId)
                              .map(toDtoConverter::convert);
+    }
+
+    @Override
+    public void update(ShelterDto shelterDto) {
+        ShelterModel existingShelter = shelterService.findById(shelterDto.getId())
+                .orElseThrow(() -> new RuntimeException("Shelter with id " + shelterDto.getId() + " does not exist"));
+
+        if(shelterDto.getName() != null) {
+            existingShelter.setName(shelterDto.getName());
+        }
+
+        existingShelter.setAddress(shelterDto.getAddress());
+        existingShelter.setContactPhone(shelterDto.getContactPhone());
+
+        shelterService.update(existingShelter);
     }
 }

@@ -23,4 +23,14 @@ public class ShelterController {
     public ResponseEntity<ShelterDto> getShelterById(@PathVariable final Long id) {
         return ResponseEntity.ok(shelterFacade.getShelterById(id).orElse(null));
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateShelter(@RequestBody final ShelterDto shelterDto) {
+        try {
+            shelterFacade.update(shelterDto);
+            return ResponseEntity.ok("Protectora actualizada correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 }

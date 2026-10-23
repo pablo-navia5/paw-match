@@ -20,7 +20,7 @@
             <span class="badge">🏡 Cuenta de Adoptante</span>
           </div>
         </div>
-        <button class="btn-edit-profile">✏️ Editar Perfil</button>
+        <button class="btn-edit-profile" (click)="openEditModal()">✏️ Editar Perfil</button>
       </div>
 
       <div class="card-body">
@@ -131,3 +131,89 @@
     </div>
   }
 </div>
+
+@if (isEditModalOpen()) {
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Editar Perfil y Preferencias</h2>
+        <button class="btn-close" (click)="closeEditModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit()" class="modern-form">
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Nombre</label>
+              <input type="text" formControlName="name" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Especie preferida</label>
+              <select formControlName="preferredSpecies" class="form-control">
+                <option value="Cualquiera">Cualquiera</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Edad mínima (años)</label>
+              <input type="number" formControlName="minAgePreference" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Edad máxima (años)</label>
+              <input type="number" formControlName="maxAgePreference" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Tamaño de vivienda</label>
+              <select formControlName="houseSize" class="form-control">
+                <option value="Pequeña">Pequeña (Piso)</option>
+                <option value="Mediana">Mediana (Adosado)</option>
+                <option value="Grande">Grande (Finca/Chalet)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Horas disponibles al día</label>
+              <input type="number" formControlName="hoursAvailablePerDay" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Nivel de actividad (1 al 3)</label>
+              <input type="number" formControlName="activityLevel" min="1" max="3" class="form-control">
+            </div>
+          </div>
+
+          <div class="checkbox-grid">
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="hasYard" class="custom-checkbox">
+              <span>Tengo jardín o terraza</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="hasPreviousExperience" class="custom-checkbox">
+              <span>Tengo experiencia previa</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="hasSmallChildren" class="custom-checkbox">
+              <span>Hay niños pequeños en casa</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="hasOtherPets" class="custom-checkbox">
+              <span>Tengo otras mascotas</span>
+            </label>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn-secondary" (click)="closeEditModal()">Cancelar</button>
+            <button type="submit" class="btn-primary" [disabled]="editForm.invalid || isSaving()">
+              @if (isSaving()) {
+                Guardando...
+              } @else {
+                Guardar Cambios
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+}

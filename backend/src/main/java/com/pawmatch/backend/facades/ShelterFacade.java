@@ -14,4 +14,6 @@ public interface ShelterFacade {
     Optional<ShelterModel> findByFirebaseUid(final String firebaseUid);
 
     Optional<ShelterDto> getShelterById(final Long shelterId);
+
+    void update(final ShelterDto shelterDto);
 }

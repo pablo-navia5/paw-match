@@ -3,9 +3,10 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { ShelterService } from '../../service/shelter.service';
 import { ShelterProfile } from '../../models/shelter.model';
 import { RouterLink } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, ReactiveFormsModule],
   standalone: true,
   selector: 'app-shelter-profile-page',
   styleUrl: './shelter-profile-page.scss',
@@ -14,13 +15,26 @@ import { RouterLink } from '@angular/router';
 export class ShelterProfilePageComponent implements OnInit {
   private authService = inject(AuthService);
   private shelterService = inject(ShelterService);
+  private fb = inject(FormBuilder);
 
   profile = signal<ShelterProfile | null>(null);
   isLoading = signal<boolean>(true);
+  isSaving = signal<boolean>(false);
+  isEditModalOpen = signal<boolean>(false);
+
+  editForm = this.fb.nonNullable.group({
+    id: [0],
+    name: ['', Validators.required],
+    contactPhone: [''],
+    address: [''],
+  });
 
   ngOnInit(): void {
-    const session = this.authService.currentUser();
+    this.loadProfile();
+  }
 
+  private loadProfile() {
+    const session = this.authService.currentUser();
     if (session?.databaseId) {
       this.shelterService.getShelterProfile(session.databaseId).subscribe({
         next: (data) => {
@@ -35,5 +49,41 @@ export class ShelterProfilePageComponent implements OnInit {
     } else {
       this.isLoading.set(false);
     }
+  }
+
+  openEditModal() {
+    const currentProfile = this.profile();
+    if (currentProfile) {
+      this.editForm.patchValue({
+        id: currentProfile.id,
+        name: currentProfile.name,
+        contactPhone: currentProfile.contactPhone || '',
+        address: currentProfile.address || '',
+      });
+      this.isEditModalOpen.set(true);
+    }
+  }
+
+  closeEditModal() {
+    this.isEditModalOpen.set(false);
+  }
+
+  onSubmitEdit() {
+    if (this.editForm.invalid) return;
+
+    this.isSaving.set(true);
+    const updatedData = this.editForm.getRawValue();
+
+    this.shelterService.updateShelter(updatedData).subscribe({
+      next: () => {
+        this.loadProfile();
+        this.isSaving.set(false);
+        this.closeEditModal();
+      },
+      error: (err) => {
+        console.error('Error al actualizar el perfil:', err);
+        this.isSaving.set(false);
+      },
+    });
   }
 }

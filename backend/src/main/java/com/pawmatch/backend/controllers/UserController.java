@@ -1,6 +1,5 @@
 package com.pawmatch.backend.controllers;
 
-import com.pawmatch.backend.dtos.ShelterDto;
 import com.pawmatch.backend.dtos.UserDto;
 import com.pawmatch.backend.dtos.UserRegisterDto;
 import com.pawmatch.backend.facades.UserFacade;
@@ -23,5 +22,15 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable final Long id) {
         return ResponseEntity.ok(userFacade.getUserById(id).orElse(null));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody UserDto requestDto) {
+        try {
+            userFacade.update(requestDto);
+            return ResponseEntity.ok("Usuario actualizado correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

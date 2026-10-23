@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService {
     public Optional<UserModel> findById(Long Id) {
         return userDao.findById(Id);
     }
+
+    @Override
+    public void update(UserModel user) {
+        userDao.save(user);
+    }
 }

@@ -14,4 +14,8 @@ export class ShelterService {
   getShelterProfile(id: number): Observable<ShelterProfile> {
     return this.http.get<ShelterProfile>(`${this.apiUrl}/shelter/${id}`);
   }
+
+  updateShelter(shelterData: any) {
+    return this.http.put(`${this.apiUrl}/shelter/update`, shelterData, { responseType: 'text' });
+  }
 }

@@ -29,7 +29,12 @@ public class ShelterServiceImpl implements ShelterService {
     }
 
     @Override
-    public Optional<ShelterModel> getShelterById(Long shelterId) {
-        return shelterDao.findById(shelterId);
+    public Optional<ShelterModel> findById(Long Id) {
+        return shelterDao.findById(Id);
+    }
+
+    @Override
+    public void update(ShelterModel shelter) {
+        shelterDao.save(shelter);
     }
 }

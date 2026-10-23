@@ -11,4 +11,6 @@ public interface UserService {
     Optional<UserModel> findByFirebaseUid(final String firebaseUid);
 
     Optional<UserModel> findById(final Long Id);
+
+    void update(final  UserModel user);
 }

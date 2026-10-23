@@ -16,4 +16,8 @@ export class UserService {
   getUserProfile(id: number): Observable<UserProfile> {
     return this.http.get<UserProfile>(`${this.apiUrl}/user/${id}`);
   }
+
+  updateUser(userData: any) {
+    return this.http.put(`${this.apiUrl}/user/update`, userData, { responseType: 'text' });
+  }
 }

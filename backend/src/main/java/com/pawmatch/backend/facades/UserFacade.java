@@ -13,4 +13,6 @@ public interface UserFacade {
     Optional<UserModel> findByFirebaseUid(final String firebaseUid);
 
     Optional<UserDto> getUserById(final Long id);
+
+    void update(final UserDto userDto);
 }
