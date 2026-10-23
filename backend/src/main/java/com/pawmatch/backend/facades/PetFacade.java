@@ -13,7 +13,9 @@ public interface PetFacade {
 
     List<PetDto> findAll();
 
-    List<PetDto> getUnseenPetsForUser(Long userId);
+    List<PetDto> getUnseenPetsForUser(final Long userId);
+
+    List<PetDto> getSwipeFeedForUser(final Long userId);
 
     void delete(final Long id);
 

@@ -41,7 +41,7 @@ public class PetController {
     @GetMapping("/feed/{userId}")
     public ResponseEntity<List<PetDto>> getUserFeed(@PathVariable Long userId) {
         try {
-            List<PetDto> feed = petFacade.getUnseenPetsForUser(userId);
+            List<PetDto> feed = petFacade.getSwipeFeedForUser(userId);
             return ResponseEntity.ok(feed);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
