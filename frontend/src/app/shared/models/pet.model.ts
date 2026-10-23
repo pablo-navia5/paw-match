@@ -11,5 +11,5 @@ export interface PetResponse {
   goodWithChildren: boolean;
   goodWithOtherPets: boolean;
   energyLevel: number;
-  // imageUrl: string;
+  image: string;
 }

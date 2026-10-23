@@ -26,6 +26,17 @@
           <label for="age">Edad (años)</label>
           <input type="number" id="age" formControlName="age" placeholder="Ej. 3" class="form-control">
         </div>
+
+        <div class="form-group full-width">
+          <label for="imageUpload">Foto de la Mascota</label>
+          <input type="file" id="imageUpload" accept="image/png, image/jpeg, image/webp" (change)="onFileSelected($event)" class="form-control file-input">
+
+          @if (imagePreviewUrl()) {
+            <div class="image-preview">
+              <img [src]="imagePreviewUrl()" alt="Vista previa de la mascota">
+            </div>
+          }
+        </div>
       </div>
 
       <hr class="divider">
@@ -80,8 +91,12 @@
         <button type="button" routerLink="/shelter-panel" class="btn-secondary">
           Cancelar
         </button>
-        <button type="submit" [disabled]="petForm.invalid" class="btn-primary">
-          Guardar Mascota
+        <button type="submit" [disabled]="petForm.invalid || isLoading()" class="btn-primary">
+          @if (isLoading()) {
+            Guardando mascota...
+          } @else {
+            Guardar Mascota
+          }
         </button>
       </div>
     </form>

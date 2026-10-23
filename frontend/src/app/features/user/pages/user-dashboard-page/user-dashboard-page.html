@@ -39,7 +39,7 @@
     @if (currentPet) {
       <div class="swipe-area">
         <div class="pet-card">
-          <img src="https://placehold.co/600x800/ffefe5/ff7e67?text={{ currentPet.name }}" alt="{{ currentPet.name }}">
+          <img src="{{ currentPet.image || 'https://placehold.co/600x800/ffefe5/ff7e67?text=' + currentPet.name }}" alt="{{ currentPet.name }}">
 
           <div class="pet-info-overlay">
             <h2>{{ currentPet.name }}, {{ currentPet.age }}</h2>

@@ -12,6 +12,7 @@ public class PetCreateDtoToModelConverter implements Converter<PetCreateDto, Pet
     public PetModel convert(final PetCreateDto source) {
         PetModel pet = new PetModel();
         pet.setName(source.getName());
+        pet.setImage(source.getImage());
         pet.setSpecies(source.getSpecies());
         pet.setAge(source.getAge());
         pet.setRequiredHouseSize(source.getRequiredHouseSize());

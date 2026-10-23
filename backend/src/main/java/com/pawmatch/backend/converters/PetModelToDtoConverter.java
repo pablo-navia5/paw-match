@@ -13,6 +13,7 @@ public class PetModelToDtoConverter implements Converter<PetModel,PetDto> {
         PetDto dto = new PetDto();
         dto.setId(source.getId());
         dto.setName(source.getName());
+        dto.setImage(source.getImage());
         dto.setSpecies(source.getSpecies());
         dto.setAge(source.getAge());
         dto.setRequiredHouseSize(source.getRequiredHouseSize());
