@@ -21,6 +21,11 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public List<MatchModel> getAllMatchesByUserId(Long userId) {
+        return matchDao.findAllMatchesByUser(userId);
+    }
+
+    @Override
     public void updateMatchStatus(Long matchId, String newStatus) {
         MatchModel match = matchDao.findById(matchId)
                                    .orElseThrow(() -> new RuntimeException("Match no encontrado con ID: " + matchId)

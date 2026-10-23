@@ -3,10 +3,10 @@ import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
 import { AuthService } from '../../../auth/services/auth.service';
 import { InteractionService } from '../../../../shared/services/interaction.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   standalone: true,
   selector: 'app-user-dashboard-page',
   styleUrl: './user-dashboard-page.scss',

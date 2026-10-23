@@ -20,6 +20,11 @@ public class MatchController {
         return ResponseEntity.ok(matchFacade.getAllMatchesByShelterId(shelterId));
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<MatchDto>> getAllMatchesByUser(@PathVariable Long userId) {
+        return ResponseEntity.ok(matchFacade.getAllMatchesByUserId(userId));
+    }
+
     @PatchMapping("/{id}/status")
     public ResponseEntity<Void> updateStatus(@PathVariable Long id, @RequestParam String status) {
         matchFacade.updateMatchStatus(id, status);

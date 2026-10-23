@@ -12,6 +12,7 @@ import com.pawmatch.backend.services.MatchService;
 import com.pawmatch.backend.services.PetService;
 import com.pawmatch.backend.services.UserService;
 import lombok.AllArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,18 @@ public class MatchFacadeImpl implements MatchFacade {
     public List<MatchDto> getAllMatchesByShelterId(Long shelterId) {
         List<MatchModel> matches = matchService.getAllMatcherByShelterId(shelterId);
 
+        return getMatchDtos(matches);
+    }
+
+    @Override
+    public List<MatchDto> getAllMatchesByUserId(Long userId) {
+        List<MatchModel> matches = matchService.getAllMatchesByUserId(userId);
+
+        return getMatchDtos(matches);
+    }
+
+    @NonNull
+    private List<MatchDto> getMatchDtos(List<MatchModel> matches) {
         return matches.stream().map(match -> {
             UserModel user = userService.findById(match.getUserId()).orElse(null);
             PetModel pet = petService.findById(match.getPetId()).orElse(null);

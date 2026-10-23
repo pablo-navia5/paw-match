@@ -26,65 +26,85 @@
   </div>
 </header>
 
-<main class="discover-container">
-  @if (isLoading()) {
-    <div class="status-view">
-      <div class="spinner"></div>
-      <h3>Buscando compañeros...</h3>
+<div class="dashboard-layout">
+  <aside class="sidebar-nav">
+    <div class="nav-section">
+      <h4 class="nav-title">Descubrir</h4>
+      <a routerLink="/user-panel" class="nav-item active">
+        <span class="nav-icon">✨</span>
+        <span class="nav-text">Explorar Peludos</span>
+      </a>
     </div>
-  } @else {
-    @if (currentPet) {
-      <div class="swipe-area">
-        <div class="pet-card">
-          @if (isImageLoading()) {
-            <div class="image-skeleton">
-              <div class="skeleton-spinner"></div>
-            </div>
-          }
 
-          <img [src]="getOptimizedImage(currentPet.image, currentPet.name)"
-               alt="{{ currentPet.name }}"
-               (load)="onImageLoad()"
-               [class.image-hidden]="isImageLoading()">
+    <div class="nav-section">
+      <h4 class="nav-title">Mis Conexiones</h4>
+      <a routerLink="/user-panel/matches" class="nav-item">
+        <span class="nav-icon">💖</span>
+        <span class="nav-text">Mis Matches</span>
+      </a>
+    </div>
+  </aside>
 
-          <div class="pet-info-overlay">
-            <h2>{{ currentPet.name }}, {{ currentPet.age }}</h2>
-            <div class="tags-container" style="margin-bottom: 8px;">
-              <p class="species-tag">{{ currentPet.species }}</p>
-            </div>
-            <p class="pet-description">{{ currentPet.description }}</p>
-          </div>
-        </div>
-
-        <div class="action-controls">
-          <button class="action-btn btn-pass" (click)="nextPet('pass')">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          </button>
-          <button class="action-btn btn-like" (click)="nextPet('like')">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-          </button>
-        </div>
+  <main class="discover-container">
+    @if (isLoading()) {
+      <div class="status-view">
+        <div class="spinner"></div>
+        <h3>Buscando compañeros...</h3>
       </div>
     } @else {
-      <div class="empty-state-card">
-        <div class="radar-container">
-          <div class="radar-pulse"></div>
-          <div class="radar-pulse delay-1"></div>
-          <div class="radar-avatar">🐶</div>
-        </div>
-        <h2>¡Has visto a todos!</h2>
-        <p>No hay más mascotas cerca de ti que coincidan con tus preferencias en este momento.</p>
+      @if (currentPet) {
+        <div class="swipe-area">
+          <div class="pet-card">
+            @if (isImageLoading()) {
+              <div class="image-skeleton">
+                <div class="skeleton-spinner"></div>
+              </div>
+            }
 
-        <div class="empty-actions">
-          <button class="btn-primary-action" (click)="goToProfile()">
-            ⚙️ Ampliar mis preferencias
-          </button>
-          <p class="hint-text">Prueba a aumentar la edad máxima o cambiar el tipo de mascota.</p>
+            <img [src]="getOptimizedImage(currentPet.image, currentPet.name)"
+                 alt="{{ currentPet.name }}"
+                 (load)="onImageLoad()"
+                 [class.image-hidden]="isImageLoading()">
+
+            <div class="pet-info-overlay">
+              <h2>{{ currentPet.name }}, {{ currentPet.age }}</h2>
+              <div class="tags-container" style="margin-bottom: 8px;">
+                <p class="species-tag">{{ currentPet.species }}</p>
+              </div>
+              <p class="pet-description">{{ currentPet.description }}</p>
+            </div>
+          </div>
+
+          <div class="action-controls">
+            <button class="action-btn btn-pass" (click)="nextPet('pass')">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <button class="action-btn btn-like" (click)="nextPet('like')">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </button>
+          </div>
         </div>
-      </div>
+      } @else {
+        <div class="empty-state-card">
+          <div class="radar-container">
+            <div class="radar-pulse"></div>
+            <div class="radar-pulse delay-1"></div>
+            <div class="radar-avatar">🐶</div>
+          </div>
+          <h2>¡Has visto a todos!</h2>
+          <p>No hay más mascotas cerca de ti que coincidan con tus preferencias en este momento.</p>
+
+          <div class="empty-actions">
+            <button class="btn-primary-action" (click)="goToProfile()">
+              Ampliar mis preferencias
+            </button>
+            <p class="hint-text">Prueba a aumentar la edad máxima o cambiar el tipo de mascota.</p>
+          </div>
+        </div>
+      }
     }
-  }
-</main>
+  </main>
+</div>
 
 @if (showMatchAnimation()) {
   <div class="match-overlay">

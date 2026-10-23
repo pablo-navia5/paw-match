@@ -8,5 +8,7 @@ public interface MatchFacade {
 
     List<MatchDto> getAllMatchesByShelterId(Long shelterId);
 
+    List<MatchDto> getAllMatchesByUserId(Long userId);
+
     void updateMatchStatus(Long matchId, String newStatus);
 }

@@ -13,6 +13,10 @@ export class MatchService {
     return this.http.get<MatchResponse[]>(`${this.apiUrl}/match/shelter/${shelterId}`);
   }
 
+  getMatchesByUser(userId: number): Observable<MatchResponse[]> {
+    return this.http.get<MatchResponse[]>(`${this.apiUrl}/match/user/${userId}`);
+  }
+
   updateMatchStatus(matchId: number, status: string) {
     const params = new HttpParams().set('status', status);
     return this.http.patch<void>(`${this.apiUrl}/match/${matchId}/status`, {}, { params });

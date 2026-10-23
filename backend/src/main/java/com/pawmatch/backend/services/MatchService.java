@@ -8,5 +8,7 @@ public interface MatchService {
 
     List<MatchModel> getAllMatcherByShelterId(Long shelterId);
 
+    List<MatchModel> getAllMatchesByUserId(Long userId);
+
     void updateMatchStatus(Long matchId, String newStatus);
 }

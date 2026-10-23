@@ -10,6 +10,7 @@ import { ShelterMatchesPageComponent } from './features/shelter/pages/shelter-ma
 import { HomePageComponent } from './features/home/pages/home-page/home-page';
 import { ShelterProfilePageComponent } from './features/shelter/pages/shelter-profile-page/shelter-profile-page';
 import { UserProfilePageComponent } from './features/user/pages/user-profile-page/user-profile-page';
+import { UserMatchesPageComponent } from './features/user/pages/user-matches-page/user-matches-page';
 
 export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
@@ -21,36 +22,42 @@ export const routes: Routes = [
     path: 'user-panel',
     component: UserDashboardPageComponent,
     canActivate: [authGuard],
-    data: {role: 'USER'}
+    data: { role: 'USER' },
   },
   {
     path: 'user-panel/profile',
     component: UserProfilePageComponent,
     canActivate: [authGuard],
-    data: {role: 'USER'}
+    data: { role: 'USER' },
+  },
+  {
+    path: 'user-panel/matches',
+    component: UserMatchesPageComponent,
+    canActivate: [authGuard],
+    data: { role: 'USER' },
   },
   {
     path: 'shelter-panel',
     component: ShelterDashboardPageComponent,
     canActivate: [authGuard],
-    data: {role: 'SHELTER'}
+    data: { role: 'SHELTER' },
   },
   {
     path: 'shelter-panel/create-pet',
     component: CreatePetPageComponent,
     canActivate: [authGuard],
-    data: { role: 'SHELTER' }
+    data: { role: 'SHELTER' },
   },
   {
     path: 'shelter-panel/matches',
     component: ShelterMatchesPageComponent,
     canActivate: [authGuard],
-    data: { role: 'SHELTER' }
+    data: { role: 'SHELTER' },
   },
   {
     path: 'shelter-panel/profile',
     component: ShelterProfilePageComponent,
     canActivate: [authGuard],
-    data: { role: 'SHELTER' }
+    data: { role: 'SHELTER' },
   },
 ];
