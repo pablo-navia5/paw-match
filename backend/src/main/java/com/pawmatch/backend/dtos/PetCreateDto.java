@@ -13,6 +13,7 @@ public class PetCreateDto {
 
     private String name;
     private String description;
+    private String status;
     private String image;
     private String species;
     private Integer age;

@@ -64,7 +64,9 @@
               <td class="text-muted" data-label="Especie">{{ pet.species }}</td>
               <td class="text-center" data-label="Edad">{{ pet.age }} años</td>
               <td class="text-center" data-label="Estado">
-                <span class="badge-status">{{ pet.status }}</span>
+                <span class="badge-status" [class]="pet.status">
+                  {{ pet.status === 'AVAILABLE' ? 'Disponible' : pet.status === 'ADOPTED' ? 'Adoptada' : 'Inactiva' }}
+                </span>
               </td>
               <td class="text-center actions-cell">
                 <div class="actions">
@@ -96,6 +98,15 @@
         <div class="form-group">
           <label>Nombre:</label>
           <input type="text" formControlName="name">
+        </div>
+
+        <div class="form-group">
+          <label>Estado de la mascota:</label>
+          <select formControlName="status" class="status-select">
+            <option value="AVAILABLE">Disponible para adopción</option>
+            <option value="ADOPTED">Adoptada</option>
+            <option value="INACTIVE">Inactiva / Oculta</option>
+          </select>
         </div>
 
         <div class="form-row">

@@ -6,7 +6,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule],
   standalone: true,
   selector: 'app-shelter-dashboard-page',
   styleUrl: './shelter-dashboard-page.scss',
@@ -37,6 +37,7 @@ export class ShelterDashboardPageComponent implements OnInit {
     energyLevel: [1, Validators.required],
     needsYard: [false],
     requiredHouseSize: ['Pequeña', Validators.required],
+    status: ['AVAILABLE', Validators.required],
   });
 
   ngOnInit() {
@@ -106,6 +107,7 @@ export class ShelterDashboardPageComponent implements OnInit {
       energyLevel: pet.energyLevel,
       needsYard: pet.needsYard,
       requiredHouseSize: pet.requiredHouseSize,
+      status: pet.status
     });
 
     this.isEditModalOpen.set(true);

@@ -27,7 +27,7 @@ export class CreatePetPageComponent {
     name: ['', Validators.required],
     species: ['Perro', Validators.required],
     age: [1, [Validators.required, Validators.min(0)]],
-    status: ['Buscando hogar', Validators.required],
+    status: ['AVAILABLE'],
     requiredHoursPerDay: [2, [Validators.required, Validators.min(0)]],
     needsYard: [false],
     requiredHouseSize: ['Pequeña', Validators.required],
