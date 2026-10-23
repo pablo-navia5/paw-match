@@ -61,18 +61,20 @@
           @for (pet of pets(); track pet.id) {
             <tr>
               <td class="font-bold">{{ pet.name }}</td>
-              <td class="text-muted">{{ pet.species }}</td>
-              <td class="text-center">{{ pet.age }} años</td>
-              <td class="text-center">
+              <td class="text-muted" data-label="Especie">{{ pet.species }}</td>
+              <td class="text-center" data-label="Edad">{{ pet.age }} años</td>
+              <td class="text-center" data-label="Estado">
                 <span class="badge-status">{{ pet.status }}</span>
               </td>
               <td class="text-center actions-cell">
-                <button class="btn-edit" (click)="openEditModal(pet)">Editar</button>
-                <button class="btn-delete" (click)="deletePet(pet.id)">Borrar</button>
+                <div class="actions">
+                  <button class="btn-edit" (click)="openEditModal(pet)">Editar</button>
+                  <button class="btn-delete" (click)="deletePet(pet.id)">Borrar</button>
+                </div>
               </td>
             </tr>
           } @empty {
-            <tr>
+            <tr class="empty-row">
               <td colspan="5" class="empty-state">
                 <p>Aún no has publicado ninguna mascota.</p>
                 <button class="btn-text" (click)="addNewPet()">¡Empieza añadiendo una!</button>
