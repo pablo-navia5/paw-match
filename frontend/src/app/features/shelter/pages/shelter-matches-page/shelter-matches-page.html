@@ -46,12 +46,12 @@
 
         <div class="card-body">
           <div class="info-row">
-            <span class="info-label">Mascota ID</span>
-            <span class="info-value">{{ match.petId }}</span>
+            <span class="info-label">Mascota</span>
+            <span class="info-value">{{ match.pet?.name }}</span>
           </div>
           <div class="info-row">
-            <span class="info-label">Solicitante ID</span>
-            <span class="info-value">{{ match.userId }}</span>
+            <span class="info-label">Solicitante</span>
+            <span class="info-value">{{ match.applicant?.name }}</span>
           </div>
         </div>
 
