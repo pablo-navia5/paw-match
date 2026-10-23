@@ -59,20 +59,31 @@ export class ShelterMatchesPageComponent implements OnInit {
     this.currentFilter.set(status);
   }
 
+  contactUser() {
+    const match = this.selectedMatch();
+    if (match && match.pet) {
+      const userEmail = match.applicant?.email || '';
+      const subject = encodeURIComponent(`Gracias por tu interés en adoptar a ${match.pet.name}`);
+      const body = encodeURIComponent(
+        `Hola,\n\nHemos visto tu interes en adoptar a ${match.pet.name} y nos gustaria comunicarte ...\n\nUn saludo.`,
+      );
+
+      window.open(`mailto:${userEmail}?subject=${subject}&body=${body}`, '_blank');
+    }
+  }
+
   changeMatchStatus(matchId: number, newStatus: string) {
     this.matchService.updateMatchStatus(matchId, newStatus).subscribe({
       next: () => {
-        this.allMatches.update(currentMatches =>
-          currentMatches.map(m =>
-            m.id === matchId ? { ...m, status: newStatus as any } : m
-          )
+        this.allMatches.update((currentMatches) =>
+          currentMatches.map((m) => (m.id === matchId ? { ...m, status: newStatus as any } : m)),
         );
 
         this.closeDetails();
       },
       error: (err) => {
         console.error('Error al actualizar el estado:', err);
-      }
+      },
     });
   }
 
@@ -85,7 +96,7 @@ export class ShelterMatchesPageComponent implements OnInit {
 
     switch (type) {
       case 'houseSize':
-        const sizeMap: Record<string, number> = { 'Pequeña': 1, 'Mediana': 2, 'Grande': 3 };
+        const sizeMap: Record<string, number> = { Pequeña: 1, Mediana: 2, Grande: 3 };
         const pSize = sizeMap[pet.requiredHouseSize || 'Pequeña'] || 1;
         const uSize = sizeMap[user.houseSize || 'Pequeña'] || 1;
         return uSize >= pSize;

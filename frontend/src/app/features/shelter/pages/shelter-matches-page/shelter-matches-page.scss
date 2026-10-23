@@ -374,6 +374,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-lg);
+  margin-top: 1.5rem;
 
   button {
     padding: var(--space-lg);
@@ -422,4 +423,35 @@
   background-color: var(--color-primary-light);
   padding: 2px 8px;
   border-radius: var(--radius-sm);
+}
+
+.modal-actions-single {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+
+  .btn-contact-large {
+    width: 100%;
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: var(--text-base);
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(248, 113, 87, 0.3);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(248, 113, 87, 0.4);
+      filter: brightness(1.05);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
 }

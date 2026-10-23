@@ -22,5 +22,6 @@ public class MatchDto {
     private MatchStatus status;
     private LocalDateTime createdAt;
     private UserDto applicant;
+    private ShelterDto shelter;
     private PetDto pet;
 }

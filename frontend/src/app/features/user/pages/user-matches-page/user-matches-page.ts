@@ -62,15 +62,15 @@ export class UserMatchesPageComponent {
   contactShelter() {
     const match = this.selectedMatch();
     if (match && match.pet) {
-      const shelterEmail = (match.pet as any).shelter?.email || 'adopciones@pawmatch.com';
+      const shelterEmail = match.shelter?.email || 'adopciones@pawmatch.com';
       const subject = encodeURIComponent(
-        `Interés en adoptar a ${match.pet.name} (Ref: ${match.pet.id})`,
+        `Interés en adoptar a ${match.pet.name}`,
       );
       const body = encodeURIComponent(
-        `Hola,\n\nHemos hecho match del ${Math.round(match.matchPercentage)}% en PawMatch y me encantaría recibir más información sobre los siguientes pasos para la adopción.\n\nMi ID de usuario es: ${match.userId}\n\nUn saludo.`,
+        `Hola,\n\nHemos hecho match del ${Math.round(match.matchPercentage)}% en PawMatch y me encantaría recibir más información sobre los siguientes pasos para la adopción. \n\nUn saludo.`,
       );
 
-      window.location.href = `mailto:${shelterEmail}?subject=${subject}&body=${body}`;
+      window.open(`mailto:${shelterEmail}?subject=${subject}&body=${body}`, '_blank');
     }
   }
 

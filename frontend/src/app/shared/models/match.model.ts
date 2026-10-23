@@ -1,5 +1,6 @@
 import { UserProfile } from './user.model';
 import { PetResponse } from './pet.model';
+import { ShelterProfile } from '../../features/shelter/models/shelter.model';
 
 export type MatchStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
 
@@ -11,5 +12,6 @@ export interface MatchResponse {
   status: MatchStatus;
   createdAt: string;
   applicant?: UserProfile;
+  shelter?: ShelterProfile;
   pet?: PetResponse;
 }

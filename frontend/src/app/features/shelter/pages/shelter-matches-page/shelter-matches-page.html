@@ -174,9 +174,10 @@
         </div>
       </div>
 
-      <div class="contact-info">
-        <span class="icon">📧</span>
-        <span><strong>Email de contacto:</strong> {{ selectedMatch()?.applicant?.email }}</span>
+      <div class="modal-actions-single">
+        <button class="btn-contact-large" (click)="contactUser()">
+          ✉️ Enviar correo al adoptante
+        </button>
       </div>
 
       @if (selectedMatch()?.status === 'PENDING') {
