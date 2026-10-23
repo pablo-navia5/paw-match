@@ -1,6 +1,7 @@
 export interface PetResponse {
   id: number;
   name: string;
+  description: string;
   species: string;
   age: number;
   status: string;

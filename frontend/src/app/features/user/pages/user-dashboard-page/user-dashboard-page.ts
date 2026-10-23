@@ -18,6 +18,7 @@ export class UserDashboardPageComponent implements OnInit {
   private router = inject(Router);
   private interactionService = inject(InteractionService);
 
+  isImageLoading = signal<boolean>(true);
   pets = signal<PetResponse[]>([]);
   isLoading = signal<boolean>(true);
   currentIndex = 0;
@@ -31,7 +32,7 @@ export class UserDashboardPageComponent implements OnInit {
   }
 
   toggleProfileMenu() {
-    this.isProfileMenuOpen.update(val => !val);
+    this.isProfileMenuOpen.update((val) => !val);
   }
 
   ngOnInit() {
@@ -56,23 +57,25 @@ export class UserDashboardPageComponent implements OnInit {
 
     if (!userSession || !userSession.databaseId) return;
 
-    this.interactionService.createInteraction(userSession.databaseId, this.currentPet.id, action).subscribe({
-      next: (response) => {
-        if (response.hasMatch) {
-          this.matchedPetName.set(this.currentPet.name)
-          this.showMatchAnimation.set(true)
-        } else {
-          this.currentIndex++;
-        }
-      },
-      error: (err) => {
-        console.error('Error al registrar la acción:', err);
-        if (err.status === 400) {
-          alert('Ya habías interactuado con esta mascota.');
-          this.currentIndex++;
-        }
-      },
-    });
+    this.interactionService
+      .createInteraction(userSession.databaseId, this.currentPet.id, action)
+      .subscribe({
+        next: (response) => {
+          if (response.hasMatch) {
+            this.matchedPetName.set(this.currentPet.name);
+            this.showMatchAnimation.set(true);
+          } else {
+            this.currentIndex++;
+          }
+        },
+        error: (err) => {
+          console.error('Error al registrar la acción:', err);
+          if (err.status === 400) {
+            alert('Ya habías interactuado con esta mascota.');
+            this.currentIndex++;
+          }
+        },
+      });
   }
 
   closeMatchPopup() {
@@ -86,5 +89,21 @@ export class UserDashboardPageComponent implements OnInit {
 
   goToProfile() {
     this.router.navigate(['/user-panel/profile']);
+  }
+
+  onImageLoad() {
+    this.isImageLoading.set(false);
+  }
+
+  getOptimizedImage(url: string | undefined | null, name: string): string {
+    if (!url) {
+      return `https://placehold.co/600x800/ffefe5/ff7e67?text=${name}`;
+    }
+
+    if (url.includes('cloudinary.com')) {
+      return url.replace('/upload/', '/upload/c_fill,g_auto,w_600,h_800/');
+    }
+
+    return url;
   }
 }

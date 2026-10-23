@@ -28,6 +28,13 @@
         </div>
 
         <div class="form-group full-width">
+          <label for="description">Descripción</label>
+          <textarea id="description" formControlName="description" rows="4"
+                    placeholder="Cuenta un poco sobre la personalidad y gustos de la mascota..."
+                    class="form-control" style="resize: vertical;"></textarea>
+        </div>
+
+        <div class="form-group full-width">
           <label for="imageUpload">Foto de la Mascota</label>
           <input type="file" id="imageUpload" accept="image/png, image/jpeg, image/webp" (change)="onFileSelected($event)" class="form-control file-input">
 

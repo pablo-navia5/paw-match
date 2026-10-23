@@ -12,6 +12,7 @@ import lombok.Setter;
 public class PetCreateDto {
 
     private String name;
+    private String description;
     private String image;
     private String species;
     private Integer age;

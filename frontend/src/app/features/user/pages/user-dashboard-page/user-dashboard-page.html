@@ -39,11 +39,23 @@
     @if (currentPet) {
       <div class="swipe-area">
         <div class="pet-card">
-          <img src="{{ currentPet.image || 'https://placehold.co/600x800/ffefe5/ff7e67?text=' + currentPet.name }}" alt="{{ currentPet.name }}">
+          @if (isImageLoading()) {
+            <div class="image-skeleton">
+              <div class="skeleton-spinner"></div>
+            </div>
+          }
+
+          <img [src]="getOptimizedImage(currentPet.image, currentPet.name)"
+               alt="{{ currentPet.name }}"
+               (load)="onImageLoad()"
+               [class.image-hidden]="isImageLoading()">
 
           <div class="pet-info-overlay">
             <h2>{{ currentPet.name }}, {{ currentPet.age }}</h2>
-            <p class="species-tag">{{ currentPet.species }}</p>
+            <div class="tags-container" style="margin-bottom: 8px;">
+              <p class="species-tag">{{ currentPet.species }}</p>
+            </div>
+            <p class="pet-description">{{ currentPet.description }}</p>
           </div>
         </div>
 

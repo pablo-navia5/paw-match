@@ -35,6 +35,7 @@ export class CreatePetPageComponent {
     goodWithChildren: [false],
     goodWithOtherPets: [false],
     energyLevel: [1, Validators.required],
+    description: ['', [Validators.required, Validators.maxLength(600)]],
     image: [''],
   });
 
