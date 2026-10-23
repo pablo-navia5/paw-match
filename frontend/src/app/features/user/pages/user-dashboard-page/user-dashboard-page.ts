@@ -21,14 +21,14 @@ export class UserDashboardPageComponent implements OnInit {
   isImageLoading = signal<boolean>(true);
   pets = signal<PetResponse[]>([]);
   isLoading = signal<boolean>(true);
-  currentIndex = 0;
+  currentIndex = signal<number>(0);
 
   showMatchAnimation = signal<boolean>(false);
   matchedPetName = signal<string>('');
   isProfileMenuOpen = signal<boolean>(false);
 
   get currentPet() {
-    return this.pets()[this.currentIndex];
+    return this.pets()[this.currentIndex()];
   }
 
   toggleProfileMenu() {
@@ -65,14 +65,16 @@ export class UserDashboardPageComponent implements OnInit {
             this.matchedPetName.set(this.currentPet.name);
             this.showMatchAnimation.set(true);
           } else {
-            this.currentIndex++;
+            this.isImageLoading.set(true);
+            this.currentIndex.update((i) => i + 1);
           }
         },
         error: (err) => {
           console.error('Error al registrar la acción:', err);
           if (err.status === 400) {
             alert('Ya habías interactuado con esta mascota.');
-            this.currentIndex++;
+            this.isImageLoading.set(true);
+            this.currentIndex.update((i) => i + 1);
           }
         },
       });
@@ -80,7 +82,8 @@ export class UserDashboardPageComponent implements OnInit {
 
   closeMatchPopup() {
     this.showMatchAnimation.set(false);
-    this.currentIndex++;
+    this.isImageLoading.set(true);
+    this.currentIndex.update((i) => i + 1);
   }
 
   logout() {
