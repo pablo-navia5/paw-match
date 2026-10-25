@@ -11,6 +11,17 @@
 ## 💡 Acerca de la Aplicación
 PawMatch es una plataforma integral diseñada para digitalizar y optimizar el proceso de adopción de mascotas. Conecta a refugios/protectoras con futuros adoptantes mediante un sistema de perfiles y un algoritmo de emparejamiento (Match). La aplicación está construida sobre una arquitectura distribuida: un cliente SPA en Angular alojado en Vercel, apoyado por una API REST en Spring Boot (Dockerizada) en Render, que persiste los datos en una base de datos MySQL. Además, integra servicios en la nube para la gestión segura de identidades (Firebase) y la optimización de recursos multimedia (Cloudinary).
 
+## 🧪 Cuentas de Demostración
+La aplicación está configurada con perfiles de prueba para evaluar las funcionalidades de ambos roles sin necesidad de registro.
+
+| Rol | Email de Acceso | Contraseña | ¿Qué puedes probar? |
+| :--- | :--- | :--- | :--- |
+| **Adoptante** | `usuario@prueba.com` | `123456` | Ver catálogo, descubrir compatibilidad (Matches), gestionar perfil y solicitar adopciones. |
+| **Protectora** | `refugio@prueba.com` | `123456` | Gestionar inventario de mascotas, editar perfiles y revisar el buzón de solicitudes entrantes. |
+
+> [!TIP]
+> Si prefieres probar el flujo de validación completo, también puedes registrarte con cualquier correo real.
+
 ## 🛠 Stack Tecnológico
 *   **Frontend:** Angular 17+, TypeScript, SCSS, Vercel.
 *   **Backend:** Java 21, Spring Boot, Gradle, Render (Docker).
