@@ -69,14 +69,13 @@ La plataforma ofrece dos experiencias completamente adaptadas según el rol del 
 Interfaz enfocada en el descubrimiento, algoritmo de compatibilidad y seguimiento de solicitudes.
 
 <div align="center">
-  <!-- Reemplaza el src con la URL de tu imagen/GIF -->
-  <img src="URL_IMG_USUARIO_HOME" width="400" alt="Dashboard Principal Adoptante"/>
+  <img src="media/user-home.png" width="400" alt="Dashboard Principal Adoptante"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="URL_IMG_USUARIO_MATCH" width="400" alt="Sistema de Match de Mascotas"/>
+  <img src="media/match.png" width="400" alt="Sistema de Match de Mascotas"/>
   <br><br><br>
-  <img src="URL_IMG_USUARIO_DETALLE" width="400" alt="Vista Detalle de la Mascota"/>
+  <img src="media/user-profile.png" width="400" alt="Vista Detalle de la Mascota"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="URL_IMG_USUARIO_PERFIL" width="400" alt="Perfil y Preferencias del Usuario"/>
+  <img src="media/user-matches.png" width="400" alt="Perfil y Preferencias del Usuario"/>
 </div>
 
 <br>
@@ -85,14 +84,13 @@ Interfaz enfocada en el descubrimiento, algoritmo de compatibilidad y seguimient
 Herramientas administrativas para el control del inventario de animales, edición de perfiles y gestión de solicitudes de adopción.
 
 <div align="center">
-  <!-- Reemplaza el src con la URL de tu imagen/GIF -->
-  <img src="URL_IMG_REFUGIO_DASHBOARD" width="400" alt="Dashboard Estadísticas Refugio"/>
+  <img src="media/shelter-main.png" width="400" alt="Dashboard Estadísticas Refugio"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="URL_IMG_REFUGIO_CRUD" width="400" alt="Panel de Gestión y Edición de Mascotas"/>
+  <img src="media/add-pet.png" width="400" alt="Panel de Gestión y Edición de Mascotas"/>
   <br><br><br>
-  <img src="URL_IMG_REFUGIO_MATCHES" width="400" alt="Bandeja de Solicitudes y Matches"/>
+  <img src="media/shelter-profile.png" width="400" alt="Bandeja de Solicitudes y Matches"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="URL_IMG_REFUGIO_PERFIL" width="400" alt="Perfil Público de la Protectora"/>
+  <img src="media/match-details" width="400" alt="Perfil Público de la Protectora"/>
 </div>
 
 ## 📂 Estructura del Repositorio
