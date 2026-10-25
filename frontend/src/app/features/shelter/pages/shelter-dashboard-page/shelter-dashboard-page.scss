@@ -873,6 +873,29 @@
   }
 }
 
+.form-control {
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-main);
+  font-family: inherit;
+  font-size: var(--text-base);
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+    background-color: var(--color-bg-card);
+  }
+
+  &::placeholder {
+    color: var(--color-text-muted-light);
+  }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -886,4 +909,8 @@
 @keyframes dropDownFade {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.full-width {
+  grid-column: 1 / -1;
 }

@@ -38,6 +38,7 @@ export class ShelterDashboardPageComponent implements OnInit {
     needsYard: [false],
     requiredHouseSize: ['Pequeña', Validators.required],
     status: ['AVAILABLE', Validators.required],
+    description: ['', [Validators.required, Validators.maxLength(600)]]
   });
 
   ngOnInit() {
@@ -107,7 +108,8 @@ export class ShelterDashboardPageComponent implements OnInit {
       energyLevel: pet.energyLevel,
       needsYard: pet.needsYard,
       requiredHouseSize: pet.requiredHouseSize,
-      status: pet.status
+      status: pet.status,
+      description: pet.description
     });
 
     this.isEditModalOpen.set(true);

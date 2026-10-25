@@ -27,6 +27,5 @@ public class AuthController {
 
         var shelter = shelterFacade.findByFirebaseUid(firebaseUid);
         return shelter.map(shelterModel -> ResponseEntity.ok(new AuthProfileDto(shelterModel.getId(), "SHELTER"))).orElseGet(() -> ResponseEntity.notFound().build());
-
     }
 }

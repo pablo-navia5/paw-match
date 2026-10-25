@@ -13,51 +13,71 @@ import { UserProfilePageComponent } from './features/user/pages/user-profile-pag
 import { UserMatchesPageComponent } from './features/user/pages/user-matches-page/user-matches-page';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginPageComponent },
-  { path: 'register-user', component: RegisterUserPageComponent },
-  { path: 'register-shelter', component: RegisterShelterPageComponent },
-  { path: '', component: HomePageComponent },
+  { path: 'login',
+    component: LoginPageComponent,
+    title: 'PawMatch - Iniciar sesion' },
+  {
+    path: 'register-user',
+    component: RegisterUserPageComponent,
+    title: 'PawMatch - Registro usuario',
+  },
+  {
+    path: 'register-shelter',
+    component: RegisterShelterPageComponent,
+    title: 'PawMatch - Registro protectora',
+  },
+  { path: '',
+    component: HomePageComponent,
+    title: 'PawMatch - Adopción de Mascotas'
+  },
 
   {
     path: 'user-panel',
     component: UserDashboardPageComponent,
     canActivate: [authGuard],
     data: { role: 'USER' },
+    title: 'PawMatch - Explorar Peludos',
   },
   {
     path: 'user-panel/profile',
     component: UserProfilePageComponent,
     canActivate: [authGuard],
     data: { role: 'USER' },
+    title: 'PawMatch - Perfil de usuario',
   },
   {
     path: 'user-panel/matches',
     component: UserMatchesPageComponent,
     canActivate: [authGuard],
     data: { role: 'USER' },
+    title: 'PawMatch - Matches del usuario',
   },
   {
     path: 'shelter-panel',
     component: ShelterDashboardPageComponent,
     canActivate: [authGuard],
     data: { role: 'SHELTER' },
+    title: 'PawMatch - Mascotas en el sistema',
   },
   {
     path: 'shelter-panel/create-pet',
     component: CreatePetPageComponent,
     canActivate: [authGuard],
     data: { role: 'SHELTER' },
+    title: 'PawMatch - Añadir mascota',
   },
   {
     path: 'shelter-panel/matches',
     component: ShelterMatchesPageComponent,
     canActivate: [authGuard],
     data: { role: 'SHELTER' },
+    title: 'PawMatch - Matches de protectora',
   },
   {
     path: 'shelter-panel/profile',
     component: ShelterProfilePageComponent,
     canActivate: [authGuard],
     data: { role: 'SHELTER' },
+    title: 'PawMatch - Perfil de protectora',
   },
 ];
