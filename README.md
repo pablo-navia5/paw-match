@@ -90,7 +90,7 @@ Herramientas administrativas para el control del inventario de animales, edició
   <br><br><br>
   <img src="media/shelter-profile.png" width="400" alt="Bandeja de Solicitudes y Matches"/>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="media/match-details" width="400" alt="Perfil Público de la Protectora"/>
+  <img src="media/match-details.png" width="400" alt="Perfil Público de la Protectora"/>
 </div>
 
 ## 📂 Estructura del Repositorio
