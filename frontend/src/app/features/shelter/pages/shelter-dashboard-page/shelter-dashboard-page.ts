@@ -4,9 +4,10 @@ import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ThemeToggle],
   standalone: true,
   selector: 'app-shelter-dashboard-page',
   styleUrl: './shelter-dashboard-page.scss',
@@ -38,7 +39,7 @@ export class ShelterDashboardPageComponent implements OnInit {
     needsYard: [false],
     requiredHouseSize: ['Pequeña', Validators.required],
     status: ['AVAILABLE', Validators.required],
-    description: ['', [Validators.required, Validators.maxLength(600)]]
+    description: ['', [Validators.required, Validators.maxLength(600)]],
   });
 
   ngOnInit() {
@@ -109,7 +110,7 @@ export class ShelterDashboardPageComponent implements OnInit {
       needsYard: pet.needsYard,
       requiredHouseSize: pet.requiredHouseSize,
       status: pet.status,
-      description: pet.description
+      description: pet.description,
     });
 
     this.isEditModalOpen.set(true);

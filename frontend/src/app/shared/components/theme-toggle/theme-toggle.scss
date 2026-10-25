@@ -1,0 +1,46 @@
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: var(--color-text-main);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-bg-header-card);
+  }
+
+  svg {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  }
+
+  .sun-icon {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  .moon-icon {
+    opacity: 0;
+    transform: translateY(-20px) rotate(-90deg);
+  }
+
+  &.is-dark {
+    .sun-icon {
+      opacity: 0;
+      transform: translateY(20px) rotate(90deg);
+    }
+    .moon-icon {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+}

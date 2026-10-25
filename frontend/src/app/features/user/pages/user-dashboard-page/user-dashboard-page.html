@@ -3,7 +3,9 @@
     <span class="brand-icon">🐾</span>
     <span class="brand-text">PawMatch</span>
   </div>
+
   <div class="top-nav-right">
+    <app-theme-toggle></app-theme-toggle>
     <div class="profile-dropdown-container">
       <button class="profile-trigger-btn" (click)="toggleProfileMenu()">
         <div class="avatar-circle">P</div>
@@ -13,7 +15,7 @@
 
       @if (isProfileMenuOpen()) {
         <div class="dropdown-menu">
-          <button (click)="goToProfile()" class="dropdown-item text-danger">
+          <button (click)="goToProfile()" class="dropdown-item">
             <i>👤</i> Perfil
           </button>
           <div class="dropdown-divider"></div>

@@ -4,9 +4,10 @@ import { PetResponse } from '../../../../shared/models/pet.model';
 import { AuthService } from '../../../auth/services/auth.service';
 import { InteractionService } from '../../../../shared/services/interaction.service';
 import { Router, RouterLink } from '@angular/router';
+import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, ThemeToggle],
   standalone: true,
   selector: 'app-user-dashboard-page',
   styleUrl: './user-dashboard-page.scss',
