@@ -1,16 +1,16 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: 'TU_API_KEY_DE_FIREBASE',
-    authDomain: 'tu-proyecto.firebaseapp.com',
-    projectId: 'tu-proyecto',
-    storageBucket: 'tu-proyecto.appspot.com',
-    messagingSenderId: '1234567',
-    appId: '1:123:web:abc',
+    apiKey: 'AIzaSyCkor21QoKhunPUEtgg3BcyygyBTcyVFXE',
+    authDomain: 'pawmatch-70c7a.firebaseapp.com',
+    projectId: 'pawmatch-70c7a',
+    storageBucket: 'pawmatch-70c7a.firebasestorage.app',
+    messagingSenderId: '145447967455',
+    appId: '1:145447967455:web:206936020fcb9077aae76a',
   },
   cloudinary: {
     cloudName: 'dibmx8zok',
     uploadPreset: 'upload_pet_image',
   },
-  apiUrl: 'https://api.tu-dominio.com/api',
+  apiUrl: 'https://paw-match-vlxw.onrender.com',
 };
