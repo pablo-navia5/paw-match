@@ -4,6 +4,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { MatchResponse, MatchStatus } from '../../../../shared/models/match.model';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   imports: [DecimalPipe, DatePipe, RouterLink],
@@ -15,10 +16,10 @@ import { RouterLink } from '@angular/router';
 export class UserMatchesPageComponent {
   private matchService = inject(MatchService);
   private authService = inject(AuthService);
+  public loadingService = inject(LoadingService);
 
   allMatches = signal<MatchResponse[]>([]);
   currentFilter = signal<MatchStatus>('PENDING');
-  isLoading = signal<boolean>(true);
   selectedMatch = signal<MatchResponse | null>(null);
 
   filteredMatches = computed(() => {
@@ -35,11 +36,9 @@ export class UserMatchesPageComponent {
       this.matchService.getMatchesByUser(session.databaseId).subscribe({
         next: (data) => {
           this.allMatches.set(data);
-          this.isLoading.set(false);
         },
         error: (err) => {
           console.error('Error cargando mis matches', err);
-          this.isLoading.set(false);
         },
       });
     }
@@ -63,9 +62,7 @@ export class UserMatchesPageComponent {
     const match = this.selectedMatch();
     if (match && match.pet) {
       const shelterEmail = match.shelter?.email || 'adopciones@pawmatch.com';
-      const subject = encodeURIComponent(
-        `Interés en adoptar a ${match.pet.name}`,
-      );
+      const subject = encodeURIComponent(`Interés en adoptar a ${match.pet.name}`);
       const body = encodeURIComponent(
         `Hola,\n\nHemos hecho match del ${Math.round(match.matchPercentage)}% en PawMatch y me encantaría recibir más información sobre los siguientes pasos para la adopción. \n\nUn saludo.`,
       );

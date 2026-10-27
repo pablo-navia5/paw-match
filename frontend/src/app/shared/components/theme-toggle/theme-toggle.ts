@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { ThemeService } from '../../../core/ThemeService';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   imports: [AsyncPipe],

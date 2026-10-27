@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  @if (isLoading()) {
+  @if (loadingService.isLoading()) {
     <div class="loading-state">
       <h3>Cargando mascotas...</h3>
     </div>
@@ -188,7 +188,7 @@
 
         <div class="modal-actions">
           <button type="button" class="btn-cancel" (click)="closeEditModal()">Cancelar</button>
-          <button type="submit" class="btn-save" [disabled]="editPetForm.invalid">Guardar Cambios</button>
+          <button type="submit" class="btn-save" [disabled]="editPetForm.invalid || loadingService.isLoading()">Guardar Cambios</button>
         </div>
       </form>
     </div>

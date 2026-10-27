@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,6 +15,7 @@ export class LoginPageComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  public loadingService = inject(LoadingService);
 
   userRole: string | null = null;
 
@@ -24,10 +26,12 @@ export class LoginPageComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.loadingService.show();
       const { email, password } = this.loginForm.getRawValue();
 
       this.authService.login(email, password).subscribe({
         next: (profile) => {
+          this.loadingService.hide();
           if (profile.role === 'USER') {
             this.router.navigate(['/user-panel']);
           } else if (profile.role === 'SHELTER') {
@@ -35,6 +39,7 @@ export class LoginPageComponent {
           }
         },
         error: (err) => {
+          this.loadingService.hide();
           alert('Error al iniciar sesión. Comprueba tus credenciales.');
           console.error(err);
         },

@@ -4,6 +4,7 @@ import { MatchService } from '../../../../shared/services/match.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   imports: [DecimalPipe, DatePipe, RouterLink],
@@ -15,10 +16,10 @@ import { RouterLink } from '@angular/router';
 export class ShelterMatchesPageComponent implements OnInit {
   private matchService = inject(MatchService);
   private authService = inject(AuthService);
+  public loadingService = inject(LoadingService);
 
   allMatches = signal<MatchResponse[]>([]);
   currentFilter = signal<MatchStatus>('PENDING');
-  isLoading = signal<boolean>(true);
   selectedMatch = signal<MatchResponse | null>(null);
 
   filteredMatches = computed(() => {
@@ -35,11 +36,9 @@ export class ShelterMatchesPageComponent implements OnInit {
       this.matchService.getMatchesForShelter(session.databaseId).subscribe({
         next: (data) => {
           this.allMatches.set(data);
-          this.isLoading.set(false);
         },
         error: (err) => {
           console.error('Error cargando solicitudes', err);
-          this.isLoading.set(false);
         },
       });
     }

@@ -3,7 +3,7 @@
     <a routerLink="/shelter-panel" class="btn-back">← Volver al Panel</a>
   </div>
 
-  @if (isLoading()) {
+  @if (loadingService.isLoading()) {
     <div class="loading-state">
       <div class="spinner"></div>
       <p>Cargando información del perfil...</p>
@@ -90,8 +90,8 @@
 
           <div class="modal-footer">
             <button type="button" class="btn-secondary" (click)="closeEditModal()">Cancelar</button>
-            <button type="submit" class="btn-primary" [disabled]="editForm.invalid || isSaving()">
-              @if (isSaving()) {
+            <button type="submit" class="btn-primary" [disabled]="editForm.invalid || loadingService.isLoading()">
+              @if (loadingService.isLoading()) {
                 Guardando...
               } @else {
                 Guardar Cambios

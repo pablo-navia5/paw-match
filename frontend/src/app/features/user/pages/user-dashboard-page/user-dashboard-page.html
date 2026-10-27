@@ -48,7 +48,7 @@
   </aside>
 
   <main class="discover-container">
-    @if (isLoading()) {
+    @if (loadingService.isLoading()) {
       <div class="status-view">
         <div class="spinner"></div>
         <h3>Buscando compañeros...</h3>

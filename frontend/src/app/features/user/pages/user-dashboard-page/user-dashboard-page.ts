@@ -5,6 +5,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { InteractionService } from '../../../../shared/services/interaction.service';
 import { Router, RouterLink } from '@angular/router';
 import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   imports: [RouterLink, ThemeToggle],
@@ -18,10 +19,10 @@ export class UserDashboardPageComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private interactionService = inject(InteractionService);
+  public loadingService = inject(LoadingService);
 
   isImageLoading = signal<boolean>(true);
   pets = signal<PetResponse[]>([]);
-  isLoading = signal<boolean>(true);
   currentIndex = signal<number>(0);
 
   showMatchAnimation = signal<boolean>(false);
@@ -43,11 +44,9 @@ export class UserDashboardPageComponent implements OnInit {
       this.petService.getUserFeed(userSession.databaseId).subscribe({
         next: (data) => {
           this.pets.set(data);
-          this.isLoading.set(false);
         },
         error: (err) => {
           console.error('Error al descargar el feed:', err);
-          this.isLoading.set(false);
         },
       });
     }
