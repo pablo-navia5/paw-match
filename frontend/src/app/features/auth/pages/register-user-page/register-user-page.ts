@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
@@ -14,6 +14,7 @@ import { LoadingService } from '../../../../core/services/loading.service';
 export class RegisterUserPageComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private router = inject(Router);
   public loadingService = inject(LoadingService);
 
   registerForm = this.fb.nonNullable.group({
@@ -40,10 +41,10 @@ export class RegisterUserPageComponent {
 
       this.authService.registerUser(userData, password).subscribe({
         next: (res) => {
-          alert('¡Éxito! Usuario registrado en Firebase y guardado en MySQL.');
+          alert('¡Éxito! Revisa tu correo para verificar tu cuenta.');
           console.log('Respuesta del Backend:', res);
           this.loadingService.hide();
-          this.registerForm.reset();
+          this.router.navigate(['/']);
         },
         error: (err) => {
           alert('Error al registrar: ' + err.message);

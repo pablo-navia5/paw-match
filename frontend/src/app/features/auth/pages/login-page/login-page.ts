@@ -40,7 +40,13 @@ export class LoginPageComponent {
         },
         error: (err) => {
           this.loadingService.hide();
-          alert('Error al iniciar sesión. Comprueba tus credenciales.');
+          if (err.message === 'EMAIL_NOT_VERIFIED') {
+            alert(
+              'Tu correo electrónico no ha sido verificado. Por favor, revisa tu bandeja de entrada.',
+            );
+          } else {
+            alert('Error al iniciar sesión. Comprueba tus credenciales.');
+          }
           console.error(err);
         },
       });
