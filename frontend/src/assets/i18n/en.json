@@ -1,0 +1,10 @@
+{
+  "NAVBAR": {
+    "HOME": "Home",
+    "LOGIN": "Login"
+  },
+  "ALERTS": {
+    "SUCCESS": "Operation completed successfully",
+    "ERROR": "An error has occurred"
+  }
+}

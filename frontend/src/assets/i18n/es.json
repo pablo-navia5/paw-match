@@ -1,0 +1,10 @@
+{
+  "NAVBAR": {
+    "HOME": "Inicio",
+    "LOGIN": "Iniciar Sesión"
+  },
+  "ALERTS": {
+    "SUCCESS": "Operación completada con éxito",
+    "ERROR": "Ha ocurrido un error"
+  }
+}
