@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { UserProfile } from '../../models/user.model';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   imports: [RouterLink, ReactiveFormsModule],
@@ -16,10 +17,9 @@ export class UserProfilePageComponent implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private fb = inject(FormBuilder);
+  public loadingService = inject(LoadingService);
 
   profile = signal<UserProfile | null>(null);
-  isLoading = signal<boolean>(true);
-  isSaving = signal<boolean>(false);
   isEditModalOpen = signal<boolean>(false);
 
   editForm = this.fb.nonNullable.group({
@@ -47,15 +47,11 @@ export class UserProfilePageComponent implements OnInit {
       this.userService.getUserProfile(session.databaseId).subscribe({
         next: (data) => {
           this.profile.set(data);
-          this.isLoading.set(false);
         },
         error: (err) => {
           console.error('Error al cargar el perfil:', err);
-          this.isLoading.set(false);
         },
       });
-    } else {
-      this.isLoading.set(false);
     }
   }
 
@@ -87,18 +83,15 @@ export class UserProfilePageComponent implements OnInit {
   onSubmitEdit() {
     if (this.editForm.invalid) return;
 
-    this.isSaving.set(true);
     const updatedData = this.editForm.getRawValue();
 
     this.userService.updateUser(updatedData).subscribe({
       next: () => {
         this.loadProfile();
-        this.isSaving.set(false);
         this.closeEditModal();
       },
       error: (err) => {
         console.error('Error al actualizar el perfil:', err);
-        this.isSaving.set(false);
       },
     });
   }

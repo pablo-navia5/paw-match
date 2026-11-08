@@ -4,6 +4,7 @@ import { PetService } from '../../../../shared/services/pet.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { UploadService } from '../../../../shared/services/upload.service';
+import { LoadingService } from '../../../../core/services/loading.service';
 
 @Component({
   imports: [ReactiveFormsModule, RouterLink],
@@ -18,10 +19,10 @@ export class CreatePetPageComponent {
   private authService = inject(AuthService);
   private uploadService = inject(UploadService);
   private router = inject(Router);
+  public loadingService = inject(LoadingService);
 
   selectedFile = signal<File | null>(null);
   imagePreviewUrl = signal<string | null>(null);
-  isLoading = signal<boolean>(false);
 
   petForm = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -52,7 +53,6 @@ export class CreatePetPageComponent {
 
   onSubmit() {
     if (this.petForm.valid) {
-      this.isLoading.set(true);
       const file = this.selectedFile();
 
       if (file) {
@@ -63,7 +63,6 @@ export class CreatePetPageComponent {
           },
           error: (err) => {
             console.error('Error subiendo imagen a Cloudinary:', err);
-            this.isLoading.set(false);
           },
         });
       } else {
@@ -78,16 +77,12 @@ export class CreatePetPageComponent {
     if (session?.databaseId) {
       this.petService.createPet(session.databaseId, this.petForm.getRawValue()).subscribe({
         next: () => {
-          this.isLoading.set(false);
           this.router.navigate(['/shelter-panel']);
         },
         error: (err) => {
           console.error('Error al guardar en BD:', err);
-          this.isLoading.set(false);
         },
       });
-    } else {
-      this.isLoading.set(false);
     }
   }
 }

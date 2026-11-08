@@ -36,7 +36,7 @@
         <input type="text" id="address" formControlName="address" placeholder="Calle, Ciudad, Código Postal..." class="form-control">
       </div>
 
-      <button type="submit" [disabled]="registerForm.invalid" class="btn-primary btn-block">
+      <button type="submit" [disabled]="registerForm.invalid || loadingService.isLoading()" class="btn-primary btn-block">
         Crear Cuenta de Protectora
       </button>
 

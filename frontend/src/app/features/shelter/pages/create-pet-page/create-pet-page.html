@@ -98,8 +98,8 @@
         <button type="button" routerLink="/shelter-panel" class="btn-secondary">
           Cancelar
         </button>
-        <button type="submit" [disabled]="petForm.invalid || isLoading()" class="btn-primary">
-          @if (isLoading()) {
+        <button type="submit" [disabled]="petForm.invalid || loadingService.isLoading()" class="btn-primary">
+          @if (loadingService.isLoading()) {
             Guardando mascota...
           } @else {
             Guardar Mascota

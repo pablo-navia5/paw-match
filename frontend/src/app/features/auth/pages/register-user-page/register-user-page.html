@@ -100,7 +100,7 @@
       </div>
 
       <div class="form-actions">
-        <button type="submit" [disabled]="registerForm.invalid" class="btn-primary btn-block">
+        <button type="submit" [disabled]="registerForm.invalid || loadingService.isLoading()" class="btn-primary btn-block">
           Crear Cuenta
         </button>
       </div>

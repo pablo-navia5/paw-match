@@ -24,13 +24,13 @@
     </button>
   </div>
 
-  @if (isLoading()) {
+  @if (loadingService.isLoading()) {
     <div class="state-container">
       <p>Cargando tus conexiones...</p>
     </div>
   }
 
-  @if (!isLoading() && filteredMatches().length === 0) {
+  @if (!loadingService.isLoading() && filteredMatches().length === 0) {
     <div class="state-container empty">
       <p>Aún no tienes matches en este estado. ¡Sigue explorando!</p>
     </div>
