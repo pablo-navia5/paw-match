@@ -16,8 +16,8 @@ La aplicación está configurada con perfiles de prueba para evaluar las funcion
 
 | Rol | Email de Acceso | Contraseña | ¿Qué puedes probar? |
 | :--- | :--- | :--- | :--- |
-| **Adoptante** | `usuario@prueba.com` | `123456` | Ver catálogo, descubrir compatibilidad (Matches), gestionar perfil y solicitar adopciones. |
-| **Protectora** | `refugio@prueba.com` | `123456` | Gestionar inventario de mascotas, editar perfiles y revisar el buzón de solicitudes entrantes. |
+| **Adoptante** | `kohaba8293@boffweb.com` | `123456` | Ver catálogo, descubrir compatibilidad (Matches), gestionar perfil y solicitar adopciones. |
+| **Protectora** | `jidewic575@boffweb.com` | `123456` | Gestionar inventario de mascotas, editar perfiles y revisar el buzón de solicitudes entrantes. |
 
 > [!TIP]
 > Si prefieres probar el flujo de validación completo, también puedes registrarte con cualquier correo real.
