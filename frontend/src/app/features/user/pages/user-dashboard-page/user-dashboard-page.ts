@@ -6,6 +6,7 @@ import { InteractionService } from '../../../../shared/services/interaction.serv
 import { Router, RouterLink } from '@angular/router';
 import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
   imports: [RouterLink, ThemeToggle],
@@ -20,6 +21,7 @@ export class UserDashboardPageComponent implements OnInit {
   private router = inject(Router);
   private interactionService = inject(InteractionService);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   isImageLoading = signal<boolean>(true);
   pets = signal<PetResponse[]>([]);
@@ -46,6 +48,7 @@ export class UserDashboardPageComponent implements OnInit {
           this.pets.set(data);
         },
         error: (err) => {
+          this.alertService.showError('Error al cargar las mascotas.');
           console.error('Error al descargar el feed:', err);
         },
       });
@@ -70,9 +73,10 @@ export class UserDashboardPageComponent implements OnInit {
           }
         },
         error: (err) => {
+          this.alertService.showError('Error al interactuar con la mascota.');
           console.error('Error al registrar la acción:', err);
           if (err.status === 400) {
-            alert('Ya habías interactuado con esta mascota.');
+            this.alertService.showError('Ya has interactuado con esta mascota.');
             this.isImageLoading.set(true);
             this.currentIndex.update((i) => i + 1);
           }

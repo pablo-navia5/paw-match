@@ -5,6 +5,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
   imports: [DecimalPipe, DatePipe, RouterLink],
@@ -17,6 +18,7 @@ export class ShelterMatchesPageComponent implements OnInit {
   private matchService = inject(MatchService);
   private authService = inject(AuthService);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   allMatches = signal<MatchResponse[]>([]);
   currentFilter = signal<MatchStatus>('PENDING');
@@ -38,6 +40,7 @@ export class ShelterMatchesPageComponent implements OnInit {
           this.allMatches.set(data);
         },
         error: (err) => {
+          this.alertService.showError('No se ha podido obtener los matches.');
           console.error('Error cargando solicitudes', err);
         },
       });
@@ -81,6 +84,7 @@ export class ShelterMatchesPageComponent implements OnInit {
         this.closeDetails();
       },
       error: (err) => {
+        this.alertService.showError('Error al actualizar el estado.');
         console.error('Error al actualizar el estado:', err);
       },
     });

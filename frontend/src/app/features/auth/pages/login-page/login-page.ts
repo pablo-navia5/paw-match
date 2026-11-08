@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
   selector: 'app-login-page',
@@ -16,6 +17,7 @@ export class LoginPageComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   userRole: string | null = null;
 
@@ -41,11 +43,9 @@ export class LoginPageComponent {
         error: (err) => {
           this.loadingService.hide();
           if (err.message === 'EMAIL_NOT_VERIFIED') {
-            alert(
-              'Tu correo electrónico no ha sido verificado. Por favor, revisa tu bandeja de entrada.',
-            );
+            this.alertService.showError('El email no ha sido verificado, comprueba tu carpeta de spam');
           } else {
-            alert('Error al iniciar sesión. Comprueba tus credenciales.');
+            this.alertService.showError('Error al iniciar sesion');
           }
           console.error(err);
         },

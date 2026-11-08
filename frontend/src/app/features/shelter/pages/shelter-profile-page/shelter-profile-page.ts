@@ -5,6 +5,7 @@ import { ShelterProfile } from '../../models/shelter.model';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
   imports: [RouterLink, ReactiveFormsModule],
@@ -18,6 +19,7 @@ export class ShelterProfilePageComponent implements OnInit {
   private shelterService = inject(ShelterService);
   private fb = inject(FormBuilder);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   profile = signal<ShelterProfile | null>(null);
   isEditModalOpen = signal<boolean>(false);
@@ -41,6 +43,7 @@ export class ShelterProfilePageComponent implements OnInit {
           this.profile.set(data);
         },
         error: (err) => {
+          this.alertService.showError('No se ha podido cargar el perfil.');
           console.error('Error al cargar el perfil de la protectora:', err);
         },
       });
@@ -71,11 +74,12 @@ export class ShelterProfilePageComponent implements OnInit {
 
     this.shelterService.updateShelter(updatedData).subscribe({
       next: () => {
+        this.alertService.showSuccess('Perfil actualizado correctamente.');
         this.loadProfile();
         this.closeEditModal();
       },
       error: (err) => {
-        console.error('Error al actualizar el perfil:', err);
+        this.alertService.showError('Error al actualizar el perfil, intentalo de nuevo mas tarde.');
       },
     });
   }

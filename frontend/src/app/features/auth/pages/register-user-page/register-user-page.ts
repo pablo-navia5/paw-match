@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
   selector: 'app-register-user-page',
@@ -16,6 +17,7 @@ export class RegisterUserPageComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   registerForm = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -41,13 +43,12 @@ export class RegisterUserPageComponent {
 
       this.authService.registerUser(userData, password).subscribe({
         next: (res) => {
-          alert('¡Éxito! Revisa tu correo para verificar tu cuenta.');
-          console.log('Respuesta del Backend:', res);
+          this.alertService.showSuccess('Revisa tu correo para verificar tu cuenta.');
           this.loadingService.hide();
           this.router.navigate(['/']);
         },
         error: (err) => {
-          alert('Error al registrar: ' + err.message);
+          this.alertService.showSuccess('Error al registrar: ' + err.message);
           this.loadingService.hide();
           console.error(err);
         },
