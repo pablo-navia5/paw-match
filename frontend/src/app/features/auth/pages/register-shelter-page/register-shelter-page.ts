@@ -4,11 +4,12 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register-shelter-page',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslatePipe],
   templateUrl: './register-shelter-page.html',
   styleUrl: './register-shelter-page.scss',
 })

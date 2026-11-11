@@ -1,43 +1,43 @@
 <div class="auth-wrapper">
   <div class="auth-card">
     <button class="btn-back" routerLink="/">
-      ← Volver al inicio
+      ← {{ 'AUTH.REGISTER_SHELTER.BACK_TO_HOME' | translate }}
     </button>
 
     <div class="auth-header">
-      <h2>Registro de Protectora</h2>
-      <p class="text-muted">Únete a nuestra red de adopción responsable</p>
+      <h2>{{ 'AUTH.REGISTER_SHELTER.TITLE' | translate }}</h2>
+      <p class="text-muted">{{ 'AUTH.REGISTER_SHELTER.SUBTITLE' | translate }}</p>
     </div>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
       <div class="form-group">
-        <label for="name">Nombre de la Protectora</label>
-        <input type="text" id="name" formControlName="name" placeholder="Ej. Refugio Esperanza" class="form-control">
+        <label for="name">{{ 'AUTH.REGISTER_SHELTER.NAME_LABEL' | translate }}</label>
+        <input type="text" id="name" formControlName="name" [placeholder]="'AUTH.REGISTER_SHELTER.NAME_PLACEHOLDER' | translate" class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="email">Email de contacto</label>
-        <input type="email" id="email" formControlName="email" placeholder="protectora@ejemplo.com" class="form-control">
+        <label for="email">{{ 'AUTH.REGISTER_SHELTER.EMAIL_LABEL' | translate }}</label>
+        <input type="email" id="email" formControlName="email" [placeholder]="'AUTH.REGISTER_SHELTER.EMAIL_PLACEHOLDER' | translate" class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="password">Contraseña (mín 6 carácteres)</label>
-        <input type="password" id="password" formControlName="password" placeholder="••••••••" class="form-control">
+        <label for="password">{{ 'AUTH.REGISTER_SHELTER.PASSWORD_LABEL' | translate }}</label>
+        <input type="password" id="password" formControlName="password" [placeholder]="'AUTH.REGISTER_SHELTER.PASSWORD_PLACEHOLDER' | translate" class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="contactPhone">Teléfono</label>
-        <input type="text" id="contactPhone" formControlName="contactPhone" placeholder="Ej. 600 123 456" class="form-control">
+        <label for="contactPhone">{{ 'AUTH.REGISTER_SHELTER.PHONE_LABEL' | translate }}</label>
+        <input type="text" id="contactPhone" formControlName="contactPhone" [placeholder]="'AUTH.REGISTER_SHELTER.PHONE_PLACEHOLDER' | translate" class="form-control">
       </div>
 
       <div class="form-group">
-        <label for="address">Dirección física</label>
-        <input type="text" id="address" formControlName="address" placeholder="Calle, Ciudad, Código Postal..." class="form-control">
+        <label for="address">{{ 'AUTH.REGISTER_SHELTER.ADDRESS_LABEL' | translate }}</label>
+        <input type="text" id="address" formControlName="address" [placeholder]="'AUTH.REGISTER_SHELTER.ADDRESS_PLACEHOLDER' | translate" class="form-control">
       </div>
 
       <button type="submit" [disabled]="registerForm.invalid || loadingService.isLoading()" class="btn-primary btn-block">
-        Crear Cuenta de Protectora
+        {{ 'AUTH.REGISTER_SHELTER.SUBMIT_BTN' | translate }}
       </button>
 
     </form>

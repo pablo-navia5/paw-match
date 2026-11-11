@@ -1,78 +1,78 @@
 <div class="form-wrapper">
   <div class="form-card">
     <button class="btn-back" routerLink="/">
-      ← Volver al inicio
+      ← {{ 'AUTH.REGISTER_USER.BACK_TO_HOME' | translate }}
     </button>
 
     <div class="form-header">
-      <h2>Registro de Adoptante</h2>
-      <p class="text-muted">Crea tu perfil y encuentra a tu compañero ideal</p>
+      <h2>{{ 'AUTH.REGISTER_USER.TITLE' | translate }}</h2>
+      <p class="text-muted">{{ 'AUTH.REGISTER_USER.SUBTITLE' | translate }}</p>
     </div>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="modern-form">
 
-      <h3 class="section-title">Datos Básicos</h3>
+      <h3 class="section-title">{{ 'AUTH.REGISTER_USER.SECTION_BASIC' | translate }}</h3>
       <div class="form-grid">
         <div class="form-group">
-          <label for="name">Nombre Completo</label>
-          <input type="text" id="name" formControlName="name" placeholder="Ej. Ana García" class="form-control">
+          <label for="name">{{ 'AUTH.REGISTER_USER.NAME_LABEL' | translate }}</label>
+          <input type="text" id="name" formControlName="name" [placeholder]="'AUTH.REGISTER_USER.NAME_PLACEHOLDER' | translate" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" formControlName="email" placeholder="ana@ejemplo.com" class="form-control">
+          <label for="email">{{ 'AUTH.REGISTER_USER.EMAIL_LABEL' | translate }}</label>
+          <input type="email" id="email" formControlName="email" [placeholder]="'AUTH.REGISTER_USER.EMAIL_PLACEHOLDER' | translate" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="password">Contraseña (mín 6 carácteres)</label>
-          <input type="password" id="password" formControlName="password" placeholder="••••••••" class="form-control">
+          <label for="password">{{ 'AUTH.REGISTER_USER.PASSWORD_LABEL' | translate }}</label>
+          <input type="password" id="password" formControlName="password" [placeholder]="'AUTH.REGISTER_USER.PASSWORD_PLACEHOLDER' | translate" class="form-control">
         </div>
       </div>
 
       <hr class="divider">
 
-      <h3 class="section-title">Preferencias de Adopción</h3>
+      <h3 class="section-title">{{ 'AUTH.REGISTER_USER.SECTION_PREFERENCES' | translate }}</h3>
       <div class="form-grid">
         <div class="form-group">
-          <label for="preferredSpecies">Especie Preferida</label>
+          <label for="preferredSpecies">{{ 'AUTH.REGISTER_USER.SPECIES_LABEL' | translate }}</label>
           <select id="preferredSpecies" formControlName="preferredSpecies" class="form-control">
-            <option value="" disabled selected>Selecciona una especie...</option>
-            <option value="Perro">Perro</option>
-            <option value="Gato">Gato</option>
+            <option value="" disabled selected>{{ 'AUTH.REGISTER_USER.SPECIES_PLACEHOLDER' | translate }}</option>
+            <option value="Perro">{{ 'AUTH.REGISTER_USER.SPECIES_DOG' | translate }}</option>
+            <option value="Gato">{{ 'AUTH.REGISTER_USER.SPECIES_CAT' | translate }}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="minAgePreference">Edad Mínima (años)</label>
+          <label for="minAgePreference">{{ 'AUTH.REGISTER_USER.MIN_AGE_LABEL' | translate }}</label>
           <input type="number" id="minAgePreference" formControlName="minAgePreference" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="maxAgePreference">Edad Máxima (años)</label>
+          <label for="maxAgePreference">{{ 'AUTH.REGISTER_USER.MAX_AGE_LABEL' | translate }}</label>
           <input type="number" id="maxAgePreference" formControlName="maxAgePreference" class="form-control">
         </div>
       </div>
 
       <hr class="divider">
 
-      <h3 class="section-title">Tu Estilo de Vida y Hogar</h3>
+      <h3 class="section-title">{{ 'AUTH.REGISTER_USER.SECTION_LIFESTYLE' | translate }}</h3>
       <div class="form-grid">
         <div class="form-group">
-          <label for="houseSize">Tamaño de Casa</label>
+          <label for="houseSize">{{ 'AUTH.REGISTER_USER.HOUSE_SIZE_LABEL' | translate }}</label>
           <select id="houseSize" formControlName="houseSize" class="form-control">
-            <option value="Pequeña">Pequeña (Piso)</option>
-            <option value="Mediana">Mediana (Adosado)</option>
-            <option value="Grande">Grande (Finca/Chalet)</option>
+            <option value="Pequeña">{{ 'AUTH.REGISTER_USER.HOUSE_SIZE_SMALL' | translate }}</option>
+            <option value="Mediana">{{ 'AUTH.REGISTER_USER.HOUSE_SIZE_MEDIUM' | translate }}</option>
+            <option value="Grande">{{ 'AUTH.REGISTER_USER.HOUSE_SIZE_LARGE' | translate }}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="hoursAvailablePerDay">Horas disponibles al día</label>
+          <label for="hoursAvailablePerDay">{{ 'AUTH.REGISTER_USER.HOURS_LABEL' | translate }}</label>
           <input type="number" id="hoursAvailablePerDay" formControlName="hoursAvailablePerDay" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="activityLevel">Tu nivel de actividad (1-Bajo, 2-Medio, 3-Alto)</label>
+          <label for="activityLevel">{{ 'AUTH.REGISTER_USER.ACTIVITY_LABEL' | translate }}</label>
           <input type="number" id="activityLevel" formControlName="activityLevel" min="1" max="3" class="form-control">
         </div>
       </div>
@@ -80,28 +80,28 @@
       <div class="checkbox-grid">
         <label class="checkbox-label">
           <input type="checkbox" formControlName="hasYard" class="custom-checkbox">
-          <span>Tengo patio o jardín exterior</span>
+          <span>{{ 'AUTH.REGISTER_USER.CHECK_YARD' | translate }}</span>
         </label>
 
         <label class="checkbox-label">
           <input type="checkbox" formControlName="hasPreviousExperience" class="custom-checkbox">
-          <span>Tengo experiencia previa con mascotas</span>
+          <span>{{ 'AUTH.REGISTER_USER.CHECK_EXPERIENCE' | translate }}</span>
         </label>
 
         <label class="checkbox-label">
           <input type="checkbox" formControlName="hasSmallChildren" class="custom-checkbox">
-          <span>Tengo niños pequeños en casa</span>
+          <span>{{ 'AUTH.REGISTER_USER.CHECK_CHILDREN' | translate }}</span>
         </label>
 
         <label class="checkbox-label">
           <input type="checkbox" formControlName="hasOtherPets" class="custom-checkbox">
-          <span>Tengo otras mascotas actualmente</span>
+          <span>{{ 'AUTH.REGISTER_USER.CHECK_PETS' | translate }}</span>
         </label>
       </div>
 
       <div class="form-actions">
         <button type="submit" [disabled]="registerForm.invalid || loadingService.isLoading()" class="btn-primary btn-block">
-          Crear Cuenta
+          {{ 'AUTH.REGISTER_USER.SUBMIT_BTN' | translate }}
         </button>
       </div>
 

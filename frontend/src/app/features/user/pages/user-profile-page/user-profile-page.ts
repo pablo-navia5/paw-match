@@ -6,9 +6,10 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, TranslatePipe],
   standalone: true,
   selector: 'app-user-profile-page',
   styleUrl: './user-profile-page.scss',
@@ -95,7 +96,9 @@ export class UserProfilePageComponent implements OnInit {
         this.closeEditModal();
       },
       error: (err) => {
-        this.alertService.showSuccess('Error al actualizar el perfil, intentalo de nuevo mas tarde.');
+        this.alertService.showSuccess(
+          'Error al actualizar el perfil, intentalo de nuevo mas tarde.',
+        );
         console.error('Error al actualizar el perfil:', err);
       },
     });

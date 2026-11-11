@@ -7,9 +7,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageSwitcher } from '../../../../shared/components/language-switcher/language-switcher';
 
 @Component({
-  imports: [ReactiveFormsModule, ThemeToggle],
+  imports: [ReactiveFormsModule, ThemeToggle, TranslatePipe, LanguageSwitcher],
   standalone: true,
   selector: 'app-shelter-dashboard-page',
   styleUrl: './shelter-dashboard-page.scss',

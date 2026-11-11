@@ -6,9 +6,10 @@ import { Router, RouterLink } from '@angular/router';
 import { UploadService } from '../../../../shared/services/upload.service';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslatePipe],
   standalone: true,
   selector: 'app-create-pet-page',
   styleUrl: './create-pet-page.scss',

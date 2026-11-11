@@ -4,9 +4,10 @@
     <span class="brand-text">PawMatch</span>
   </div>
   <div class="nav-actions">
+    <app-language-switcher></app-language-switcher>
     <app-theme-toggle></app-theme-toggle>
-    <a routerLink="/login" class="nav-link">Iniciar Sesión</a>
-    <button class="btn-primary" routerLink="/register-user">Empezar ahora</button>
+    <a routerLink="/login" class="nav-link">{{ 'NAVBAR.LOGIN' | translate }}</a>
+    <button class="btn-primary" routerLink="/register-user">{{ 'NAVBAR.GET_STARTED' | translate }}</button>
   </div>
 </nav>
 
@@ -14,30 +15,30 @@
 
   <section class="hero-section">
     <div class="hero-content">
-      <span class="badge-animate">Adopción Inteligente</span>
-      <h1 class="hero-title">Encuentra a tu compañero de vida ideal</h1>
-      <p class="hero-subtitle">Nuestro algoritmo analiza tu estilo de vida, espacio y energía para conectarte con la mascota perfecta de las protectoras locales.</p>
+      <span class="badge-animate">{{ 'HOME.MAIN.INTELLIGENT' | translate }}</span>
+      <h1 class="hero-title">{{ 'HOME.MAIN.TITLE' | translate }}</h1>
+      <p class="hero-subtitle">{{ 'HOME.MAIN.SUBTITLE' | translate }}</p>
 
       <div class="hero-cta">
         <button class="btn-primary btn-large" routerLink="/register-user">
-          Soy Adoptante
+          {{ 'HOME.HERO.ADOPTER_BTN' | translate }}
         </button>
         <button class="btn-secondary btn-large" routerLink="/register-shelter">
-          Soy Protectora
+          {{ 'HOME.HERO.SHELTER_BTN' | translate }}
         </button>
       </div>
     </div>
 
     <div class="hero-visual">
       <div class="floating-card shape-1">
-        <img src="https://placehold.co/400x500/ffefe5/ff7e67?text=Swipe+Match" alt="Interfaz de PawMatch">
+        <img src="https://placehold.co/400x500/ffefe5/ff7e67?text=Swipe+Match" [alt]="'HOME.HERO.IMG_ALT' | translate">
       </div>
       <div class="floating-card shape-2">
         <div class="match-popup">
           <span class="popup-icon">💖</span>
           <div>
-            <strong>¡Es un Match!</strong>
-            <span>85% Compatibilidad</span>
+            <strong>{{ 'HOME.HERO.MATCH_POPUP_TITLE' | translate }}</strong>
+            <span>{{ 'HOME.HERO.MATCH_POPUP_SUBTITLE' | translate }}</span>
           </div>
         </div>
       </div>
@@ -46,27 +47,27 @@
 
   <section class="features-section">
     <div class="section-header">
-      <h2>¿Cómo funciona PawMatch?</h2>
-      <p>Un proceso diseñado para garantizar adopciones exitosas y duraderas.</p>
+      <h2>{{ 'HOME.FEATURES.TITLE' | translate }}</h2>
+      <p>{{ 'HOME.FEATURES.SUBTITLE' | translate }}</p>
     </div>
 
     <div class="features-grid">
       <div class="feature-card fade-up-1">
         <div class="feature-icon">📝</div>
-        <h3>1. Crea tu Perfil</h3>
-        <p>Cuéntanos sobre tu casa, tu jardín, tus horarios y tu experiencia previa. Solo te tomará 2 minutos.</p>
+        <h3>{{ 'HOME.FEATURES.STEP_1_TITLE' | translate }}</h3>
+        <p>{{ 'HOME.FEATURES.STEP_1_DESC' | translate }}</p>
       </div>
 
       <div class="feature-card fade-up-2">
         <div class="feature-icon">✨</div>
-        <h3>2. Match Automático</h3>
-        <p>El sistema filtra y te muestra únicamente a los animales cuyas necesidades encajan al 100% con tu vida.</p>
+        <h3>{{ 'HOME.FEATURES.STEP_2_TITLE' | translate }}</h3>
+        <p>{{ 'HOME.FEATURES.STEP_2_DESC' | translate }}</p>
       </div>
 
       <div class="feature-card fade-up-3">
         <div class="feature-icon">🏡</div>
-        <h3>3. Adopta y Conecta</h3>
-        <p>La protectora recibe tu solicitud con tu porcentaje de afinidad. ¡Todo listo para conoceros en persona!</p>
+        <h3>{{ 'HOME.FEATURES.STEP_3_TITLE' | translate }}</h3>
+        <p>{{ 'HOME.FEATURES.STEP_3_DESC' | translate }}</p>
       </div>
     </div>
   </section>
@@ -74,11 +75,11 @@
   <section class="demo-section">
     <div class="demo-container">
       <div class="demo-info">
-        <h2>Mira la magia en acción</h2>
-        <p>Descubre lo fácil que es navegar por los perfiles, hacer 'like' y cambiar la vida de un peludo para siempre.</p>
+        <h2>{{ 'HOME.DEMO.TITLE' | translate }}</h2>
+        <p>{{ 'HOME.DEMO.SUBTITLE' | translate }}</p>
       </div>
       <div class="video-placeholder">
-        <img src="https://placehold.co/800x450/f1f5f9/cbd5e1?text=Espacio+para+Video/Demo" alt="Demo de la aplicación">
+        <img src="https://placehold.co/800x450/f1f5f9/cbd5e1?text=Espacio+para+Video/Demo" [alt]="'HOME.DEMO.IMG_ALT' | translate">
         <button class="play-btn">▶</button>
       </div>
     </div>
@@ -92,6 +93,6 @@
       <span class="brand-icon">🐾</span>
       <span class="brand-text">PawMatch</span>
     </div>
-    <p>© 2026 PawMatch. Uniendo familias, salvando vidas.</p>
+    <p>{{ 'FOOTER.COPYRIGHT' | translate }}</p>
   </div>
 </footer>

@@ -13,7 +13,9 @@ export class App {
   protected readonly title = signal('frontend');
 
   constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('es');
-    this.translate.use('es');
+    this.translate.setFallbackLang('es');
+
+    const savedLang = localStorage.getItem('preferredLang') || 'es';
+    this.translate.use(savedLang);
   }
 }

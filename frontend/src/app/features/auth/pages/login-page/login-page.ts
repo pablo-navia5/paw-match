@@ -4,11 +4,12 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslatePipe],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
@@ -43,7 +44,9 @@ export class LoginPageComponent {
         error: (err) => {
           this.loadingService.hide();
           if (err.message === 'EMAIL_NOT_VERIFIED') {
-            this.alertService.showError('El email no ha sido verificado, comprueba tu carpeta de spam');
+            this.alertService.showError(
+              'El email no ha sido verificado, comprueba tu carpeta de spam',
+            );
           } else {
             this.alertService.showError('Error al iniciar sesion');
           }

@@ -1,8 +1,9 @@
 <header class="dashboard-header">
   <div class="header-brand">
-    <h1>🏠 Panel de Protectora</h1>
+    <h1>🏠 {{ 'SHELTER.DASHBOARD.HEADER_TITLE' | translate }}</h1>
   </div>
   <div class="theme-toggle">
+    <app-language-switcher></app-language-switcher>
     <app-theme-toggle></app-theme-toggle>
   </div>
   <div class="header-user">
@@ -12,18 +13,18 @@
     <div class="profile-dropdown-container">
       <button class="profile-trigger-btn" (click)="toggleProfileMenu()">
         <div class="avatar-circle">P</div>
-        <span class="profile-name">Mi Cuenta</span>
+        <span class="profile-name">{{ 'SHELTER.DASHBOARD.MY_ACCOUNT' | translate }}</span>
         <span class="chevron" [class.rotated]="isProfileMenuOpen()">▼</span>
       </button>
 
       @if (isProfileMenuOpen()) {
         <div class="dropdown-menu">
           <button (click)="goToProfile()" class="dropdown-item">
-            <i>👤</i> Perfil
+            <i>👤</i> {{ 'SHELTER.DASHBOARD.MENU_PROFILE' | translate }}
           </button>
           <div class="dropdown-divider"></div>
           <button (click)="logout()" class="dropdown-item text-danger">
-            <i>🚪</i> Cerrar sesión
+            <i>🚪</i> {{ 'SHELTER.DASHBOARD.MENU_LOGOUT' | translate }}
           </button>
         </div>
       }
@@ -33,56 +34,56 @@
 
 <main class="dashboard-main">
   <div class="dashboard-toolbar">
-    <h2>Mis Mascotas Publicadas</h2>
+    <h2>{{ 'SHELTER.DASHBOARD.MY_PETS_TITLE' | translate }}</h2>
     <div class="toolbar-actions">
       <button class="btn-secondary" (click)="goToMatches()">
-        Ver Solicitudes
+        {{ 'SHELTER.DASHBOARD.BTN_REQUESTS' | translate }}
       </button>
       <button class="btn-primary" (click)="addNewPet()">
-        + Añadir Mascota
+        + {{ 'SHELTER.DASHBOARD.BTN_ADD_PET' | translate }}
       </button>
     </div>
   </div>
 
   @if (loadingService.isLoading()) {
     <div class="loading-state">
-      <h3>Cargando mascotas...</h3>
+      <h3>{{ 'SHELTER.DASHBOARD.LOADING' | translate }}</h3>
     </div>
   } @else {
     <div class="table-container">
       <table class="pet-table">
         <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Especie</th>
-          <th class="text-center">Edad</th>
-          <th class="text-center">Estado</th>
-          <th class="text-center">Acciones</th>
+          <th>{{ 'SHELTER.DASHBOARD.TABLE_NAME' | translate }}</th>
+          <th>{{ 'SHELTER.DASHBOARD.TABLE_SPECIES' | translate }}</th>
+          <th class="text-center">{{ 'SHELTER.DASHBOARD.TABLE_AGE' | translate }}</th>
+          <th class="text-center">{{ 'SHELTER.DASHBOARD.TABLE_STATUS' | translate }}</th>
+          <th class="text-center">{{ 'SHELTER.DASHBOARD.TABLE_ACTIONS' | translate }}</th>
         </tr>
         </thead>
         <tbody>
           @for (pet of pets(); track pet.id) {
             <tr>
               <td class="font-bold">{{ pet.name }}</td>
-              <td class="text-muted" data-label="Especie">{{ pet.species }}</td>
-              <td class="text-center" data-label="Edad">{{ pet.age }} años</td>
-              <td class="text-center" data-label="Estado">
+              <td class="text-muted" [attr.data-label]="'SHELTER.DASHBOARD.TABLE_SPECIES' | translate">{{ pet.species }}</td>
+              <td class="text-center" [attr.data-label]="'SHELTER.DASHBOARD.TABLE_AGE' | translate">{{ pet.age }} {{ 'SHELTER.DASHBOARD.YEARS' | translate }}</td>
+              <td class="text-center" [attr.data-label]="'SHELTER.DASHBOARD.TABLE_STATUS' | translate">
                 <span class="badge-status" [class]="pet.status">
-                  {{ pet.status === 'AVAILABLE' ? 'Disponible' : pet.status === 'ADOPTED' ? 'Adoptada' : 'Inactiva' }}
+                  {{ pet.status === 'AVAILABLE' ? ('SHELTER.DASHBOARD.STATUS_AVAILABLE' | translate) : pet.status === 'ADOPTED' ? ('SHELTER.DASHBOARD.STATUS_ADOPTED' | translate) : ('SHELTER.DASHBOARD.STATUS_INACTIVE' | translate) }}
                 </span>
               </td>
               <td class="text-center actions-cell">
                 <div class="actions">
-                  <button class="btn-edit" (click)="openEditModal(pet)">Editar</button>
-                  <button class="btn-delete" (click)="deletePet(pet.id)">Borrar</button>
+                  <button class="btn-edit" (click)="openEditModal(pet)">{{ 'SHELTER.DASHBOARD.BTN_EDIT' | translate }}</button>
+                  <button class="btn-delete" (click)="deletePet(pet.id)">{{ 'SHELTER.DASHBOARD.BTN_DELETE' | translate }}</button>
                 </div>
               </td>
             </tr>
           } @empty {
             <tr class="empty-row">
               <td colspan="5" class="empty-state">
-                <p>Aún no has publicado ninguna mascota.</p>
-                <button class="btn-text" (click)="addNewPet()">¡Empieza añadiendo una!</button>
+                <p>{{ 'SHELTER.DASHBOARD.EMPTY_P1' | translate }}</p>
+                <button class="btn-text" (click)="addNewPet()">{{ 'SHELTER.DASHBOARD.EMPTY_BTN' | translate }}</button>
               </td>
             </tr>
           }
@@ -95,100 +96,100 @@
 @if (isEditModalOpen()) {
   <div class="modal-overlay">
     <div class="modal-content">
-      <h2>Editar Mascota</h2>
+      <h2>{{ 'SHELTER.EDIT_MODAL.TITLE' | translate }}</h2>
 
       <form [formGroup]="editPetForm" (ngSubmit)="onSubmitEdit()">
         <div class="form-group">
-          <label>Nombre:</label>
+          <label>{{ 'SHELTER.EDIT_MODAL.NAME_LABEL' | translate }}</label>
           <input type="text" formControlName="name">
         </div>
 
         <div class="form-group full-width">
-          <label for="description">Descripción</label>
+          <label for="description">{{ 'SHELTER.EDIT_MODAL.DESC_LABEL' | translate }}</label>
           <textarea id="description" formControlName="description" rows="4"
-                    placeholder="Cuenta un poco sobre la personalidad y gustos de la mascota..."
+                    [placeholder]="'SHELTER.EDIT_MODAL.DESC_PLACEHOLDER' | translate"
                     class="form-control" style="resize: vertical;"></textarea>
         </div>
 
         <div class="form-group">
-          <label>Estado de la mascota:</label>
+          <label>{{ 'SHELTER.EDIT_MODAL.STATUS_LABEL' | translate }}</label>
           <select formControlName="status" class="status-select">
-            <option value="AVAILABLE">Disponible para adopción</option>
-            <option value="ADOPTED">Adoptada</option>
-            <option value="INACTIVE">Inactiva / Oculta</option>
+            <option value="AVAILABLE">{{ 'SHELTER.EDIT_MODAL.STATUS_AVAILABLE' | translate }}</option>
+            <option value="ADOPTED">{{ 'SHELTER.EDIT_MODAL.STATUS_ADOPTED' | translate }}</option>
+            <option value="INACTIVE">{{ 'SHELTER.EDIT_MODAL.STATUS_INACTIVE' | translate }}</option>
           </select>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label>Especie:</label>
+            <label>{{ 'SHELTER.EDIT_MODAL.SPECIES_LABEL' | translate }}</label>
             <select formControlName="species">
-              <option value="Perro">Perro</option>
-              <option value="Gato">Gato</option>
-              <option value="Otro">Otro</option>
+              <option value="Perro">{{ 'SHELTER.EDIT_MODAL.SPECIES_DOG' | translate }}</option>
+              <option value="Gato">{{ 'SHELTER.EDIT_MODAL.SPECIES_CAT' | translate }}</option>
+              <option value="Otro">{{ 'SHELTER.EDIT_MODAL.SPECIES_OTHER' | translate }}</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label>Edad:</label>
+            <label>{{ 'SHELTER.EDIT_MODAL.AGE_LABEL' | translate }}</label>
             <input type="number" formControlName="age">
           </div>
         </div>
 
         <div class="form-group">
-          <label>Tamaño de casa requerido:</label>
+          <label>{{ 'SHELTER.EDIT_MODAL.HOUSE_SIZE_LABEL' | translate }}</label>
           <select formControlName="requiredHouseSize">
-            <option value="Pequeña">Pequeña</option>
-            <option value="Mediana">Mediana</option>
-            <option value="Grande">Grande</option>
+            <option value="Pequeña">{{ 'SHELTER.EDIT_MODAL.HOUSE_SIZE_SMALL' | translate }}</option>
+            <option value="Mediana">{{ 'SHELTER.EDIT_MODAL.HOUSE_SIZE_MEDIUM' | translate }}</option>
+            <option value="Grande">{{ 'SHELTER.EDIT_MODAL.HOUSE_SIZE_LARGE' | translate }}</option>
           </select>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label>Horas de atención al día:</label>
+            <label>{{ 'SHELTER.EDIT_MODAL.HOURS_LABEL' | translate }}</label>
             <input type="number" formControlName="requiredHoursPerDay">
           </div>
 
           <div class="form-group">
-            <label>Nivel de energía (1-3):</label>
+            <label>{{ 'SHELTER.EDIT_MODAL.ENERGY_LABEL' | translate }}</label>
             <input type="number" formControlName="energyLevel" min="1" max="3">
           </div>
         </div>
 
         <div class="checkbox-section">
-          <span class="section-title">Características y Requisitos</span>
+          <span class="section-title">{{ 'SHELTER.EDIT_MODAL.SECTION_REQS' | translate }}</span>
 
           <div class="checkbox-grid">
             <label class="custom-checkbox">
               <input type="checkbox" formControlName="needsYard">
               <span class="checkmark"></span>
-              Necesita jardín
+              {{ 'SHELTER.EDIT_MODAL.CHECK_YARD' | translate }}
             </label>
 
             <label class="custom-checkbox">
               <input type="checkbox" formControlName="requiresExperiencedOwner">
               <span class="checkmark"></span>
-              Dueño experimentado
+              {{ 'SHELTER.EDIT_MODAL.CHECK_EXPERIENCE' | translate }}
             </label>
 
             <label class="custom-checkbox">
               <input type="checkbox" formControlName="goodWithChildren">
               <span class="checkmark"></span>
-              Bueno con niños
+              {{ 'SHELTER.EDIT_MODAL.CHECK_CHILDREN' | translate }}
             </label>
 
             <label class="custom-checkbox">
               <input type="checkbox" formControlName="goodWithOtherPets">
               <span class="checkmark"></span>
-              Bueno con otras mascotas
+              {{ 'SHELTER.EDIT_MODAL.CHECK_PETS' | translate }}
             </label>
           </div>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="btn-cancel" (click)="closeEditModal()">Cancelar</button>
-          <button type="submit" class="btn-save" [disabled]="editPetForm.invalid || loadingService.isLoading()">Guardar Cambios</button>
+          <button type="button" class="btn-cancel" (click)="closeEditModal()">{{ 'SHELTER.EDIT_MODAL.BTN_CANCEL' | translate }}</button>
+          <button type="submit" class="btn-save" [disabled]="editPetForm.invalid || loadingService.isLoading()">{{ 'SHELTER.EDIT_MODAL.BTN_SAVE' | translate }}</button>
         </div>
       </form>
     </div>

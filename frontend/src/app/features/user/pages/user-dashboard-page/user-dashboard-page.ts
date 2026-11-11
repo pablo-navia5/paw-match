@@ -7,9 +7,11 @@ import { Router, RouterLink } from '@angular/router';
 import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageSwitcher } from '../../../../shared/components/language-switcher/language-switcher';
 
 @Component({
-  imports: [RouterLink, ThemeToggle],
+  imports: [RouterLink, ThemeToggle, TranslatePipe, LanguageSwitcher],
   standalone: true,
   selector: 'app-user-dashboard-page',
   styleUrl: './user-dashboard-page.scss',
