@@ -1,46 +1,46 @@
 <div class="form-wrapper">
   <div class="form-card">
     <div class="form-header">
-      <h2>Añadir Nueva Mascota</h2>
-      <p class="text-muted">Completa el perfil para que el sistema encuentre al adoptante ideal.</p>
+      <h2>{{ 'SHELTER.CREATE_PET.TITLE' | translate }}</h2>
+      <p class="text-muted">{{ 'SHELTER.CREATE_PET.SUBTITLE' | translate }}</p>
     </div>
 
     <form [formGroup]="petForm" (ngSubmit)="onSubmit()" class="modern-form">
-      <h3 class="section-title">Datos Básicos</h3>
+      <h3 class="section-title">{{ 'SHELTER.CREATE_PET.SECTION_BASIC' | translate }}</h3>
       <div class="form-grid">
         <div class="form-group">
-          <label for="name">Nombre</label>
-          <input type="text" id="name" formControlName="name" placeholder="Ej. Max" class="form-control">
+          <label for="name">{{ 'SHELTER.CREATE_PET.NAME_LABEL' | translate }}</label>
+          <input type="text" id="name" formControlName="name" [placeholder]="'SHELTER.CREATE_PET.NAME_PLACEHOLDER' | translate" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="species">Especie</label>
+          <label for="species">{{ 'SHELTER.CREATE_PET.SPECIES_LABEL' | translate }}</label>
           <select id="species" formControlName="species" class="form-control">
-            <option value="" disabled selected>Selecciona una especie...</option>
-            <option value="Perro">Perro</option>
-            <option value="Gato">Gato</option>
+            <option value="" disabled selected>{{ 'SHELTER.CREATE_PET.SPECIES_PLACEHOLDER' | translate }}</option>
+            <option value="Perro">{{ 'SHELTER.CREATE_PET.SPECIES_DOG' | translate }}</option>
+            <option value="Gato">{{ 'SHELTER.CREATE_PET.SPECIES_CAT' | translate }}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="age">Edad (años)</label>
-          <input type="number" id="age" formControlName="age" placeholder="Ej. 3" class="form-control">
+          <label for="age">{{ 'SHELTER.CREATE_PET.AGE_LABEL' | translate }}</label>
+          <input type="number" id="age" formControlName="age" [placeholder]="'SHELTER.CREATE_PET.AGE_PLACEHOLDER' | translate" class="form-control">
         </div>
 
         <div class="form-group full-width">
-          <label for="description">Descripción</label>
+          <label for="description">{{ 'SHELTER.CREATE_PET.DESC_LABEL' | translate }}</label>
           <textarea id="description" formControlName="description" rows="4"
-                    placeholder="Cuenta un poco sobre la personalidad y gustos de la mascota..."
+                    [placeholder]="'SHELTER.CREATE_PET.DESC_PLACEHOLDER' | translate"
                     class="form-control" style="resize: vertical;"></textarea>
         </div>
 
         <div class="form-group full-width">
-          <label for="imageUpload">Foto de la Mascota</label>
+          <label for="imageUpload">{{ 'SHELTER.CREATE_PET.PHOTO_LABEL' | translate }}</label>
           <input type="file" id="imageUpload" accept="image/png, image/jpeg, image/webp" (change)="onFileSelected($event)" class="form-control file-input">
 
           @if (imagePreviewUrl()) {
             <div class="image-preview">
-              <img [src]="imagePreviewUrl()" alt="Vista previa de la mascota">
+              <img [src]="imagePreviewUrl()" [alt]="'SHELTER.CREATE_PET.PHOTO_ALT' | translate">
             </div>
           }
         </div>
@@ -48,25 +48,25 @@
 
       <hr class="divider">
 
-      <h3 class="section-title">Requisitos de Adopción</h3>
+      <h3 class="section-title">{{ 'SHELTER.CREATE_PET.SECTION_REQUIREMENTS' | translate }}</h3>
       <div class="form-grid">
 
         <div class="form-group">
-          <label for="requiredHoursPerDay">Horas de atención diarias requeridas</label>
-          <input type="number" id="requiredHoursPerDay" formControlName="requiredHoursPerDay" placeholder="Ej. 2" class="form-control">
+          <label for="requiredHoursPerDay">{{ 'SHELTER.CREATE_PET.HOURS_LABEL' | translate }}</label>
+          <input type="number" id="requiredHoursPerDay" formControlName="requiredHoursPerDay" [placeholder]="'SHELTER.CREATE_PET.HOURS_PLACEHOLDER' | translate" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="energyLevel">Nivel de energía (1-Bajo, 2-Medio, 3-Alto)</label>
+          <label for="energyLevel">{{ 'SHELTER.CREATE_PET.ENERGY_LABEL' | translate }}</label>
           <input type="number" id="energyLevel" formControlName="energyLevel" min="1" max="3" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="requiredHouseSize">Tamaño de vivienda mínimo</label>
+          <label for="requiredHouseSize">{{ 'SHELTER.CREATE_PET.HOUSE_SIZE_LABEL' | translate }}</label>
           <select id="requiredHouseSize" formControlName="requiredHouseSize" class="form-control">
-            <option value="Pequeña">Pequeña (Piso)</option>
-            <option value="Mediana">Mediana (Adosado)</option>
-            <option value="Grande">Grande (Finca/Chalet)</option>
+            <option value="Pequeña">{{ 'SHELTER.CREATE_PET.HOUSE_SIZE_SMALL' | translate }}</option>
+            <option value="Mediana">{{ 'SHELTER.CREATE_PET.HOUSE_SIZE_MEDIUM' | translate }}</option>
+            <option value="Grande">{{ 'SHELTER.CREATE_PET.HOUSE_SIZE_LARGE' | translate }}</option>
           </select>
         </div>
 
@@ -75,34 +75,34 @@
       <div class="checkbox-grid">
         <label class="checkbox-label">
           <input type="checkbox" formControlName="needsYard" class="custom-checkbox">
-          <span>Requiere jardín obligatorio</span>
+          <span>{{ 'SHELTER.CREATE_PET.CHECK_YARD' | translate }}</span>
         </label>
 
         <label class="checkbox-label">
           <input type="checkbox" formControlName="requiresExperiencedOwner" class="custom-checkbox">
-          <span>Requiere dueño experimentado</span>
+          <span>{{ 'SHELTER.CREATE_PET.CHECK_EXPERIENCE' | translate }}</span>
         </label>
 
         <label class="checkbox-label">
           <input type="checkbox" formControlName="goodWithChildren" class="custom-checkbox">
-          <span>Compatible con niños pequeños</span>
+          <span>{{ 'SHELTER.CREATE_PET.CHECK_CHILDREN' | translate }}</span>
         </label>
 
         <label class="checkbox-label">
           <input type="checkbox" formControlName="goodWithOtherPets" class="custom-checkbox">
-          <span>Compatible con otras mascotas</span>
+          <span>{{ 'SHELTER.CREATE_PET.CHECK_PETS' | translate }}</span>
         </label>
       </div>
 
       <div class="form-actions">
         <button type="button" routerLink="/shelter-panel" class="btn-secondary">
-          Cancelar
+          {{ 'SHELTER.CREATE_PET.BTN_CANCEL' | translate }}
         </button>
         <button type="submit" [disabled]="petForm.invalid || loadingService.isLoading()" class="btn-primary">
           @if (loadingService.isLoading()) {
-            Guardando mascota...
+            {{ 'SHELTER.CREATE_PET.BTN_SAVING' | translate }}
           } @else {
-            Guardar Mascota
+            {{ 'SHELTER.CREATE_PET.BTN_SAVE' | translate }}
           }
         </button>
       </div>

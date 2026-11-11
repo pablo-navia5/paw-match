@@ -5,22 +5,23 @@
   </div>
 
   <div class="top-nav-right">
+    <app-language-switcher></app-language-switcher>
     <app-theme-toggle></app-theme-toggle>
     <div class="profile-dropdown-container">
       <button class="profile-trigger-btn" (click)="toggleProfileMenu()">
         <div class="avatar-circle">P</div>
-        <span class="profile-name">Mi Cuenta</span>
+        <span class="profile-name">{{ 'USER.DASHBOARD.MY_ACCOUNT' | translate }}</span>
         <span class="chevron" [class.rotated]="isProfileMenuOpen()">▼</span>
       </button>
 
       @if (isProfileMenuOpen()) {
         <div class="dropdown-menu">
           <button (click)="goToProfile()" class="dropdown-item">
-            <i>👤</i> Perfil
+            <i>👤</i> {{ 'USER.DASHBOARD.MENU_PROFILE' | translate }}
           </button>
           <div class="dropdown-divider"></div>
           <button (click)="logout()" class="dropdown-item text-danger">
-            <i>🚪</i> Cerrar sesión
+            <i>🚪</i> {{ 'USER.DASHBOARD.MENU_LOGOUT' | translate }}
           </button>
         </div>
       }
@@ -31,18 +32,18 @@
 <div class="dashboard-layout">
   <aside class="sidebar-nav">
     <div class="nav-section">
-      <h4 class="nav-title">Descubrir</h4>
+      <h4 class="nav-title">{{ 'USER.DASHBOARD.NAV_DISCOVER' | translate }}</h4>
       <a routerLink="/user-panel" class="nav-item active">
         <span class="nav-icon">✨</span>
-        <span class="nav-text">Explorar Peludos</span>
+        <span class="nav-text">{{ 'USER.DASHBOARD.NAV_EXPLORE' | translate }}</span>
       </a>
     </div>
 
     <div class="nav-section">
-      <h4 class="nav-title">Mis Conexiones</h4>
+      <h4 class="nav-title">{{ 'USER.DASHBOARD.NAV_CONNECTIONS' | translate }}</h4>
       <a routerLink="/user-panel/matches" class="nav-item">
         <span class="nav-icon">💖</span>
-        <span class="nav-text">Mis Matches</span>
+        <span class="nav-text">{{ 'USER.DASHBOARD.NAV_MY_MATCHES' | translate }}</span>
       </a>
     </div>
   </aside>
@@ -51,7 +52,7 @@
     @if (loadingService.isLoading()) {
       <div class="status-view">
         <div class="spinner"></div>
-        <h3>Buscando compañeros...</h3>
+        <h3>{{ 'USER.DASHBOARD.LOADING_PETS' | translate }}</h3>
       </div>
     } @else {
       @if (currentPet) {
@@ -78,10 +79,10 @@
           </div>
 
           <div class="action-controls">
-            <button class="action-btn btn-pass" (click)="nextPet('pass')">
+            <button class="action-btn btn-pass" (click)="nextPet('pass')" [attr.aria-label]="'USER.DASHBOARD.BTN_PASS' | translate">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
-            <button class="action-btn btn-like" (click)="nextPet('like')">
+            <button class="action-btn btn-like" (click)="nextPet('like')" [attr.aria-label]="'USER.DASHBOARD.BTN_LIKE' | translate">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
             </button>
           </div>
@@ -93,14 +94,14 @@
             <div class="radar-pulse delay-1"></div>
             <div class="radar-avatar">🐶</div>
           </div>
-          <h2>¡Has visto a todos!</h2>
-          <p>No hay más mascotas cerca de ti que coincidan con tus preferencias en este momento.</p>
+          <h2>{{ 'USER.DASHBOARD.EMPTY_TITLE' | translate }}</h2>
+          <p>{{ 'USER.DASHBOARD.EMPTY_DESC' | translate }}</p>
 
           <div class="empty-actions">
             <button class="btn-primary-action" (click)="goToProfile()">
-              Ampliar mis preferencias
+              {{ 'USER.DASHBOARD.BTN_EXPAND_PREFS' | translate }}
             </button>
-            <p class="hint-text">Prueba a aumentar la edad máxima o cambiar el tipo de mascota.</p>
+            <p class="hint-text">{{ 'USER.DASHBOARD.EMPTY_HINT' | translate }}</p>
           </div>
         </div>
       }
@@ -111,12 +112,12 @@
 @if (showMatchAnimation()) {
   <div class="match-overlay">
     <div class="match-content">
-      <h2 class="match-title">¡Es un Match!</h2>
-      <p class="match-subtitle">Nuestra IA dice que <strong>{{ matchedPetName() }}</strong> y tú sois tal para cual.</p>
+      <h2 class="match-title">{{ 'USER.MATCH_MODAL.TITLE' | translate }}</h2>
+      <p class="match-subtitle" [innerHTML]="'USER.MATCH_MODAL.SUBTITLE' | translate:{ name: matchedPetName() }"></p>
       <div class="match-icon">💖</div>
-      <p class="match-info">La protectora acaba de recibir tu solicitud.</p>
+      <p class="match-info">{{ 'USER.MATCH_MODAL.INFO' | translate }}</p>
 
-      <button class="btn-continue-match" (click)="closeMatchPopup()">Seguir buscando</button>
+      <button class="btn-continue-match" (click)="closeMatchPopup()">{{ 'USER.MATCH_MODAL.BTN_CONTINUE' | translate }}</button>
     </div>
   </div>
 }

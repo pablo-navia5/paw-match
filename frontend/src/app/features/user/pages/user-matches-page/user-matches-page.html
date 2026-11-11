@@ -1,38 +1,38 @@
 <div class="matches-wrapper">
   <div class="matches-header">
     <button class="btn-back" routerLink="/user-panel">
-      ← Volver a Explorar
+      ← {{ 'USER.MATCHES.BACK_BTN' | translate }}
     </button>
-    <h2>Mis Matches</h2>
+    <h2>{{ 'USER.MATCHES.TITLE' | translate }}</h2>
   </div>
 
   <div class="tabs-container">
     <button
       [class.active]="currentFilter() === 'PENDING'"
       (click)="setFilter('PENDING')">
-      En Espera
+      {{ 'USER.MATCHES.TAB_PENDING' | translate }}
     </button>
     <button
       [class.active]="currentFilter() === 'APPROVED'"
       (click)="setFilter('APPROVED')">
-      Aceptadas
+      {{ 'USER.MATCHES.TAB_APPROVED' | translate }}
     </button>
     <button
       [class.active]="currentFilter() === 'REJECTED'"
       (click)="setFilter('REJECTED')">
-      Rechazadas
+      {{ 'USER.MATCHES.TAB_REJECTED' | translate }}
     </button>
   </div>
 
   @if (loadingService.isLoading()) {
     <div class="state-container">
-      <p>Cargando tus conexiones...</p>
+      <p>{{ 'USER.MATCHES.LOADING' | translate }}</p>
     </div>
   }
 
   @if (!loadingService.isLoading() && filteredMatches().length === 0) {
     <div class="state-container empty">
-      <p>Aún no tienes matches en este estado. ¡Sigue explorando!</p>
+      <p>{{ 'USER.MATCHES.EMPTY_STATE' | translate }}</p>
     </div>
   }
 
@@ -40,25 +40,25 @@
     @for (match of filteredMatches(); track match.id) {
       <div class="match-card">
         <div class="card-header">
-          <span class="match-badge">{{ match.matchPercentage | number:'1.0-0' }}% Afinidad</span>
+          <span class="match-badge">{{ match.matchPercentage | number:'1.0-0' }}% {{ 'USER.MATCHES.AFFINITY' | translate }}</span>
           <span class="match-date">{{ match.createdAt | date:'dd/MM/yyyy' }}</span>
         </div>
 
         <div class="card-body">
           <div class="info-row">
-            <span class="info-label">Mascota</span>
-            <span class="info-value">{{ match.pet?.name || 'ID: ' + match.petId }}</span>
+            <span class="info-label">{{ 'USER.MATCHES.LABEL_PET' | translate }}</span>
+            <span class="info-value">{{ match.pet?.name || ('USER.MATCHES.ID' | translate) + match.petId }}</span>
           </div>
           <div class="info-row">
-            <span class="info-label">Estado</span>
+            <span class="info-label">{{ 'USER.MATCHES.LABEL_STATUS' | translate }}</span>
             <span class="info-value">
-              {{ match.status === 'PENDING' ? 'Protectora revisando' : match.status === 'APPROVED' ? '¡Aprobada!' : 'Rechazada' }}
+              {{ match.status === 'PENDING' ? ('USER.MATCHES.STATUS_PENDING' | translate) : match.status === 'APPROVED' ? ('USER.MATCHES.STATUS_APPROVED' | translate) : ('USER.MATCHES.STATUS_REJECTED' | translate) }}
             </span>
           </div>
         </div>
 
         <div class="card-actions">
-          <button class="btn-details" (click)="openDetails(match)">Ver Detalles</button>
+          <button class="btn-details" (click)="openDetails(match)">{{ 'USER.MATCHES.BTN_DETAILS' | translate }}</button>
         </div>
       </div>
     }
@@ -72,103 +72,103 @@
 
       <div class="modal-header">
         <div class="header-titles">
-          <h3>Análisis de Compatibilidad</h3>
-          <p class="subtitle">Tú y {{ selectedMatch()?.pet?.name }}</p>
+          <h3>{{ 'USER.MATCHES_MODAL.TITLE' | translate }}</h3>
+          <p class="subtitle">{{ 'USER.MATCHES_MODAL.SUBTITLE' | translate:{ name: selectedMatch()?.pet?.name } }}</p>
         </div>
-        <span class="match-badge">{{ selectedMatch()?.matchPercentage | number:'1.0-0' }}% Afinidad</span>
+        <span class="match-badge">{{ selectedMatch()?.matchPercentage | number:'1.0-0' }}% {{ 'USER.MATCHES.AFFINITY' | translate }}</span>
       </div>
 
       <div class="comparison-table">
         <div class="table-header">
-          <div class="th-pet"><span class="icon">🐾</span> Requisitos de {{ selectedMatch()?.pet?.name }}</div>
-          <div class="th-user"><span class="icon">👤</span> Tu Perfil</div>
+          <div class="th-pet"><span class="icon">🐾</span> {{ 'USER.MATCHES_MODAL.TH_PET' | translate:{ name: selectedMatch()?.pet?.name } }}</div>
+          <div class="th-user"><span class="icon">👤</span> {{ 'USER.MATCHES_MODAL.TH_USER' | translate }}</div>
         </div>
 
         <div class="table-row">
           <div class="td-pet">
-            <span class="label">Vivienda:</span>
-            <span class="value">{{ selectedMatch()?.pet?.requiredHouseSize || 'Cualquiera' }}</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_HOUSE' | translate }}</span>
+            <span class="value">{{ selectedMatch()?.pet?.requiredHouseSize || ('USER.MATCHES_MODAL.VAL_ANY_HOUSE' | translate) }}</span>
           </div>
           <div class="td-user">
-            <span class="label">Tu vivienda:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_USER_HOUSE' | translate }}</span>
             <span class="value" [class.highlight-match]="checkRequirement('houseSize')">
-              {{ selectedMatch()?.applicant?.houseSize || 'No especificado' }}
+              {{ selectedMatch()?.applicant?.houseSize || ('USER.MATCHES_MODAL.VAL_UNSPECIFIED' | translate) }}
             </span>
           </div>
         </div>
 
         <div class="table-row">
           <div class="td-pet">
-            <span class="label">Jardín obligatorio:</span>
-            <span class="value">{{ selectedMatch()?.pet?.needsYard ? 'Sí' : 'No' }}</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_YARD_REQ' | translate }}</span>
+            <span class="value">{{ (selectedMatch()?.pet?.needsYard ? 'USER.MATCHES_MODAL.VAL_YES' : 'USER.MATCHES_MODAL.VAL_NO') | translate }}</span>
           </div>
           <div class="td-user">
-            <span class="label">Tu jardín:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_USER_YARD' | translate }}</span>
             <span class="value" [class.highlight-match]="checkRequirement('yard')">
-              {{ selectedMatch()?.applicant?.hasYard ? 'Sí' : 'No' }}
+              {{ (selectedMatch()?.applicant?.hasYard ? 'USER.MATCHES_MODAL.VAL_YES' : 'USER.MATCHES_MODAL.VAL_NO') | translate }}
             </span>
           </div>
         </div>
 
         <div class="table-row">
           <div class="td-pet">
-            <span class="label">Horas al día:</span>
-            <span class="value">{{ selectedMatch()?.pet?.requiredHoursPerDay }}h mínimas</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_HOURS_REQ' | translate }}</span>
+            <span class="value">{{ selectedMatch()?.pet?.requiredHoursPerDay }} {{ 'USER.MATCHES_MODAL.VAL_MIN_HOURS' | translate }}</span>
           </div>
           <div class="td-user">
-            <span class="label">Tus horas:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_USER_HOURS' | translate }}</span>
             <span class="value" [class.highlight-match]="checkRequirement('hours')">
-              {{ selectedMatch()?.applicant?.hoursAvailablePerDay }}h declaradas
+              {{ selectedMatch()?.applicant?.hoursAvailablePerDay }} {{ 'USER.MATCHES_MODAL.VAL_DECLARED_HOURS' | translate }}
             </span>
           </div>
         </div>
 
         <div class="table-row">
           <div class="td-pet">
-            <span class="label">Dueño experto:</span>
-            <span class="value">{{ selectedMatch()?.pet?.requiresExperiencedOwner ? 'Obligatorio' : 'No necesario' }}</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_EXPERT_REQ' | translate }}</span>
+            <span class="value">{{ (selectedMatch()?.pet?.requiresExperiencedOwner ? 'USER.MATCHES_MODAL.VAL_MANDATORY' : 'USER.MATCHES_MODAL.VAL_NOT_NEEDED') | translate }}</span>
           </div>
           <div class="td-user">
-            <span class="label">Tu experiencia:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_USER_EXP' | translate }}</span>
             <span class="value" [class.highlight-match]="checkRequirement('experience')">
-              {{ selectedMatch()?.applicant?.hasPreviousExperience ? 'Sí' : 'No' }}
+              {{ (selectedMatch()?.applicant?.hasPreviousExperience ? 'USER.MATCHES_MODAL.VAL_YES' : 'USER.MATCHES_MODAL.VAL_NO') | translate }}
             </span>
           </div>
         </div>
 
         <div class="table-row">
           <div class="td-pet">
-            <span class="label">Compatible con niños:</span>
-            <span class="value">{{ selectedMatch()?.pet?.goodWithChildren ? 'Sí' : 'Preferible sin niños' }}</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_CHILD_COMPAT' | translate }}</span>
+            <span class="value">{{ (selectedMatch()?.pet?.goodWithChildren ? 'USER.MATCHES_MODAL.VAL_YES' : 'USER.MATCHES_MODAL.VAL_NO_CHILDREN') | translate }}</span>
           </div>
           <div class="td-user">
-            <span class="label">Niños en casa:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_USER_CHILDREN' | translate }}</span>
             <span class="value" [class.highlight-match]="checkRequirement('children')">
-              {{ selectedMatch()?.applicant?.hasSmallChildren ? 'Sí' : 'No' }}
+              {{ (selectedMatch()?.applicant?.hasSmallChildren ? 'USER.MATCHES_MODAL.VAL_YES' : 'USER.MATCHES_MODAL.VAL_NO') | translate }}
             </span>
           </div>
         </div>
 
         <div class="table-row">
           <div class="td-pet">
-            <span class="label">Otras mascotas:</span>
-            <span class="value">{{ selectedMatch()?.pet?.goodWithOtherPets ? 'Sí' : 'Hijo único' }}</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_OTHER_PETS' | translate }}</span>
+            <span class="value">{{ (selectedMatch()?.pet?.goodWithOtherPets ? 'USER.MATCHES_MODAL.VAL_YES' : 'USER.MATCHES_MODAL.VAL_ONLY_CHILD') | translate }}</span>
           </div>
           <div class="td-user">
-            <span class="label">Tus mascotas:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_USER_PETS' | translate }}</span>
             <span class="value" [class.highlight-match]="checkRequirement('otherPets')">
-              {{ selectedMatch()?.applicant?.hasOtherPets ? 'Sí' : 'No' }}
+              {{ (selectedMatch()?.applicant?.hasOtherPets ? 'USER.MATCHES_MODAL.VAL_YES' : 'USER.MATCHES_MODAL.VAL_NO') | translate }}
             </span>
           </div>
         </div>
 
         <div class="table-row">
           <div class="td-pet">
-            <span class="label">Nivel de energía:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_ENERGY' | translate }}</span>
             <span class="value">{{ selectedMatch()?.pet?.energyLevel }}/3</span>
           </div>
           <div class="td-user">
-            <span class="label">Tu actividad:</span>
+            <span class="label">{{ 'USER.MATCHES_MODAL.LABEL_USER_ACTIVITY' | translate }}</span>
             <span class="value" [class.highlight-match]="checkRequirement('energy')">
               {{ selectedMatch()?.applicant?.activityLevel }}/3
             </span>
@@ -178,7 +178,7 @@
 
       <div class="modal-actions-single">
         <button class="btn-contact-large" (click)="contactShelter()">
-          ✉️ Enviar correo a la Protectora
+          ✉️ {{ 'USER.MATCHES_MODAL.BTN_CONTACT' | translate }}
         </button>
       </div>
     </div>

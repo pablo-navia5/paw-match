@@ -1,12 +1,12 @@
 <div class="profile-page-wrapper">
   <div class="page-header">
-    <a routerLink="/user-panel" class="btn-back">← Volver al Panel</a>
+    <a routerLink="/user-panel" class="btn-back">← {{ 'USER.PROFILE.BACK_BTN' | translate }}</a>
   </div>
 
   @if (loadingService.isLoading()) {
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>Cargando información del perfil...</p>
+      <p>{{ 'USER.PROFILE.LOADING' | translate }}</p>
     </div>
   } @else if (profile()) {
     <div class="profile-card">
@@ -17,74 +17,74 @@
           <div class="avatar-large">{{ profile()?.name?.[0] }}</div>
           <div class="header-titles">
             <h2>{{ profile()?.name }}</h2>
-            <span class="badge">🏡 Cuenta de Adoptante</span>
+            <span class="badge">🏡 {{ 'USER.PROFILE.BADGE' | translate }}</span>
           </div>
         </div>
-        <button class="btn-edit-profile" (click)="openEditModal()">✏️ Editar Perfil</button>
+        <button class="btn-edit-profile" (click)="openEditModal()">✏️ {{ 'USER.PROFILE.BTN_EDIT' | translate }}</button>
       </div>
 
       <div class="card-body">
-        <h3 class="section-title">Información de Contacto</h3>
+        <h3 class="section-title">{{ 'USER.PROFILE.SECTION_CONTACT' | translate }}</h3>
         <div class="info-grid single-col">
           <div class="info-box">
             <div class="info-icon">✉️</div>
             <div class="info-content">
-              <label>Email</label>
+              <label>{{ 'USER.PROFILE.EMAIL_LABEL' | translate }}</label>
               <p>{{ profile()?.email }}</p>
             </div>
           </div>
         </div>
 
-        <h3 class="section-title">Preferencias de Adopción</h3>
+        <h3 class="section-title">{{ 'USER.PROFILE.SECTION_PREFERENCES' | translate }}</h3>
         <div class="info-grid three-cols">
           <div class="info-box">
             <div class="info-icon">🐾</div>
             <div class="info-content">
-              <label>Especie preferida</label>
-              <p>{{ profile()?.preferredSpecies || 'Cualquiera' }}</p>
+              <label>{{ 'USER.PROFILE.PREF_SPECIES_LABEL' | translate }}</label>
+              <p>{{ profile()?.preferredSpecies || ('USER.PROFILE.VAL_ANY' | translate) }}</p>
             </div>
           </div>
 
           <div class="info-box">
             <div class="info-icon">🍼</div>
             <div class="info-content">
-              <label>Edad mínima</label>
-              <p>{{ profile()?.minAgePreference }} años</p>
+              <label>{{ 'USER.PROFILE.PREF_MIN_AGE_LABEL' | translate }}</label>
+              <p>{{ profile()?.minAgePreference }} {{ 'USER.PROFILE.YEARS' | translate }}</p>
             </div>
           </div>
 
           <div class="info-box">
             <div class="info-icon">🦴</div>
             <div class="info-content">
-              <label>Edad máxima</label>
-              <p>{{ profile()?.maxAgePreference }} años</p>
+              <label>{{ 'USER.PROFILE.PREF_MAX_AGE_LABEL' | translate }}</label>
+              <p>{{ profile()?.maxAgePreference }} {{ 'USER.PROFILE.YEARS' | translate }}</p>
             </div>
           </div>
         </div>
 
-        <h3 class="section-title">Hogar, Estilo de Vida y Entorno</h3>
+        <h3 class="section-title">{{ 'USER.PROFILE.SECTION_LIFESTYLE' | translate }}</h3>
         <div class="info-grid three-cols">
           <div class="info-box">
             <div class="info-icon">🏠</div>
             <div class="info-content">
-              <label>Tamaño de vivienda</label>
-              <p>{{ profile()?.houseSize || 'No especificado' }}</p>
+              <label>{{ 'USER.PROFILE.LIFE_HOUSE_LABEL' | translate }}</label>
+              <p>{{ profile()?.houseSize || ('USER.PROFILE.VAL_UNSPECIFIED' | translate) }}</p>
             </div>
           </div>
 
           <div class="info-box">
             <div class="info-icon">⏳</div>
             <div class="info-content">
-              <label>Tiempo disponible</label>
-              <p>{{ profile()?.hoursAvailablePerDay }} horas / día</p>
+              <label>{{ 'USER.PROFILE.LIFE_TIME_LABEL' | translate }}</label>
+              <p>{{ profile()?.hoursAvailablePerDay }} {{ 'USER.PROFILE.HOURS_DAY' | translate }}</p>
             </div>
           </div>
 
           <div class="info-box">
             <div class="info-icon">⚡</div>
             <div class="info-content">
-              <label>Nivel de actividad</label>
-              <p>Nivel {{ profile()?.activityLevel }} / 3</p>
+              <label>{{ 'USER.PROFILE.LIFE_ACTIVITY_LABEL' | translate }}</label>
+              <p>{{ 'USER.PROFILE.LEVEL' | translate }} {{ profile()?.activityLevel }} / 3</p>
             </div>
           </div>
         </div>
@@ -93,32 +93,32 @@
           <div class="feature-item" [class.active]="profile()?.hasYard">
             <span class="status-dot"></span>
             <div class="feature-text">
-              <span class="feature-label">Jardín o terraza</span>
-              <span class="feature-value">{{ profile()?.hasYard ? 'Sí tiene' : 'No tiene' }}</span>
+              <span class="feature-label">{{ 'USER.PROFILE.FEAT_YARD' | translate }}</span>
+              <span class="feature-value">{{ (profile()?.hasYard ? 'USER.PROFILE.FEAT_YARD_YES' : 'USER.PROFILE.FEAT_YARD_NO') | translate }}</span>
             </div>
           </div>
 
           <div class="feature-item" [class.active]="profile()?.hasPreviousExperience">
             <span class="status-dot"></span>
             <div class="feature-text">
-              <span class="feature-label">Experiencia previa</span>
-              <span class="feature-value">{{ profile()?.hasPreviousExperience ? 'Con experiencia' : 'Sin experiencia' }}</span>
+              <span class="feature-label">{{ 'USER.PROFILE.FEAT_EXP' | translate }}</span>
+              <span class="feature-value">{{ (profile()?.hasPreviousExperience ? 'USER.PROFILE.FEAT_EXP_YES' : 'USER.PROFILE.FEAT_EXP_NO') | translate }}</span>
             </div>
           </div>
 
           <div class="feature-item" [class.active]="profile()?.hasSmallChildren">
             <span class="status-dot"></span>
             <div class="feature-text">
-              <span class="feature-label">Niños pequeños en casa</span>
-              <span class="feature-value">{{ profile()?.hasSmallChildren ? 'Sí hay' : 'No hay' }}</span>
+              <span class="feature-label">{{ 'USER.PROFILE.FEAT_CHILDREN' | translate }}</span>
+              <span class="feature-value">{{ (profile()?.hasSmallChildren ? 'USER.PROFILE.FEAT_CHILDREN_YES' : 'USER.PROFILE.FEAT_CHILDREN_NO') | translate }}</span>
             </div>
           </div>
 
           <div class="feature-item" [class.active]="profile()?.hasOtherPets">
             <span class="status-dot"></span>
             <div class="feature-text">
-              <span class="feature-label">Otras mascotas</span>
-              <span class="feature-value">{{ profile()?.hasOtherPets ? 'Sí convive' : 'No tiene' }}</span>
+              <span class="feature-label">{{ 'USER.PROFILE.FEAT_PETS' | translate }}</span>
+              <span class="feature-value">{{ (profile()?.hasOtherPets ? 'USER.PROFILE.FEAT_PETS_YES' : 'USER.PROFILE.FEAT_PETS_NO') | translate }}</span>
             </div>
           </div>
         </div>
@@ -126,8 +126,8 @@
     </div>
   } @else {
     <div class="error-state">
-      <h3>Vaya, algo ha salido mal</h3>
-      <p>No hemos podido cargar los datos de tu perfil.</p>
+      <h3>{{ 'USER.PROFILE.ERROR_TITLE' | translate }}</h3>
+      <p>{{ 'USER.PROFILE.ERROR_DESC' | translate }}</p>
     </div>
   }
 </div>
@@ -136,7 +136,7 @@
   <div class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Editar Perfil y Preferencias</h2>
+        <h2>{{ 'USER.PROFILE_MODAL.TITLE' | translate }}</h2>
         <button class="btn-close" (click)="closeEditModal()">×</button>
       </div>
 
@@ -144,41 +144,41 @@
         <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit()" class="modern-form">
           <div class="form-grid">
             <div class="form-group full-width">
-              <label>Nombre</label>
+              <label>{{ 'USER.PROFILE_MODAL.NAME_LABEL' | translate }}</label>
               <input type="text" formControlName="name" class="form-control">
             </div>
 
             <div class="form-group">
-              <label>Especie preferida</label>
+              <label>{{ 'USER.PROFILE_MODAL.SPECIES_LABEL' | translate }}</label>
               <select formControlName="preferredSpecies" class="form-control">
-                <option value="Cualquiera">Cualquiera</option>
-                <option value="Perro">Perro</option>
-                <option value="Gato">Gato</option>
+                <option value="Cualquiera">{{ 'USER.PROFILE_MODAL.SPECIES_ANY' | translate }}</option>
+                <option value="Perro">{{ 'USER.PROFILE_MODAL.SPECIES_DOG' | translate }}</option>
+                <option value="Gato">{{ 'USER.PROFILE_MODAL.SPECIES_CAT' | translate }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Edad mínima (años)</label>
+              <label>{{ 'USER.PROFILE_MODAL.MIN_AGE_LABEL' | translate }}</label>
               <input type="number" formControlName="minAgePreference" class="form-control">
             </div>
             <div class="form-group">
-              <label>Edad máxima (años)</label>
+              <label>{{ 'USER.PROFILE_MODAL.MAX_AGE_LABEL' | translate }}</label>
               <input type="number" formControlName="maxAgePreference" class="form-control">
             </div>
 
             <div class="form-group">
-              <label>Tamaño de vivienda</label>
+              <label>{{ 'USER.PROFILE_MODAL.HOUSE_SIZE_LABEL' | translate }}</label>
               <select formControlName="houseSize" class="form-control">
-                <option value="Pequeña">Pequeña (Piso)</option>
-                <option value="Mediana">Mediana (Adosado)</option>
-                <option value="Grande">Grande (Finca/Chalet)</option>
+                <option value="Pequeña">{{ 'USER.PROFILE_MODAL.HOUSE_SMALL' | translate }}</option>
+                <option value="Mediana">{{ 'USER.PROFILE_MODAL.HOUSE_MEDIUM' | translate }}</option>
+                <option value="Grande">{{ 'USER.PROFILE_MODAL.HOUSE_LARGE' | translate }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Horas disponibles al día</label>
+              <label>{{ 'USER.PROFILE_MODAL.HOURS_LABEL' | translate }}</label>
               <input type="number" formControlName="hoursAvailablePerDay" class="form-control">
             </div>
             <div class="form-group">
-              <label>Nivel de actividad (1 al 3)</label>
+              <label>{{ 'USER.PROFILE_MODAL.ACTIVITY_LABEL' | translate }}</label>
               <input type="number" formControlName="activityLevel" min="1" max="3" class="form-control">
             </div>
           </div>
@@ -186,29 +186,29 @@
           <div class="checkbox-grid">
             <label class="checkbox-label">
               <input type="checkbox" formControlName="hasYard" class="custom-checkbox">
-              <span>Tengo jardín o terraza</span>
+              <span>{{ 'USER.PROFILE_MODAL.CHECK_YARD' | translate }}</span>
             </label>
             <label class="checkbox-label">
               <input type="checkbox" formControlName="hasPreviousExperience" class="custom-checkbox">
-              <span>Tengo experiencia previa</span>
+              <span>{{ 'USER.PROFILE_MODAL.CHECK_EXP' | translate }}</span>
             </label>
             <label class="checkbox-label">
               <input type="checkbox" formControlName="hasSmallChildren" class="custom-checkbox">
-              <span>Hay niños pequeños en casa</span>
+              <span>{{ 'USER.PROFILE_MODAL.CHECK_CHILDREN' | translate }}</span>
             </label>
             <label class="checkbox-label">
               <input type="checkbox" formControlName="hasOtherPets" class="custom-checkbox">
-              <span>Tengo otras mascotas</span>
+              <span>{{ 'USER.PROFILE_MODAL.CHECK_PETS' | translate }}</span>
             </label>
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn-secondary" (click)="closeEditModal()">Cancelar</button>
+            <button type="button" class="btn-secondary" (click)="closeEditModal()">{{ 'USER.PROFILE_MODAL.BTN_CANCEL' | translate }}</button>
             <button type="submit" class="btn-primary" [disabled]="editForm.invalid || loadingService.isLoading()">
               @if (loadingService.isLoading()) {
-                Guardando...
+                {{ 'USER.PROFILE_MODAL.BTN_SAVING' | translate }}
               } @else {
-                Guardar Cambios
+                {{ 'USER.PROFILE_MODAL.BTN_SAVE' | translate }}
               }
             </button>
           </div>

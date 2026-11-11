@@ -5,9 +5,11 @@ import { MatchResponse, MatchStatus } from '../../../../shared/models/match.mode
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [DecimalPipe, DatePipe, RouterLink],
+  imports: [DecimalPipe, DatePipe, RouterLink, TranslatePipe],
   standalone: true,
   selector: 'app-user-matches-page',
   styleUrl: './user-matches-page.scss',
@@ -17,6 +19,7 @@ export class UserMatchesPageComponent {
   private matchService = inject(MatchService);
   private authService = inject(AuthService);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   allMatches = signal<MatchResponse[]>([]);
   currentFilter = signal<MatchStatus>('PENDING');
@@ -38,6 +41,7 @@ export class UserMatchesPageComponent {
           this.allMatches.set(data);
         },
         error: (err) => {
+          this.alertService.showError('Error cargando los matches.');
           console.error('Error cargando mis matches', err);
         },
       });

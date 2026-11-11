@@ -1,12 +1,12 @@
 <div class="profile-page-wrapper">
   <div class="page-header">
-    <a routerLink="/shelter-panel" class="btn-back">← Volver al Panel</a>
+    <a routerLink="/shelter-panel" class="btn-back">← {{ 'SHELTER.PROFILE.BACK_BTN' | translate }}</a>
   </div>
 
   @if (loadingService.isLoading()) {
     <div class="loading-state">
       <div class="spinner"></div>
-      <p>Cargando información del perfil...</p>
+      <p>{{ 'SHELTER.PROFILE.LOADING' | translate }}</p>
     </div>
   } @else if (profile()) {
     <div class="profile-card">
@@ -17,20 +17,20 @@
           <div class="avatar-large">{{ profile()?.name?.[0] }}</div>
           <div class="header-titles">
             <h2>{{ profile()?.name }}</h2>
-            <span class="badge">🐾 Cuenta de Protectora</span>
+            <span class="badge">🐾 {{ 'SHELTER.PROFILE.BADGE' | translate }}</span>
           </div>
         </div>
-        <button class="btn-edit-profile" (click)="openEditModal()">✏️ Editar Perfil</button>
+        <button class="btn-edit-profile" (click)="openEditModal()">✏️ {{ 'SHELTER.PROFILE.BTN_EDIT' | translate }}</button>
       </div>
 
       <div class="card-body">
-        <h3 class="section-title">Información de Contacto</h3>
+        <h3 class="section-title">{{ 'SHELTER.PROFILE.SECTION_CONTACT' | translate }}</h3>
 
         <div class="info-grid">
           <div class="info-box full-width">
             <div class="info-icon">✉️</div>
             <div class="info-content">
-              <label>Email de contacto</label>
+              <label>{{ 'SHELTER.PROFILE.EMAIL_LABEL' | translate }}</label>
               <p>{{ profile()?.email }}</p>
             </div>
           </div>
@@ -38,16 +38,16 @@
           <div class="info-box">
             <div class="info-icon">📞</div>
             <div class="info-content">
-              <label>Teléfono</label>
-              <p>{{ profile()?.contactPhone || 'No especificado' }}</p>
+              <label>{{ 'SHELTER.PROFILE.PHONE_LABEL' | translate }}</label>
+              <p>{{ profile()?.contactPhone || ('SHELTER.PROFILE.NOT_SPECIFIED_M' | translate) }}</p>
             </div>
           </div>
 
           <div class="info-box">
             <div class="info-icon">📍</div>
             <div class="info-content">
-              <label>Ubicación</label>
-              <p>{{ profile()?.address || 'No especificada' }}</p>
+              <label>{{ 'SHELTER.PROFILE.LOCATION_LABEL' | translate }}</label>
+              <p>{{ profile()?.address || ('SHELTER.PROFILE.NOT_SPECIFIED_F' | translate) }}</p>
             </div>
           </div>
         </div>
@@ -55,8 +55,8 @@
     </div>
   } @else {
     <div class="error-state">
-      <h3>Vaya, algo ha salido mal</h3>
-      <p>No hemos podido cargar los datos de tu perfil.</p>
+      <h3>{{ 'SHELTER.PROFILE.ERROR_TITLE' | translate }}</h3>
+      <p>{{ 'SHELTER.PROFILE.ERROR_DESC' | translate }}</p>
     </div>
   }
 </div>
@@ -65,7 +65,7 @@
   <div class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Editar Datos de la Protectora</h2>
+        <h2>{{ 'SHELTER.PROFILE_MODAL.TITLE' | translate }}</h2>
         <button class="btn-close" (click)="closeEditModal()">×</button>
       </div>
 
@@ -73,28 +73,28 @@
         <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit()" class="modern-form">
           <div class="form-grid">
             <div class="form-group full-width">
-              <label>Nombre de la Protectora</label>
+              <label>{{ 'SHELTER.PROFILE_MODAL.NAME_LABEL' | translate }}</label>
               <input type="text" formControlName="name" class="form-control">
             </div>
 
             <div class="form-group">
-              <label>Teléfono de Contacto</label>
+              <label>{{ 'SHELTER.PROFILE_MODAL.PHONE_LABEL' | translate }}</label>
               <input type="text" formControlName="contactPhone" class="form-control">
             </div>
 
             <div class="form-group">
-              <label>Dirección / Ubicación</label>
+              <label>{{ 'SHELTER.PROFILE_MODAL.ADDRESS_LABEL' | translate }}</label>
               <input type="text" formControlName="address" class="form-control">
             </div>
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn-secondary" (click)="closeEditModal()">Cancelar</button>
+            <button type="button" class="btn-secondary" (click)="closeEditModal()">{{ 'SHELTER.PROFILE_MODAL.BTN_CANCEL' | translate }}</button>
             <button type="submit" class="btn-primary" [disabled]="editForm.invalid || loadingService.isLoading()">
               @if (loadingService.isLoading()) {
-                Guardando...
+                {{ 'SHELTER.PROFILE_MODAL.BTN_SAVING' | translate }}
               } @else {
-                Guardar Cambios
+                {{ 'SHELTER.PROFILE_MODAL.BTN_SAVE' | translate }}
               }
             </button>
           </div>

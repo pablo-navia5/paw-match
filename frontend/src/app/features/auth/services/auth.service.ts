@@ -3,11 +3,12 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendEmailVerification, signOut,
+  sendEmailVerification,
+  signOut
 } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { from, switchMap, Observable, tap, catchError, throwError } from 'rxjs';
+import { from, switchMap, Observable, tap } from 'rxjs';
 import { UserRegisterRequest, ShelterRegisterRequest, AuthProfile } from '../models/auth.model';
 import { Router } from '@angular/router';
 

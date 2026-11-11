@@ -5,9 +5,11 @@ import { UserProfile } from '../../models/user.model';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, TranslatePipe],
   standalone: true,
   selector: 'app-user-profile-page',
   styleUrl: './user-profile-page.scss',
@@ -18,6 +20,7 @@ export class UserProfilePageComponent implements OnInit {
   private userService = inject(UserService);
   private fb = inject(FormBuilder);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   profile = signal<UserProfile | null>(null);
   isEditModalOpen = signal<boolean>(false);
@@ -49,6 +52,7 @@ export class UserProfilePageComponent implements OnInit {
           this.profile.set(data);
         },
         error: (err) => {
+          this.alertService.showError('Error cargando el perfil.');
           console.error('Error al cargar el perfil:', err);
         },
       });
@@ -87,10 +91,14 @@ export class UserProfilePageComponent implements OnInit {
 
     this.userService.updateUser(updatedData).subscribe({
       next: () => {
+        this.alertService.showSuccess('Perfil actualizado correctamente.');
         this.loadProfile();
         this.closeEditModal();
       },
       error: (err) => {
+        this.alertService.showSuccess(
+          'Error al actualizar el perfil, intentalo de nuevo mas tarde.',
+        );
         console.error('Error al actualizar el perfil:', err);
       },
     });

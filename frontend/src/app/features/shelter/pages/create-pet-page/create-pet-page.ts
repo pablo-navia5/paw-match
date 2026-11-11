@@ -5,9 +5,11 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { UploadService } from '../../../../shared/services/upload.service';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, TranslatePipe],
   standalone: true,
   selector: 'app-create-pet-page',
   styleUrl: './create-pet-page.scss',
@@ -20,6 +22,7 @@ export class CreatePetPageComponent {
   private uploadService = inject(UploadService);
   private router = inject(Router);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   selectedFile = signal<File | null>(null);
   imagePreviewUrl = signal<string | null>(null);
@@ -77,6 +80,7 @@ export class CreatePetPageComponent {
     if (session?.databaseId) {
       this.petService.createPet(session.databaseId, this.petForm.getRawValue()).subscribe({
         next: () => {
+          this.alertService.showSuccess('Mascota registrada correctamente.');
           this.router.navigate(['/shelter-panel']);
         },
         error: (err) => {

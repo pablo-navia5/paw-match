@@ -1,0 +1,23 @@
+<div class="lang-dropdown-container">
+  <button class="lang-trigger-btn" (click)="toggleMenu()" [attr.aria-expanded]="isOpen()">
+    <img [src]="'https://flagcdn.com/' + getCurrentFlag() + '.svg'" width="22" class="flag-icon" alt="Idioma actual">
+    <span class="chevron" [class.rotated]="isOpen()">▼</span>
+  </button>
+
+  @if (isOpen()) {
+    <div class="dropdown-menu">
+      @for (lang of languages; track lang.code) {
+        <button class="dropdown-item"
+                [class.active]="currentLang() === lang.code"
+                (click)="changeLanguage(lang.code)">
+          <img [src]="'https://flagcdn.com/' + lang.flagCode + '.svg'" width="22" class="flag-icon" [alt]="lang.name">
+          <span class="lang-name">{{ lang.name }}</span>
+
+          @if (currentLang() === lang.code) {
+            <span class="check-icon">✓</span>
+          }
+        </button>
+      }
+    </div>
+  }
+</div>

@@ -6,9 +6,12 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 import { LoadingService } from '../../../../core/services/loading.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageSwitcher } from '../../../../shared/components/language-switcher/language-switcher';
 
 @Component({
-  imports: [ReactiveFormsModule, ThemeToggle],
+  imports: [ReactiveFormsModule, ThemeToggle, TranslatePipe, LanguageSwitcher],
   standalone: true,
   selector: 'app-shelter-dashboard-page',
   styleUrl: './shelter-dashboard-page.scss',
@@ -20,6 +23,7 @@ export class ShelterDashboardPageComponent implements OnInit {
   private router = inject(Router);
   private fb = inject(FormBuilder);
   public loadingService = inject(LoadingService);
+  private alertService = inject(AlertService);
 
   shelterName = 'Protectora prueba';
   pets = signal<PetResponse[]>([]);
@@ -57,6 +61,7 @@ export class ShelterDashboardPageComponent implements OnInit {
         this.pets.set(data);
       },
       error: (err) => {
+        this.alertService.showError('No se ha podido obtener las mascotas publicadas.');
         console.error('Error al descargar las mascotas de Spring Boot:', err);
       },
     });
@@ -81,11 +86,11 @@ export class ShelterDashboardPageComponent implements OnInit {
       this.petService.deletePet(id).subscribe({
         next: () => {
           this.pets.update((mascotasActuales) => mascotasActuales.filter((pet) => pet.id !== id));
-          alert('Mascota eliminada correctamente.');
+          this.alertService.showSuccess('Mascota eliminada correctamente.');
         },
         error: (err) => {
           console.error('Error al borrar la mascota:', err);
-          alert('Hubo un error al intentar borrar.');
+          this.alertService.showError('Error al eliminar la mascota, prueba de nuevo mas tarde.');
         },
       });
     }
@@ -130,8 +135,8 @@ export class ShelterDashboardPageComponent implements OnInit {
       const updatedPetData = this.editPetForm.getRawValue();
 
       this.petService.updatePet(updatedPetData).subscribe({
-        next: (response) => {
-          console.log('Actualizado:', response);
+        next: () => {
+          this.alertService.showSuccess('Mascota actualizada correctamente.');
           this.closeEditModal();
           const userSession = this.authService.currentUser();
 
@@ -139,8 +144,8 @@ export class ShelterDashboardPageComponent implements OnInit {
             this.loadPets(userSession.databaseId);
           }
         },
-        error: (err) => {
-          console.error('Error al actualizar:', err);
+        error: () => {
+          this.alertService.showError('Error al actualizar la mascota, prueba de nuevo mas tarde.');
         },
       });
     }
