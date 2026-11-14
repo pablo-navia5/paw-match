@@ -222,6 +222,15 @@
       "BTN_REJECT": "Rejeitar Adoção",
       "BTN_APPROVE": "Aprovar Adoção"
     },
+    "MATCHES_SUCCESS": {
+      "TITLE_APPROVED": "Adoção Aprovada!",
+      "TITLE_REJECTED": "Pedido Rejeitado",
+      "SUBTITLE": "A operação foi registada com sucesso no sistema.",
+      "SEND_EMAIL": "Enviar email automático ao adotante",
+      "HINT_APPROVED": "Será enviada a matriz de 'Próximos passos e boas-vindas'.",
+      "HINT_REJECTED": "Será enviada a matriz de 'Rejeição cordial'.",
+      "BTN_CONFIRM": "Aceitar e Fechar"
+    },
     "PROFILE": {
       "BACK_BTN": "Voltar ao Painel",
       "LOADING": "A carregar informação do perfil...",

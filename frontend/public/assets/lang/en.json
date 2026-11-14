@@ -222,6 +222,15 @@
       "BTN_REJECT": "Reject Adoption",
       "BTN_APPROVE": "Approve Adoption"
     },
+    "MATCHES_SUCCESS": {
+      "TITLE_APPROVED": "Adoption Approved!",
+      "TITLE_REJECTED": "Request Rejected",
+      "SUBTITLE": "The operation has been successfully registered in the system.",
+      "SEND_EMAIL": "Send automatic email to the adopter",
+      "HINT_APPROVED": "The 'Next steps and welcome' template will be sent.",
+      "HINT_REJECTED": "The 'Polite rejection' template will be sent.",
+      "BTN_CONFIRM": "Accept & Close"
+    },
     "PROFILE": {
       "BACK_BTN": "Back to Dashboard",
       "LOADING": "Loading profile information...",

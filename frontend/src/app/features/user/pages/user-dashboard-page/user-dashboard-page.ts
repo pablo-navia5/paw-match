@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, HostListener } from '@angular/core';
 import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -84,6 +84,19 @@ export class UserDashboardPageComponent implements OnInit {
           }
         },
       });
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (this.loadingService.isLoading() || this.showMatchAnimation() || !this.currentPet) {
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      this.nextPet('pass');
+    } else if (event.key === 'ArrowRight') {
+      this.nextPet('like');
+    }
   }
 
   closeMatchPopup() {

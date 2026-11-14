@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MatchFacadeImpl implements MatchFacade {
 
     private final MatchService matchService;

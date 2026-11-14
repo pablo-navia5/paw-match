@@ -193,3 +193,36 @@
     </div>
   </div>
 }
+
+@if (showSuccessModal()) {
+  <div class="modal-backdrop success-backdrop" (click)="confirmSuccessAction()">
+    <div class="modal-content success-modal" (click)="$event.stopPropagation()">
+
+      <div class="success-icon">
+        {{ lastActionStatus() === 'APPROVED' ? '🎉' : '✅' }}
+      </div>
+
+      <h3>{{ (lastActionStatus() === 'APPROVED' ? 'SHELTER.MATCHES_SUCCESS.TITLE_APPROVED' : 'SHELTER.MATCHES_SUCCESS.TITLE_REJECTED') | translate }}</h3>
+
+      <p class="text-muted">{{ 'SHELTER.MATCHES_SUCCESS.SUBTITLE' | translate }}</p>
+
+      <div class="email-option-card">
+        <label class="custom-checkbox">
+          <input type="checkbox" [checked]="sendEmailChecked()" (change)="toggleEmailCheckbox()">
+          <span class="checkmark"></span>
+          {{ 'SHELTER.MATCHES_SUCCESS.SEND_EMAIL' | translate }}
+        </label>
+        <p class="hint-text">
+          {{ (lastActionStatus() === 'APPROVED' ? 'SHELTER.MATCHES_SUCCESS.HINT_APPROVED' : 'SHELTER.MATCHES_SUCCESS.HINT_REJECTED') | translate }}
+        </p>
+      </div>
+
+      <div class="modal-actions-single">
+        <button class="btn-primary-action" (click)="confirmSuccessAction()">
+          {{ 'SHELTER.MATCHES_SUCCESS.BTN_CONFIRM' | translate }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
