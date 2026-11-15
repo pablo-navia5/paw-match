@@ -148,6 +148,10 @@
       "STATUS_INACTIVE": "Inactive",
       "BTN_EDIT": "Edit",
       "BTN_DELETE": "Delete",
+      "DELETE_TITLE": "Delete {{name}}?",
+      "DELETE_WARNING": "This action is permanent and cannot be undone. The pet and all associated adoption requests will be deleted.",
+      "DELETE_CANCEL": "Cancel",
+      "DELETE_CONFIRM": "Delete",
       "EMPTY_P1": "You haven't published any pets yet.",
       "EMPTY_BTN": "Start by adding one!"
     },

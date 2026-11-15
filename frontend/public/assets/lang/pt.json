@@ -148,6 +148,10 @@
       "STATUS_INACTIVE": "Inativo",
       "BTN_EDIT": "Editar",
       "BTN_DELETE": "Apagar",
+      "DELETE_TITLE": "Eliminar o(a) {{name}}?",
+      "DELETE_WARNING": "Esta ação é permanente e não pode ser desfeita. O animal e todos os seus pedidos de adoção associados serão eliminados.",
+      "DELETE_CANCEL": "Cancelar",
+      "DELETE_CONFIRM": "Eliminar",
       "EMPTY_P1": "Ainda não publicou nenhum animal.",
       "EMPTY_BTN": "Comece por adicionar um!"
     },

@@ -27,8 +27,10 @@ export class ShelterDashboardPageComponent implements OnInit {
 
   shelterName = 'Protectora prueba';
   pets = signal<PetResponse[]>([]);
+  petToDelete = signal<PetResponse | null>(null);
   isEditModalOpen = signal<boolean>(false);
   isProfileMenuOpen = signal<boolean>(false);
+  isDeleteConfirmOpen = signal<boolean>(false);
 
   editPetForm = this.fb.nonNullable.group({
     id: [0, Validators.required],
@@ -79,17 +81,18 @@ export class ShelterDashboardPageComponent implements OnInit {
     this.router.navigate(['/shelter-panel/profile']);
   }
 
-  deletePet(id: number) {
-    const confirmacion = confirm('¿Estás seguro de que quieres retirar a esta mascota?');
-
-    if (confirmacion) {
-      this.petService.deletePet(id).subscribe({
+  deletePet() {
+    const petToDelete = this.petToDelete();
+    if (petToDelete && petToDelete.id) {
+      this.petService.deletePet(petToDelete.id).subscribe({
         next: () => {
-          this.pets.update((mascotasActuales) => mascotasActuales.filter((pet) => pet.id !== id));
+          this.pets.update((mascotasActuales) => mascotasActuales.filter((pet) => pet.id !== petToDelete.id));
+          this.closeDeleteConfirmModal();
           this.alertService.showSuccess('Mascota eliminada correctamente.');
         },
         error: (err) => {
           console.error('Error al borrar la mascota:', err);
+          this.closeDeleteConfirmModal();
           this.alertService.showError('Error al eliminar la mascota, prueba de nuevo mas tarde.');
         },
       });
@@ -119,6 +122,16 @@ export class ShelterDashboardPageComponent implements OnInit {
 
   toggleProfileMenu() {
     this.isProfileMenuOpen.update((val) => !val);
+  }
+
+  showDeleteConfirmModal(pet: PetResponse) {
+    this.petToDelete.set(pet);
+    this.isDeleteConfirmOpen.set(true);
+  }
+
+  closeDeleteConfirmModal() {
+    this.petToDelete.set(null);
+    this.isDeleteConfirmOpen.set(false);
   }
 
   closeEditModal() {

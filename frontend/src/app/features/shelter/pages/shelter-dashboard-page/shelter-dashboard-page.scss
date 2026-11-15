@@ -921,3 +921,78 @@
 .full-width {
   grid-column: 1 / -1;
 }
+
+.delete-backdrop {
+  z-index: 2000;
+}
+
+.delete-modal {
+  max-width: 400px;
+  text-align: center;
+  padding: 35px 30px;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+  h3 {
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+  }
+
+  p.text-muted {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: 25px;
+  }
+
+  .modal-icon-warning {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  }
+
+  .modal-actions-delete {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+
+    button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-main);
+
+      &:hover {
+        background-color: var(--color-bg-header-card);
+      }
+    }
+
+    .btn-danger {
+      background-color: var(--color-error-border);
+      border: none;
+      color: white;
+
+      &:hover {
+        background-color: var(--color-error-text);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

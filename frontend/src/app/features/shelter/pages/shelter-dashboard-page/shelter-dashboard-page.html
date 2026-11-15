@@ -65,8 +65,12 @@
           @for (pet of pets(); track pet.id) {
             <tr>
               <td class="font-bold">{{ pet.name }}</td>
-              <td class="text-muted" [attr.data-label]="'SHELTER.DASHBOARD.TABLE_SPECIES' | translate">{{ pet.species }}</td>
-              <td class="text-center" [attr.data-label]="'SHELTER.DASHBOARD.TABLE_AGE' | translate">{{ pet.age }} {{ 'SHELTER.DASHBOARD.YEARS' | translate }}</td>
+              <td class="text-muted"
+                  [attr.data-label]="'SHELTER.DASHBOARD.TABLE_SPECIES' | translate">{{ pet.species }}
+              </td>
+              <td class="text-center"
+                  [attr.data-label]="'SHELTER.DASHBOARD.TABLE_AGE' | translate">{{ pet.age }} {{ 'SHELTER.DASHBOARD.YEARS' | translate }}
+              </td>
               <td class="text-center" [attr.data-label]="'SHELTER.DASHBOARD.TABLE_STATUS' | translate">
                 <span class="badge-status" [class]="pet.status">
                   {{ pet.status === 'AVAILABLE' ? ('SHELTER.DASHBOARD.STATUS_AVAILABLE' | translate) : pet.status === 'ADOPTED' ? ('SHELTER.DASHBOARD.STATUS_ADOPTED' | translate) : ('SHELTER.DASHBOARD.STATUS_INACTIVE' | translate) }}
@@ -74,8 +78,11 @@
               </td>
               <td class="text-center actions-cell">
                 <div class="actions">
-                  <button class="btn-edit" (click)="openEditModal(pet)">{{ 'SHELTER.DASHBOARD.BTN_EDIT' | translate }}</button>
-                  <button class="btn-delete" (click)="deletePet(pet.id)">{{ 'SHELTER.DASHBOARD.BTN_DELETE' | translate }}</button>
+                  <button class="btn-edit" (click)="openEditModal(pet)">{{ 'SHELTER.DASHBOARD.BTN_EDIT' | translate }}
+                  </button>
+                  <button class="btn-delete"
+                          (click)="showDeleteConfirmModal(pet)">{{ 'SHELTER.DASHBOARD.BTN_DELETE' | translate }}
+                  </button>
                 </div>
               </td>
             </tr>
@@ -188,10 +195,31 @@
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="btn-cancel" (click)="closeEditModal()">{{ 'SHELTER.EDIT_MODAL.BTN_CANCEL' | translate }}</button>
-          <button type="submit" class="btn-save" [disabled]="editPetForm.invalid || loadingService.isLoading()">{{ 'SHELTER.EDIT_MODAL.BTN_SAVE' | translate }}</button>
+          <button type="button" class="btn-cancel"
+                  (click)="closeEditModal()">{{ 'SHELTER.EDIT_MODAL.BTN_CANCEL' | translate }}
+          </button>
+          <button type="submit" class="btn-save"
+                  [disabled]="editPetForm.invalid || loadingService.isLoading()">{{ 'SHELTER.EDIT_MODAL.BTN_SAVE' | translate }}
+          </button>
         </div>
       </form>
+    </div>
+  </div>
+}
+
+@if (isDeleteConfirmOpen()) {
+  <div class="modal-overlay delete-backdrop" (click)="closeDeleteConfirmModal()">
+    <div class="modal-content delete-modal" (click)="$event.stopPropagation()">
+
+      <div class="modal-icon-warning"> 🗑️ </div>
+
+      <h3>{{ 'SHELTER.DASHBOARD.DELETE_TITLE' | translate:{ name: petToDelete()?.name } }}</h3>
+      <p class="text-muted"> {{ "SHELTER.DASHBOARD.DELETE_WARNING" | translate }} </p>
+
+      <div class="modal-actions-delete">
+        <button class="btn-secondary" (click)="closeDeleteConfirmModal()">{{ "SHELTER.DASHBOARD.DELETE_CANCEL" | translate }}</button>
+        <button class="btn-danger" (click)="deletePet()">{{ "SHELTER.DASHBOARD.DELETE_CONFIRM" | translate }}</button>
+      </div>
     </div>
   </div>
 }

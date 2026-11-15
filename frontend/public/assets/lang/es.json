@@ -148,6 +148,10 @@
       "STATUS_INACTIVE": "Inactiva",
       "BTN_EDIT": "Editar",
       "BTN_DELETE": "Borrar",
+      "DELETE_TITLE": "¿Eliminar a {{name}}?",
+      "DELETE_WARNING": "Esta acción es permanente y no se puede deshacer. Se eliminará la mascota y todas sus solicitudes de adopción asociadas.",
+      "DELETE_CANCEL": "Cancelar",
+      "DELETE_CONFIRM": "Eliminar",
       "EMPTY_P1": "Aún no has publicado ninguna mascota.",
       "EMPTY_BTN": "¡Empieza añadiendo una!"
     },
