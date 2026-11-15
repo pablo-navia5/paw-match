@@ -93,6 +93,10 @@
       "CHECK_CHILDREN": "I have small children at home",
       "CHECK_PETS": "I currently have other pets",
       "SUBMIT_BTN": "Create Account"
+    },
+    "ALERTS": {
+      "EMAIL_NOT_VERIFIED": "The email is not verified check your spam folder",
+      "LOGIN_ERROR": "An error ocurred while login"
     }
   },
   "SHELTER": {
@@ -148,6 +152,10 @@
       "STATUS_INACTIVE": "Inactive",
       "BTN_EDIT": "Edit",
       "BTN_DELETE": "Delete",
+      "DELETE_TITLE": "Delete {{name}}?",
+      "DELETE_WARNING": "This action is permanent and cannot be undone. The pet and all associated adoption requests will be deleted.",
+      "DELETE_CANCEL": "Cancel",
+      "DELETE_CONFIRM": "Delete",
       "EMPTY_P1": "You haven't published any pets yet.",
       "EMPTY_BTN": "Start by adding one!"
     },
@@ -222,6 +230,15 @@
       "BTN_REJECT": "Reject Adoption",
       "BTN_APPROVE": "Approve Adoption"
     },
+    "MATCHES_SUCCESS": {
+      "TITLE_APPROVED": "Adoption Approved!",
+      "TITLE_REJECTED": "Request Rejected",
+      "SUBTITLE": "The operation has been successfully registered in the system.",
+      "SEND_EMAIL": "Send automatic email to the adopter",
+      "HINT_APPROVED": "The 'Next steps and welcome' template will be sent.",
+      "HINT_REJECTED": "The 'Polite rejection' template will be sent.",
+      "BTN_CONFIRM": "Accept & Close"
+    },
     "PROFILE": {
       "BACK_BTN": "Back to Dashboard",
       "LOADING": "Loading profile information...",
@@ -244,6 +261,23 @@
       "BTN_CANCEL": "Cancel",
       "BTN_SAVING": "Saving...",
       "BTN_SAVE": "Save Changes"
+    },
+    "ALERTS": {
+      "MAX_PHOTOS": "You can only upload a maximum of 5 photos",
+      "UPLOAD_PHOTOS_ERROR": "Error uploading images",
+      "INVALID_ADD_FORM": "Make sure to fill in all fields and upload at least 1 photo",
+      "SUCCESS_CREATED": "Pet created successfully",
+      "ERROR_CREATED": "Error creating pet",
+      "ERROR_GET_PETS": "Could not retrieve the published pets",
+      "SUCCESS_DELETE": "Pet deleted successfully",
+      "ERROR_DELETE": "Error deleting pet",
+      "SUCCESS_EDIT": "Pet updated successfully",
+      "ERROR_EDIT": "Error updating pet",
+      "ERROR_GET_MATCHES": "Error retrieving matches",
+      "ERROR_CHANGE_STATUS": "Error updating match status",
+      "ERROR_GET_PROFILE": "Error retrieving profile",
+      "SUCCESS_PROFILE": "Profile updated successfully",
+      "ERROR_PROFILE": "Error updating profile"
     }
   },
   "USER": {
@@ -374,6 +408,15 @@
       "BTN_CANCEL": "Cancel",
       "BTN_SAVING": "Saving...",
       "BTN_SAVE": "Save Changes"
+    },
+    "ALERTS": {
+      "ERROR_GET_PETS": "Error retrieving pets",
+      "ERROR_INTERACT": "Error interacting with the pet",
+      "ERROR_HAVE_INTERACT": "You have already interacted with this pet",
+      "ERROR_GET_MATCHES": "Error loading matches",
+      "ERROR_GET_PROFILE": "Error loading profile",
+      "SUCCESS_PROFILE": "Profile updated successfully",
+      "ERROR_PROFILE": "Error updating profile"
     }
   }
 }

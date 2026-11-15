@@ -93,6 +93,12 @@
       "CHECK_CHILDREN": "Tenho crianças pequenas em casa",
       "CHECK_PETS": "Tenho outros animais atualmente",
       "SUBMIT_BTN": "Criar Conta"
+    },
+    "ALERTS": {
+      "EMAIL_NOT_VERIFIED": "O email não foi verificado, verifique a sua pasta de spam",
+      "LOGIN_ERROR": "Erro ao iniciar sessão",
+      "CHECK_VERIFICATION": "Verifique o seu email para confirmar a sua conta",
+      "REGISTER_ERROR": "Erro ao registar-se"
     }
   },
   "SHELTER": {
@@ -148,6 +154,10 @@
       "STATUS_INACTIVE": "Inativo",
       "BTN_EDIT": "Editar",
       "BTN_DELETE": "Apagar",
+      "DELETE_TITLE": "Eliminar o(a) {{name}}?",
+      "DELETE_WARNING": "Esta ação é permanente e não pode ser desfeita. O animal e todos os seus pedidos de adoção associados serão eliminados.",
+      "DELETE_CANCEL": "Cancelar",
+      "DELETE_CONFIRM": "Eliminar",
       "EMPTY_P1": "Ainda não publicou nenhum animal.",
       "EMPTY_BTN": "Comece por adicionar um!"
     },
@@ -222,6 +232,15 @@
       "BTN_REJECT": "Rejeitar Adoção",
       "BTN_APPROVE": "Aprovar Adoção"
     },
+    "MATCHES_SUCCESS": {
+      "TITLE_APPROVED": "Adoção Aprovada!",
+      "TITLE_REJECTED": "Pedido Rejeitado",
+      "SUBTITLE": "A operação foi registada com sucesso no sistema.",
+      "SEND_EMAIL": "Enviar email automático ao adotante",
+      "HINT_APPROVED": "Será enviada a matriz de 'Próximos passos e boas-vindas'.",
+      "HINT_REJECTED": "Será enviada a matriz de 'Rejeição cordial'.",
+      "BTN_CONFIRM": "Aceitar e Fechar"
+    },
     "PROFILE": {
       "BACK_BTN": "Voltar ao Painel",
       "LOADING": "A carregar informação do perfil...",
@@ -244,6 +263,23 @@
       "BTN_CANCEL": "Cancelar",
       "BTN_SAVING": "A guardar...",
       "BTN_SAVE": "Guardar Alterações"
+    },
+    "ALERTS": {
+      "MAX_PHOTOS": "Só podes carregar um máximo de 5 fotos",
+      "UPLOAD_PHOTOS_ERROR": "Erro ao carregar as imagens",
+      "INVALID_ADD_FORM": "Certifica-te de preencher todos os campos e carregar pelo menos 1 foto",
+      "SUCCESS_CREATED": "O animal foi criado com sucesso",
+      "ERROR_CREATED": "Erro ao criar o animal",
+      "ERROR_GET_PETS": "Não foi possível obter os animais publicados",
+      "SUCCESS_DELETE": "O animal foi eliminado com sucesso",
+      "ERROR_DELETE": "Erro ao eliminar o animal",
+      "SUCCESS_EDIT": "O animal foi editado com sucesso",
+      "ERROR_EDIT": "Erro ao editar o animal",
+      "ERROR_GET_MATCHES": "Erro ao obter os matches",
+      "ERROR_CHANGE_STATUS": "Erro ao atualizar o estado do match",
+      "ERROR_GET_PROFILE": "Erro ao obter o perfil",
+      "SUCCESS_PROFILE": "O perfil foi atualizado com sucesso",
+      "ERROR_PROFILE": "Erro ao atualizar o perfil"
     }
   },
   "USER": {
@@ -374,6 +410,15 @@
       "BTN_CANCEL": "Cancelar",
       "BTN_SAVING": "A guardar...",
       "BTN_SAVE": "Guardar Alterações"
+    },
+    "ALERTS": {
+      "ERROR_GET_PETS": "Erro ao obter os animais",
+      "ERROR_INTERACT": "Erro ao interagir com o animal",
+      "ERROR_HAVE_INTERACT": "Já interagiste com este animal",
+      "ERROR_GET_MATCHES": "Erro ao carregar os matches",
+      "ERROR_GET_PROFILE": "Erro ao carregar o perfil",
+      "SUCCESS_PROFILE": "Perfil atualizado com sucesso",
+      "ERROR_PROFILE": "Erro ao atualizar o perfil"
     }
   }
 }

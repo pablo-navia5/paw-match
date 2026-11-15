@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,7 +16,7 @@ public class PetCreateDto {
     private String name;
     private String description;
     private String status;
-    private String image;
+    private List<String> photos;
     private String species;
     private Integer age;
 

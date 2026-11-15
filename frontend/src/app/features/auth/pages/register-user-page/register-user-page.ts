@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register-user-page',
@@ -19,6 +19,7 @@ export class RegisterUserPageComponent {
   private router = inject(Router);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   registerForm = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -44,12 +45,12 @@ export class RegisterUserPageComponent {
 
       this.authService.registerUser(userData, password).subscribe({
         next: (res) => {
-          this.alertService.showSuccess('Revisa tu correo para verificar tu cuenta.');
+          this.alertService.showSuccess(this.translate.instant('AUTH.ALERTS.CHECK_VERIFICATION'));
           this.loadingService.hide();
           this.router.navigate(['/']);
         },
         error: (err) => {
-          this.alertService.showSuccess('Error al registrar: ' + err.message);
+          this.alertService.showSuccess(this.translate.instant('AUTH.ALERTS.REGISTER_ERROR'));
           this.loadingService.hide();
           console.error(err);
         },

@@ -35,12 +35,24 @@
         </div>
 
         <div class="form-group full-width">
-          <label for="imageUpload">{{ 'SHELTER.CREATE_PET.PHOTO_LABEL' | translate }}</label>
-          <input type="file" id="imageUpload" accept="image/png, image/jpeg, image/webp" (change)="onFileSelected($event)" class="form-control file-input">
+          <label for="imageUpload">{{ 'SHELTER.CREATE_PET.PHOTO_LABEL' | translate }} (Mínimo 1, Máximo 5)</label>
 
-          @if (imagePreviewUrl()) {
-            <div class="image-preview">
-              <img [src]="imagePreviewUrl()" [alt]="'SHELTER.CREATE_PET.PHOTO_ALT' | translate">
+          <input type="file" id="imageUpload" accept="image/png, image/jpeg, image/webp"
+                 (change)="onFileSelected($event)"
+                 class="form-control file-input"
+                 multiple
+                 [disabled]="selectedFiles().length >= 5">
+
+          @if (selectedFiles().length > 0) {
+            <div class="previews-grid">
+              @for (item of selectedFiles(); track $index) {
+                <div class="preview-card">
+                  <img [src]="item.preview" [alt]="'SHELTER.CREATE_PET.PHOTO_ALT' | translate">
+                  <button type="button" class="btn-remove-photo" (click)="removePhoto($index)" title="Eliminar foto">
+                    ✕
+                  </button>
+                </div>
+              }
             </div>
           }
         </div>
@@ -98,7 +110,7 @@
         <button type="button" routerLink="/shelter-panel" class="btn-secondary">
           {{ 'SHELTER.CREATE_PET.BTN_CANCEL' | translate }}
         </button>
-        <button type="submit" [disabled]="petForm.invalid || loadingService.isLoading()" class="btn-primary">
+        <button type="submit" [disabled]="petForm.invalid || selectedFiles().length === 0 || loadingService.isLoading()" class="btn-primary">
           @if (loadingService.isLoading()) {
             {{ 'SHELTER.CREATE_PET.BTN_SAVING' | translate }}
           } @else {

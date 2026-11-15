@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register-shelter-page',
@@ -19,6 +19,7 @@ export class RegisterShelterPageComponent {
   private router = inject(Router);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   registerForm = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -35,12 +36,12 @@ export class RegisterShelterPageComponent {
 
       this.authService.registerShelter(shelterData, password).subscribe({
         next: () => {
-          this.alertService.showSuccess('Revisa tu correo para verificar tu cuenta.');
+          this.alertService.showSuccess(this.translate.instant('AUTH.ALERTS.CHECK_VERIFICATION'));
           this.loadingService.hide();
           this.router.navigate(['/']);
         },
         error: (err) => {
-          this.alertService.showError('Error al registrar: ' + err.message);
+          this.alertService.showError(this.translate.instant('AUTH.ALERTS.REGISTER_ERROR'));
           this.loadingService.hide();
           console.error(err);
         },

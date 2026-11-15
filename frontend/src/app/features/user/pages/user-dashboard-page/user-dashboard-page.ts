@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, HostListener } from '@angular/core';
 import { PetService } from '../../../../shared/services/pet.service';
 import { PetResponse } from '../../../../shared/models/pet.model';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -7,7 +7,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LanguageSwitcher } from '../../../../shared/components/language-switcher/language-switcher';
 
 @Component({
@@ -24,6 +24,7 @@ export class UserDashboardPageComponent implements OnInit {
   private interactionService = inject(InteractionService);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   isImageLoading = signal<boolean>(true);
   pets = signal<PetResponse[]>([]);
@@ -32,9 +33,35 @@ export class UserDashboardPageComponent implements OnInit {
   showMatchAnimation = signal<boolean>(false);
   matchedPetName = signal<string>('');
   isProfileMenuOpen = signal<boolean>(false);
+  currentPhotoIndex = signal<number>(0);
 
   get currentPet() {
     return this.pets()[this.currentIndex()];
+  }
+
+  get currentPetPhotos(): string[] {
+    const pet = this.currentPet;
+    if (!pet) return [];
+
+    if (pet.photos && pet.photos.length > 0) return pet.photos;
+    return [];
+  }
+
+  nextPhoto(event: Event) {
+    event.stopPropagation();
+    const photos = this.currentPetPhotos;
+    if (this.currentPhotoIndex() < photos.length - 1) {
+      this.isImageLoading.set(true);
+      this.currentPhotoIndex.update((i) => i + 1);
+    }
+  }
+
+  prevPhoto(event: Event) {
+    event.stopPropagation();
+    if (this.currentPhotoIndex() > 0) {
+      this.isImageLoading.set(true);
+      this.currentPhotoIndex.update((i) => i - 1);
+    }
   }
 
   toggleProfileMenu() {
@@ -50,7 +77,7 @@ export class UserDashboardPageComponent implements OnInit {
           this.pets.set(data);
         },
         error: (err) => {
-          this.alertService.showError('Error al cargar las mascotas.');
+          this.alertService.showError(this.translate.instant('USER.ALERTS.ERROR_GET_PETS'));
           console.error('Error al descargar el feed:', err);
         },
       });
@@ -71,14 +98,15 @@ export class UserDashboardPageComponent implements OnInit {
             this.showMatchAnimation.set(true);
           } else {
             this.isImageLoading.set(true);
+            this.currentPhotoIndex.set(0);
             this.currentIndex.update((i) => i + 1);
           }
         },
         error: (err) => {
-          this.alertService.showError('Error al interactuar con la mascota.');
+          this.alertService.showError(this.translate.instant('USER.ALERTS.ERROR_INTERACT'));
           console.error('Error al registrar la acción:', err);
           if (err.status === 400) {
-            this.alertService.showError('Ya has interactuado con esta mascota.');
+            this.alertService.showError(this.translate.instant('USER.ALERTS.ERROR_HAVE_INTERACT'));
             this.isImageLoading.set(true);
             this.currentIndex.update((i) => i + 1);
           }
@@ -86,9 +114,23 @@ export class UserDashboardPageComponent implements OnInit {
       });
   }
 
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (this.loadingService.isLoading() || this.showMatchAnimation() || !this.currentPet) {
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      this.nextPet('pass');
+    } else if (event.key === 'ArrowRight') {
+      this.nextPet('like');
+    }
+  }
+
   closeMatchPopup() {
     this.showMatchAnimation.set(false);
     this.isImageLoading.set(true);
+    this.currentPhotoIndex.set(0);
     this.currentIndex.update((i) => i + 1);
   }
 

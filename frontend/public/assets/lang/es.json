@@ -14,7 +14,9 @@
       "SHELTER_BTN": "Soy Protectora",
       "MATCH_POPUP_TITLE": "¡Es un Match!",
       "MATCH_POPUP_SUBTITLE": "85% Compatibilidad",
-      "IMG_ALT": "Interfaz de PawMatch"
+      "IMG_ALT": "Interfaz de PawMatch",
+      "DOG": "PERRO",
+      "DOG_DESC": "Soy linda una perrita muy cariñosa y juguetona. Me encanta pasear por el parque y jugar a la pelota. Estoy buscando una familia"
     },
     "FEATURES": {
       "TITLE": "¿Cómo funciona PawMatch?",
@@ -93,6 +95,12 @@
       "CHECK_CHILDREN": "Tengo niños pequeños en casa",
       "CHECK_PETS": "Tengo otras mascotas actualmente",
       "SUBMIT_BTN": "Crear Cuenta"
+    },
+    "ALERTS": {
+      "EMAIL_NOT_VERIFIED": "El email no ha sido verificado comprueba tu carpeta de spam",
+      "LOGIN_ERROR": "Error al iniciar sesion",
+      "CHECK_VERIFICATION": "Revisa tu correo para verificar tu cuenta",
+      "REGISTER_ERROR": "Error al registrarse"
     }
   },
   "SHELTER": {
@@ -148,6 +156,10 @@
       "STATUS_INACTIVE": "Inactiva",
       "BTN_EDIT": "Editar",
       "BTN_DELETE": "Borrar",
+      "DELETE_TITLE": "¿Eliminar a {{name}}?",
+      "DELETE_WARNING": "Esta acción es permanente y no se puede deshacer. Se eliminará la mascota y todas sus solicitudes de adopción asociadas.",
+      "DELETE_CANCEL": "Cancelar",
+      "DELETE_CONFIRM": "Eliminar",
       "EMPTY_P1": "Aún no has publicado ninguna mascota.",
       "EMPTY_BTN": "¡Empieza añadiendo una!"
     },
@@ -222,6 +234,15 @@
       "BTN_REJECT": "Rechazar Adopción",
       "BTN_APPROVE": "Aprobar Adopción"
     },
+    "MATCHES_SUCCESS": {
+      "TITLE_APPROVED": "¡Adopción Aprobada!",
+      "TITLE_REJECTED": "Solicitud Rechazada",
+      "SUBTITLE": "La operación se ha registrado correctamente en el sistema.",
+      "SEND_EMAIL": "Enviar correo automático al adoptante",
+      "HINT_APPROVED": "Se enviará la plantilla de 'Siguientes pasos y bienvenida'.",
+      "HINT_REJECTED": "Se enviará la plantilla de 'Rechazo cordial'.",
+      "BTN_CONFIRM": "Aceptar y Cerrar"
+    },
     "PROFILE": {
       "BACK_BTN": "Volver al Panel",
       "LOADING": "Cargando información del perfil...",
@@ -244,6 +265,23 @@
       "BTN_CANCEL": "Cancelar",
       "BTN_SAVING": "Guardando...",
       "BTN_SAVE": "Guardar Cambios"
+    },
+    "ALERTS": {
+      "MAX_PHOTOS": "Solo puedes subir una maximo de 5 fotos",
+      "UPLOAD_PHOTOS_ERROR": "Error a subir las imagenes",
+      "INVALID_ADD_FORM": "Asegurate de rellenar todos los campos y subir minimo 1 foto",
+      "SUCCESS_CREATED": "Se ha creado la mascota correctamente",
+      "ERROR_CREATED": "Error al crear la mascota",
+      "ERROR_GET_PETS": "No se han podido obtener las mascotas publicadas",
+      "SUCCESS_DELETE": "Se ha eliminado la mascota correctamente",
+      "ERROR_DELETE": "Error al eliminar la mascota",
+      "SUCCESS_EDIT": "Se ha editado la mascota",
+      "ERROR_EDIT": "Error al editar la mascota",
+      "ERROR_GET_MATCHES": "Error al obtener los matches",
+      "ERROR_CHANGE_STATUS": "Error al actualizar el estado del match",
+      "ERROR_GET_PROFILE": "Error al obtener el perfil",
+      "SUCCESS_PROFILE": "Se ha actualizado el perfil",
+      "ERROR_PROFILE": "Error al actualizar el perfi"
     }
   },
   "USER": {
@@ -374,6 +412,15 @@
       "BTN_CANCEL": "Cancelar",
       "BTN_SAVING": "Guardando...",
       "BTN_SAVE": "Guardar Cambios"
+    },
+    "ALERTS": {
+      "ERROR_GET_PETS": "Error al obtener mascotas",
+      "ERROR_INTERACT": "Error al interactuar con la mascota",
+      "ERROR_HAVE_INTERACT": "Ya habias interactuado con esta mascota",
+      "ERROR_GET_MATCHES": "Error al cargar los matches",
+      "ERROR_GET_PROFILE": "Error al cargar el perfil",
+      "SUCCESS_PROFILE": "Perfil actualizado correctamente",
+      "ERROR_PROFILE": "Error al actualizar el perfil"
     }
   }
 }

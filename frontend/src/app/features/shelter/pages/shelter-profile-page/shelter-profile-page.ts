@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   imports: [RouterLink, ReactiveFormsModule, TranslatePipe],
@@ -21,6 +21,7 @@ export class ShelterProfilePageComponent implements OnInit {
   private fb = inject(FormBuilder);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   profile = signal<ShelterProfile | null>(null);
   isEditModalOpen = signal<boolean>(false);
@@ -44,7 +45,7 @@ export class ShelterProfilePageComponent implements OnInit {
           this.profile.set(data);
         },
         error: (err) => {
-          this.alertService.showError('No se ha podido cargar el perfil.');
+          this.alertService.showError(this.translate.instant('SHELTER.ALERTS.ERROR_GET_PROFILE'));
           console.error('Error al cargar el perfil de la protectora:', err);
         },
       });
@@ -75,12 +76,12 @@ export class ShelterProfilePageComponent implements OnInit {
 
     this.shelterService.updateShelter(updatedData).subscribe({
       next: () => {
-        this.alertService.showSuccess('Perfil actualizado correctamente.');
+        this.alertService.showSuccess(this.translate.instant('SHELTER.ALERTS.SUCCES_PROFILE'));
         this.loadProfile();
         this.closeEditModal();
       },
       error: (err) => {
-        this.alertService.showError('Error al actualizar el perfil, intentalo de nuevo mas tarde.');
+        this.alertService.showError(this.translate.instant('SHELTER.ALERTS.ERROR_PROFILE'));
       },
     });
   }

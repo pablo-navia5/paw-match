@@ -6,7 +6,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   imports: [DecimalPipe, DatePipe, RouterLink, TranslatePipe],
@@ -20,10 +20,15 @@ export class ShelterMatchesPageComponent implements OnInit {
   private authService = inject(AuthService);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   allMatches = signal<MatchResponse[]>([]);
   currentFilter = signal<MatchStatus>('PENDING');
   selectedMatch = signal<MatchResponse | null>(null);
+  showSuccessModal = signal(false);
+  lastActionStatus = signal<MatchStatus | null>(null);
+  sendEmailChecked = signal(true);
+  processedMatch = signal<MatchResponse | null>(null);
 
   filteredMatches = computed(() => {
     return this.allMatches().filter((match) => match.status === this.currentFilter());
@@ -41,7 +46,7 @@ export class ShelterMatchesPageComponent implements OnInit {
           this.allMatches.set(data);
         },
         error: (err) => {
-          this.alertService.showError('No se ha podido obtener los matches.');
+          this.alertService.showError(this.translate.instant('SHELTER.ALERTS.ERROR_GET_MATCHES'));
           console.error('Error cargando solicitudes', err);
         },
       });
@@ -54,8 +59,10 @@ export class ShelterMatchesPageComponent implements OnInit {
   }
 
   closeDetails() {
-    this.selectedMatch.set(null);
-    document.body.style.overflow = 'auto';
+    if (this.selectedMatch()) {
+      this.selectedMatch.set(null);
+      document.body.style.overflow = 'auto';
+    }
   }
 
   setFilter(status: MatchStatus) {
@@ -75,20 +82,55 @@ export class ShelterMatchesPageComponent implements OnInit {
     }
   }
 
-  changeMatchStatus(matchId: number, newStatus: string) {
+  changeMatchStatus(matchId: number, newStatus: MatchStatus) {
     this.matchService.updateMatchStatus(matchId, newStatus).subscribe({
       next: () => {
         this.allMatches.update((currentMatches) =>
           currentMatches.map((m) => (m.id === matchId ? { ...m, status: newStatus as any } : m)),
         );
 
+        this.lastActionStatus.set(newStatus);
+        this.processedMatch.set(this.selectedMatch());
+
         this.closeDetails();
+        this.sendEmailChecked.set(true);
+        this.showSuccessModal.set(true);
       },
       error: (err) => {
-        this.alertService.showError('Error al actualizar el estado.');
+        this.alertService.showError(this.translate.instant('SHELTER.ALERTS.ERROR_CHANGE_STATUS'));
         console.error('Error al actualizar el estado:', err);
       },
     });
+  }
+
+  toggleEmailCheckbox() {
+    this.sendEmailChecked.update(v => !v);
+  }
+
+  confirmSuccessAction() {
+    if (this.sendEmailChecked()) {
+      const match = this.processedMatch();
+      const status = this.lastActionStatus();
+
+      if (match) {
+        const userEmail = match.applicant?.email || '';
+        const subject = encodeURIComponent(
+          status === 'APPROVED'
+            ? '¡Tu adopción ha sido aprobada!'
+            : 'Actualización sobre tu solicitud',
+        );
+        const body = encodeURIComponent(
+          status === 'APPROVED'
+            ? `Hola ${match?.applicant?.name},\n\nNos alegra comunicarte que tu solicitud por ${match?.pet?.name} ha sido aprobada. Los siguientes pasos son...`
+            : `Hola ${match?.applicant?.name},\n\nLamentamos informarte que en esta ocasión...`,
+        );
+
+        window.open(`mailto:${userEmail}?subject=${subject}&body=${body}`, '_blank');
+      }
+    }
+
+    this.showSuccessModal.set(false);
+    this.processedMatch.set(null);
   }
 
   checkRequirement(type: string): boolean {

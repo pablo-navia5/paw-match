@@ -31,7 +31,17 @@
 
     <div class="hero-visual">
       <div class="floating-card shape-1">
-        <img src="https://placehold.co/400x500/ffefe5/ff7e67?text=Swipe+Match" [alt]="'HOME.HERO.IMG_ALT' | translate">
+        <div class="static-pet-card">
+          <img src="/assets/images/linda.png" alt="Luna">
+
+          <div class="pet-info-overlay">
+            <h2>Linda, 5</h2>
+            <div class="tags-container" style="margin-bottom: 8px;">
+              <p class="species-tag">{{ 'HOME.HERO.DOG' | translate }}</p>
+            </div>
+            <p class="pet-description">{{ 'HOME.HERO.DOG_DESC' | translate }}</p>
+          </div>
+        </div>
       </div>
       <div class="floating-card shape-2">
         <div class="match-popup">
