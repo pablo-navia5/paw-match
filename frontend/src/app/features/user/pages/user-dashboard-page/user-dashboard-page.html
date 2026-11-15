@@ -64,10 +64,28 @@
               </div>
             }
 
-            <img [src]="getOptimizedImage(currentPet.image, currentPet.name)"
-                 alt="{{ currentPet.name }}"
-                 (load)="onImageLoad()"
-                 [class.image-hidden]="isImageLoading()">
+            <div class="carousel-container">
+              <img [src]="getOptimizedImage(currentPetPhotos[currentPhotoIndex()], currentPet.name)"
+                   alt="{{ currentPet.name }}"
+                   (load)="onImageLoad()"
+                   [class.image-hidden]="isImageLoading()">
+
+              @if (currentPetPhotos.length > 1) {
+                @if (currentPhotoIndex() > 0) {
+                  <div class="carousel-nav nav-left" (click)="prevPhoto($event)"></div>
+                }
+
+                @if (currentPhotoIndex() < currentPetPhotos.length - 1) {
+                  <div class="carousel-nav nav-right" (click)="nextPhoto($event)"></div>
+                }
+
+                <div class="carousel-indicators">
+                  @for (photo of currentPetPhotos; track $index) {
+                    <div class="indicator-bar" [class.active]="$index === currentPhotoIndex()"></div>
+                  }
+                </div>
+              }
+            </div>
 
             <div class="pet-info-overlay">
               <h2>{{ currentPet.name }}, {{ currentPet.age }}</h2>

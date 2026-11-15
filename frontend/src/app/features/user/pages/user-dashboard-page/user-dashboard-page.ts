@@ -32,9 +32,35 @@ export class UserDashboardPageComponent implements OnInit {
   showMatchAnimation = signal<boolean>(false);
   matchedPetName = signal<string>('');
   isProfileMenuOpen = signal<boolean>(false);
+  currentPhotoIndex = signal<number>(0);
 
   get currentPet() {
     return this.pets()[this.currentIndex()];
+  }
+
+  get currentPetPhotos(): string[] {
+    const pet = this.currentPet;
+    if (!pet) return [];
+
+    if (pet.photos && pet.photos.length > 0) return pet.photos;
+    return [];
+  }
+
+  nextPhoto(event: Event) {
+    event.stopPropagation();
+    const photos = this.currentPetPhotos;
+    if (this.currentPhotoIndex() < photos.length - 1) {
+      this.isImageLoading.set(true);
+      this.currentPhotoIndex.update((i) => i + 1);
+    }
+  }
+
+  prevPhoto(event: Event) {
+    event.stopPropagation();
+    if (this.currentPhotoIndex() > 0) {
+      this.isImageLoading.set(true);
+      this.currentPhotoIndex.update((i) => i - 1);
+    }
   }
 
   toggleProfileMenu() {
@@ -71,6 +97,7 @@ export class UserDashboardPageComponent implements OnInit {
             this.showMatchAnimation.set(true);
           } else {
             this.isImageLoading.set(true);
+            this.currentPhotoIndex.set(0);
             this.currentIndex.update((i) => i + 1);
           }
         },
@@ -102,6 +129,7 @@ export class UserDashboardPageComponent implements OnInit {
   closeMatchPopup() {
     this.showMatchAnimation.set(false);
     this.isImageLoading.set(true);
+    this.currentPhotoIndex.set(0);
     this.currentIndex.update((i) => i + 1);
   }
 
