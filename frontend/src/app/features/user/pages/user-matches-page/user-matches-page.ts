@@ -6,7 +6,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   imports: [DecimalPipe, DatePipe, RouterLink, TranslatePipe],
@@ -20,6 +20,7 @@ export class UserMatchesPageComponent {
   private authService = inject(AuthService);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   allMatches = signal<MatchResponse[]>([]);
   currentFilter = signal<MatchStatus>('PENDING');
@@ -41,7 +42,7 @@ export class UserMatchesPageComponent {
           this.allMatches.set(data);
         },
         error: (err) => {
-          this.alertService.showError('Error cargando los matches.');
+          this.alertService.showError(this.translate.instant('USER.ALERTS.ERROR_GET_MATCHES'));
           console.error('Error cargando mis matches', err);
         },
       });

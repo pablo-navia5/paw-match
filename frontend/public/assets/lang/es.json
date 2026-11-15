@@ -93,6 +93,12 @@
       "CHECK_CHILDREN": "Tengo niños pequeños en casa",
       "CHECK_PETS": "Tengo otras mascotas actualmente",
       "SUBMIT_BTN": "Crear Cuenta"
+    },
+    "ALERTS": {
+      "EMAIL_NOT_VERIFIED": "El email no ha sido verificado comprueba tu carpeta de spam",
+      "LOGIN_ERROR": "Error al iniciar sesion",
+      "CHECK_VERIFICATION": "Revisa tu correo para verificar tu cuenta",
+      "REGISTER_ERROR": "Error al registrarse"
     }
   },
   "SHELTER": {
@@ -257,6 +263,23 @@
       "BTN_CANCEL": "Cancelar",
       "BTN_SAVING": "Guardando...",
       "BTN_SAVE": "Guardar Cambios"
+    },
+    "ALERTS": {
+      "MAX_PHOTOS": "Solo puedes subir una maximo de 5 fotos",
+      "UPLOAD_PHOTOS_ERROR": "Error a subir las imagenes",
+      "INVALID_ADD_FORM": "Asegurate de rellenar todos los campos y subir minimo 1 foto",
+      "SUCCESS_CREATED": "Se ha creado la mascota correctamente",
+      "ERROR_CREATED": "Error al crear la mascota",
+      "ERROR_GET_PETS": "No se han podido obtener las mascotas publicadas",
+      "SUCCESS_DELETE": "Se ha eliminado la mascota correctamente",
+      "ERROR_DELETE": "Error al eliminar la mascota",
+      "SUCCESS_EDIT": "Se ha editado la mascota",
+      "ERROR_EDIT": "Error al editar la mascota",
+      "ERROR_GET_MATCHES": "Error al obtener los matches",
+      "ERROR_CHANGE_STATUS": "Error al actualizar el estado del match",
+      "ERROR_GET_PROFILE": "Error al obtener el perfil",
+      "SUCCESS_PROFILE": "Se ha actualizado el perfil",
+      "ERROR_PROFILE": "Error al actualizar el perfi"
     }
   },
   "USER": {
@@ -387,6 +410,15 @@
       "BTN_CANCEL": "Cancelar",
       "BTN_SAVING": "Guardando...",
       "BTN_SAVE": "Guardar Cambios"
+    },
+    "ALERTS": {
+      "ERROR_GET_PETS": "Error al obtener mascotas",
+      "ERROR_INTERACT": "Error al interactuar con la mascota",
+      "ERROR_HAVE_INTERACT": "Ya habias interactuado con esta mascota",
+      "ERROR_GET_MATCHES": "Error al cargar los matches",
+      "ERROR_GET_PROFILE": "Error al cargar el perfil",
+      "SUCCESS_PROFILE": "Perfil actualizado correctamente",
+      "ERROR_PROFILE": "Error al actualizar el perfil"
     }
   }
 }

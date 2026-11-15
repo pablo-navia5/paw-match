@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-page',
@@ -19,6 +19,7 @@ export class LoginPageComponent {
   private router = inject(Router);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   userRole: string | null = null;
 
@@ -44,11 +45,9 @@ export class LoginPageComponent {
         error: (err) => {
           this.loadingService.hide();
           if (err.message === 'EMAIL_NOT_VERIFIED') {
-            this.alertService.showError(
-              'El email no ha sido verificado, comprueba tu carpeta de spam',
-            );
+            this.alertService.showError(this.translate.instant('AUTH.ALERTS.EMAIL_NOT_VERIFIED'));
           } else {
-            this.alertService.showError('Error al iniciar sesion');
+            this.alertService.showError(this.translate.instant('AUTH.ALERTS.LOGIN_ERROR'));
           }
           console.error(err);
         },

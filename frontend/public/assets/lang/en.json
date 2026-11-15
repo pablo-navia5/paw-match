@@ -93,6 +93,10 @@
       "CHECK_CHILDREN": "I have small children at home",
       "CHECK_PETS": "I currently have other pets",
       "SUBMIT_BTN": "Create Account"
+    },
+    "ALERTS": {
+      "EMAIL_NOT_VERIFIED": "The email is not verified check your spam folder",
+      "LOGIN_ERROR": "An error ocurred while login"
     }
   },
   "SHELTER": {
@@ -257,6 +261,23 @@
       "BTN_CANCEL": "Cancel",
       "BTN_SAVING": "Saving...",
       "BTN_SAVE": "Save Changes"
+    },
+    "ALERTS": {
+      "MAX_PHOTOS": "You can only upload a maximum of 5 photos",
+      "UPLOAD_PHOTOS_ERROR": "Error uploading images",
+      "INVALID_ADD_FORM": "Make sure to fill in all fields and upload at least 1 photo",
+      "SUCCESS_CREATED": "Pet created successfully",
+      "ERROR_CREATED": "Error creating pet",
+      "ERROR_GET_PETS": "Could not retrieve the published pets",
+      "SUCCESS_DELETE": "Pet deleted successfully",
+      "ERROR_DELETE": "Error deleting pet",
+      "SUCCESS_EDIT": "Pet updated successfully",
+      "ERROR_EDIT": "Error updating pet",
+      "ERROR_GET_MATCHES": "Error retrieving matches",
+      "ERROR_CHANGE_STATUS": "Error updating match status",
+      "ERROR_GET_PROFILE": "Error retrieving profile",
+      "SUCCESS_PROFILE": "Profile updated successfully",
+      "ERROR_PROFILE": "Error updating profile"
     }
   },
   "USER": {
@@ -387,6 +408,15 @@
       "BTN_CANCEL": "Cancel",
       "BTN_SAVING": "Saving...",
       "BTN_SAVE": "Save Changes"
+    },
+    "ALERTS": {
+      "ERROR_GET_PETS": "Error retrieving pets",
+      "ERROR_INTERACT": "Error interacting with the pet",
+      "ERROR_HAVE_INTERACT": "You have already interacted with this pet",
+      "ERROR_GET_MATCHES": "Error loading matches",
+      "ERROR_GET_PROFILE": "Error loading profile",
+      "SUCCESS_PROFILE": "Profile updated successfully",
+      "ERROR_PROFILE": "Error updating profile"
     }
   }
 }

@@ -7,7 +7,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ThemeToggle } from '../../../../shared/components/theme-toggle/theme-toggle';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LanguageSwitcher } from '../../../../shared/components/language-switcher/language-switcher';
 
 @Component({
@@ -24,6 +24,7 @@ export class UserDashboardPageComponent implements OnInit {
   private interactionService = inject(InteractionService);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService);
 
   isImageLoading = signal<boolean>(true);
   pets = signal<PetResponse[]>([]);
@@ -76,7 +77,7 @@ export class UserDashboardPageComponent implements OnInit {
           this.pets.set(data);
         },
         error: (err) => {
-          this.alertService.showError('Error al cargar las mascotas.');
+          this.alertService.showError(this.translate.instant('USER.ALERTS.ERROR_GET_PETS'));
           console.error('Error al descargar el feed:', err);
         },
       });
@@ -102,10 +103,10 @@ export class UserDashboardPageComponent implements OnInit {
           }
         },
         error: (err) => {
-          this.alertService.showError('Error al interactuar con la mascota.');
+          this.alertService.showError(this.translate.instant('USER.ALERTS.ERROR_INTERACT'));
           console.error('Error al registrar la acción:', err);
           if (err.status === 400) {
-            this.alertService.showError('Ya has interactuado con esta mascota.');
+            this.alertService.showError(this.translate.instant('USER.ALERTS.ERROR_HAVE_INTERACT'));
             this.isImageLoading.set(true);
             this.currentIndex.update((i) => i + 1);
           }

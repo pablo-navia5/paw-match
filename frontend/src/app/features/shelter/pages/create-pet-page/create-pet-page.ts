@@ -10,7 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 import { UploadService } from '../../../../shared/services/upload.service';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlertService } from '../../../../core/services/alert.service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -28,6 +28,7 @@ export class CreatePetPageComponent {
   private router = inject(Router);
   public loadingService = inject(LoadingService);
   private alertService = inject(AlertService);
+  private translate = inject(TranslateService)
 
   selectedFiles = signal<{ file: File; preview: string }[]>([]);
 
@@ -53,7 +54,7 @@ export class CreatePetPageComponent {
       const slotsAvailable = 5 - currentFiles.length;
 
       if (files.length > slotsAvailable) {
-        this.alertService.showError('Solo puedes subir un máximo de 5 fotos.');
+        this.alertService.showError(this.translate.instant('SHELTER.ALERTS.MAX_PHOTOS'));
       }
 
       const filesToAdd = Array.from(files).slice(0, slotsAvailable) as File[];
@@ -87,11 +88,11 @@ export class CreatePetPageComponent {
         },
         error: (err) => {
           console.error('Error subiendo imágenes a Cloudinary:', err);
-          this.alertService.showError('Error al subir las imágenes.');
+          this.alertService.showError(this.translate.instant('SHELTER.ALERTS.UPLOAD_PHOTOS_ERROR'));
         },
       });
       } else {
-        this.alertService.showError('Rellena todos los campos y asegúrate de subir al menos 1 foto.');
+        this.alertService.showError(this.translate.instant('SHELTER.ALERTS.INVALID_ADD_FORM'));
       }
   }
 
@@ -106,12 +107,12 @@ export class CreatePetPageComponent {
 
       this.petService.createPet(session.databaseId, petData).subscribe({
         next: () => {
-          this.alertService.showSuccess('Mascota registrada correctamente.');
+          this.alertService.showSuccess(this.translate.instant('SHELTER.ALERTS.SUCCESS_CREATED'));
           this.router.navigate(['/shelter-panel']);
         },
         error: (err) => {
           console.error('Error al guardar en BD:', err);
-          this.alertService.showError('Error al guardar la mascota en la base de datos.');
+          this.alertService.showError(this.translate.instant('SHELTER.ALERTS.ERROR_CREATED'));
         },
       });
     }
