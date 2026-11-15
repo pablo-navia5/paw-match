@@ -14,7 +14,9 @@
       "SHELTER_BTN": "Soy Protectora",
       "MATCH_POPUP_TITLE": "¡Es un Match!",
       "MATCH_POPUP_SUBTITLE": "85% Compatibilidad",
-      "IMG_ALT": "Interfaz de PawMatch"
+      "IMG_ALT": "Interfaz de PawMatch",
+      "DOG": "PERRO",
+      "DOG_DESC": "Soy linda una perrita muy cariñosa y juguetona. Me encanta pasear por el parque y jugar a la pelota. Estoy buscando una familia"
     },
     "FEATURES": {
       "TITLE": "¿Cómo funciona PawMatch?",

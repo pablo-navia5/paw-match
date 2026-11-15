@@ -324,17 +324,23 @@
 }
 
 .shape-2 {
-  z-index: 2;
-  bottom: var(--space-lg);
-  left: 50%;
-  margin-left: calc(-1 * 150px);
-  border: 1px solid var(--color-border-light);
+  position: absolute;
+  z-index: 20;
+  top: 30px;
+  right: -20px;
+  bottom: auto;
+  left: auto;
+  margin: 0;
+  overflow: visible;
+  border: none;
+  background: transparent;
   animation: float 5s ease-in-out infinite reverse;
 
   @media (min-width: 768px) {
-    bottom: 10%;
-    left: 0;
-    margin-left: 0;
+    top: 40px;
+    right: -40px;
+    bottom: auto;
+    left: auto;
   }
 }
 
@@ -618,4 +624,78 @@
     font-weight: 500;
     color: var(--color-text-muted);
   }
+}
+
+.static-pet-card {
+  position: relative;
+  width: 100%;
+  height: 65vh;
+  min-height: 480px;
+  max-height: 650px;
+  background-color: var(--color-bg-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .pet-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    color: white;
+    z-index: 10;
+    pointer-events: none;
+    text-align: left;
+
+    h2 {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: var(--space-xs);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      color: white;
+    }
+  }
+
+  .tags-container {
+    .species-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: white;
+    }
+  }
+
+  .pet-description {
+    margin-top: var(--space-xs);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.shape-1 {
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
 }
